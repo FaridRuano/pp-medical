@@ -35,14 +35,13 @@ export default function HomePage() {
         </div>
 
         <h1 className={styles.constructionTitle}>
-          Estamos construyendo algo grande para ti
-          <br /> <span>P&amp;P Medical</span>
+          Estamos construyendo una nueva experiencia para ti
+         
         </h1>
 
         <p className={styles.constructionText}>
-          Muy pronto podrás conocer nuestra línea de equipos médicos
-          veterinarios y humanos, incluyendo ecógrafos, paneles de rayos X y
-          más soluciones especializadas.
+          En P&P Medical estamos desarrollando un espacio donde la innovación en diagnóstico por imagen será protagonista.
+          Muy pronto podrás conocer nuestra línea de equipos de diagnóstico por imagen para uso humano y veterinario, diseñada para ofrecer precisión, confiabilidad y alto rendimiento clínico.
         </p>
       </section>
     </main>

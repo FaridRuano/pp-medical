@@ -29,9 +29,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: clamp(140px, 20vw, 220px);
-    height: clamp(80px, 20vw, 120px);
+    width: clamp(140px, 20vw, 420px);
+    height: clamp(80px, 20vw, 150px);
     margin: 0 auto 1.5rem;
+
+    @media (max-width: 768px) {
+        width: clamp(140px, 50vw, 420px);
+        height: clamp(80px, 40vw, 150px);
+    }
 }
 
 .constructionLogo {
