@@ -71,6 +71,7 @@ select {
     --bg-solid: #{$white};
 
     --text-primary: #{$text-dark};
+    --text-inverse: #{$white};
     --text-secondary: #{$muted-dark};
 
     --surface: #{$surface-light};
@@ -100,6 +101,7 @@ select {
         --bg-solid: #8d001d;
 
         --text-primary: #{$text-light};
+        --text-inverse: #{$primary-1};
         --text-secondary: #{$muted-light};
 
         --surface: #{$surface-dark};

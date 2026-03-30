@@ -11,7 +11,7 @@ export default function HomePage() {
       <section className={styles.constructionWrap}>
         <div className={styles.constructionLogoBox}>
           <Image
-            src="/imgs/pp-medical-dark.webp"
+            src="/imgs/pp-medical.webp"
             alt="P&P Medical"
             width={220}
             height={220}
@@ -20,7 +20,7 @@ export default function HomePage() {
           />
 
           <Image
-            src="/imgs/pp-medical.webp"
+            src="/imgs/pp-medical-dark.webp"
             alt="P&P Medical"
             width={220}
             height={220}
@@ -36,7 +36,7 @@ export default function HomePage() {
 
         <h1 className={styles.constructionTitle}>
           Estamos construyendo una nueva experiencia para ti
-         
+
         </h1>
 
         <p className={styles.constructionText}>
