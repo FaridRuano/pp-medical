@@ -1,0 +1,121 @@
+@use "variables" as *;
+
+// ==========================
+// RESET
+// ==========================
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    color-scheme: light dark;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    font-family: var(--font-gilroy), sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition:
+        background 0.35s ease,
+        color 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+
+// ==========================
+// THEME VARIABLES
+// ==========================
+
+:root {
+    --bg-gradient: linear-gradient(135deg, #{$neutral-1}, #{$neutral-2});
+    --bg-solid: #{$white};
+
+    --text-primary: #{$text-dark};
+    --text-secondary: #{$muted-dark};
+
+    --surface: #{$surface-light};
+    --surface-strong: rgba(255, 255, 255, 0.92);
+
+    --border-color: #{$border-light};
+
+    --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.05);
+    --shadow-md: #{$shadow-light};
+    --shadow-lg: 0 18px 50px rgba(0, 0, 0, 0.12);
+
+    --gradient-primary: linear-gradient(135deg, #{$primary-1}, #{$primary-2});
+    --gradient-neutral: linear-gradient(135deg, #{$neutral-1}, #{$neutral-2});
+
+    --button-text-on-primary: #{$white};
+    --button-text-on-light: #{$text-dark};
+}
+
+
+// ==========================
+// DARK MODE AUTOMÁTICO
+// ==========================
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-gradient: linear-gradient(135deg, #{$primary-1}, #{$primary-2});
+        --bg-solid: #8d001d;
+
+        --text-primary: #{$text-light};
+        --text-secondary: #{$muted-light};
+
+        --surface: #{$surface-dark};
+        --surface-strong: rgba(255, 255, 255, 0.12);
+
+        --border-color: #{$border-dark};
+
+        --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.18);
+        --shadow-md: #{$shadow-dark};
+        --shadow-lg: 0 18px 50px rgba(0, 0, 0, 0.32);
+
+
+        --gradient-primary: linear-gradient(135deg, #{$neutral-1}, #{$neutral-2});
+        --gradient-neutral: linear-gradient(135deg, #{$primary-1}, #{$primary-2});
+
+        --button-text-on-primary: #{$white};
+        --button-text-on-light: #{$white};
+    }
+}
