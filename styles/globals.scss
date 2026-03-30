@@ -75,7 +75,7 @@ select {
     --text-secondary: #{$muted-dark};
 
     --surface: #{$surface-light};
-    --surface-strong: rgba(255, 255, 255, 0.92);
+    --surface-strong: #{$primary-1};
 
     --border-color: #{$border-light};
 
@@ -105,7 +105,7 @@ select {
         --text-secondary: #{$muted-light};
 
         --surface: #{$surface-dark};
-        --surface-strong: rgba(255, 255, 255, 0.12);
+        --surface-strong: #{$surface-light};
 
         --border-color: #{$border-dark};
 
