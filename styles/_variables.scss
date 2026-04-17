@@ -105,3 +105,55 @@ $radius-lg: 20px;
 $shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
 $shadow-md: 0 6px 20px rgba(0, 0, 0, 0.08);
 $shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+// Extended design tokens for the component refactor
+$brand-900: #63101c;
+$brand-800: #8c1524;
+$brand-700: #b81d2d;
+$brand-600: #d83943;
+$brand-500: #f26872;
+
+$sand-50: #f8f4ef;
+$sand-100: #efe7df;
+$sand-200: #dccfc2;
+$sand-700: #62544f;
+$sand-900: #1f1714;
+
+$slate-950: #0f141b;
+$slate-900: #171d27;
+$slate-800: #202836;
+$slate-700: #415066;
+
+$canvas-light: #f7f1eb;
+$canvas-light-strong: #fdf9f5;
+$canvas-dark: #0f131a;
+$canvas-dark-strong: #151b25;
+
+$text-dark-soft: #685a54;
+$text-light-soft: rgba(247, 242, 237, 0.74);
+
+$surface-light-strong: rgba(255, 252, 249, 0.9);
+$surface-light-solid: #fffaf6;
+$surface-dark-strong: rgba(24, 31, 44, 0.88);
+$surface-dark-solid: #1b2330;
+
+$border-light-strong: rgba(34, 24, 20, 0.16);
+$border-dark-strong: rgba(247, 242, 237, 0.18);
+
+$shadow-light-sm: 0 14px 30px rgba(71, 40, 24, 0.08);
+$shadow-light-md: 0 24px 60px rgba(71, 40, 24, 0.14);
+$shadow-light-lg: 0 36px 90px rgba(45, 24, 14, 0.18);
+
+$shadow-dark-sm: 0 18px 32px rgba(0, 0, 0, 0.24);
+$shadow-dark-md: 0 30px 72px rgba(0, 0, 0, 0.34);
+$shadow-dark-lg: 0 42px 110px rgba(0, 0, 0, 0.42);
+
+$spacing-2xs: 0.25rem;
+$spacing-2xl: 3rem;
+$spacing-3xl: 4rem;
+$spacing-4xl: 6rem;
+
+$font-size-2xl: 2.5rem;
+$font-size-3xl: 4rem;
+
+$radius-xs: 0.75rem;
+$radius-xl: 2.5rem;

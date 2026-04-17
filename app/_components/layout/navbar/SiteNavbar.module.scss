@@ -1,0 +1,148 @@
+@use "@styles/variables" as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  padding: 0;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 360px) 1fr auto;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.35rem 2rem 1.1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.22));
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+  padding: 0.35rem 0.15rem;
+}
+
+.logoFrame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 7.5rem;
+  padding-right: 1rem;
+}
+
+.logo {
+  width: auto;
+  height: 3.05rem;
+}
+
+.brandText {
+  display: grid;
+  gap: 0.18rem;
+  min-width: 0;
+}
+
+.brandText strong {
+  font-size: 1.08rem;
+  line-height: 1.1;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brandText span {
+  color: var(--text-accent);
+  font-size: 0.74rem;
+  line-height: 1.25;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.desktopNav {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  min-width: 0;
+  justify-self: center;
+}
+
+.desktopDropdown {
+  display: flex;
+}
+
+.mobileNav {
+  display: flex;
+  justify-self: end;
+}
+
+.navLink {
+  padding: 0.75rem 0.95rem;
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.navLink:hover {
+  background: rgba(193, 0, 39, 0.06);
+  color: var(--text-accent);
+}
+
+@media (min-width: 960px) {
+  .desktopNav {
+    display: flex;
+  }
+
+  .mobileNav {
+    display: none;
+  }
+}
+
+@media (max-width: 959px) {
+  .inner {
+    grid-template-columns: 1fr auto;
+    gap: 0.7rem;
+    padding: 1rem 1rem 0.8rem;
+  }
+
+  .brand {
+    gap: 0.8rem;
+  }
+
+  .logoFrame {
+    min-width: 0;
+    padding-right: 0.7rem;
+  }
+
+  .logo {
+    height: 2.35rem;
+  }
+
+  .brandText strong {
+    font-size: 1rem;
+  }
+
+  .brandText span {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: 0.95rem 0.75rem 0.7rem;
+  }
+
+  .brandText strong {
+    font-size: 0.92rem;
+  }
+}

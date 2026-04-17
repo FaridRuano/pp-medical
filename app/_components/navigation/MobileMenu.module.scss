@@ -1,0 +1,446 @@
+@use "@styles/variables" as *;
+
+.menuWrap {
+  position: relative;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+}
+
+.menuButton,
+.closeButton,
+.primaryLink,
+.categoryButton,
+.productLink {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.menuButton {
+  z-index: 99999;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+
+  min-height: 2.65rem;
+  padding: 0.68rem 0.9rem;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+
+  color: var(--text-secondary);
+  background: transparent;
+
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.menuButton:hover,
+.menuButtonActive {
+  color: var(--text-accent);
+  background: color-mix(in srgb, var(--primary-color) 7%, transparent);
+  border-color: color-mix(in srgb, var(--primary-color) 12%, transparent);
+}
+
+.mobileOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+
+  color: var(--text-secondary);
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--neutral-color-2) 92%, transparent),
+      color-mix(in srgb, var(--neutral-color) 96%, var(--neutral-color-2)));
+
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  overflow: hidden;
+
+  transform: translate3d(0, -0.4rem, 0);
+
+  transition:
+    opacity 220ms ease,
+    visibility 220ms ease,
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobileOverlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 18% 0%,
+      color-mix(in srgb, var(--primary-color) 7%, transparent),
+      transparent 32%),
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--neutral-color-2) 58%, transparent),
+      transparent 42%);
+
+  pointer-events: none;
+}
+
+.mobileOverlayOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
+}
+
+.mobileHeader,
+.mobileContent {
+  position: relative;
+  z-index: 2;
+}
+
+.mobileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  min-height: 4.25rem;
+  padding:
+    max(0.95rem, env(safe-area-inset-top)) clamp(1rem, 5vw, 1.4rem) 0.8rem;
+
+  border-bottom: 1px solid color-mix(in srgb, var(--primary-color) 10%, transparent);
+  background: color-mix(in srgb, var(--neutral-color-2) 68%, transparent);
+
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+}
+
+.mobileHeaderLabel {
+  color: var(--text-accent-soft);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.6rem;
+  height: 2.6rem;
+
+  border: 1px solid var(--surface-border-2);
+  border-radius: 999px;
+  cursor: pointer;
+
+  color: var(--text-secondary);
+  background: var(--surface-2);
+}
+
+.closeButton:hover {
+  color: var(--text-accent);
+  background: var(--surface-2-hover);
+  border-color: var(--surface-border-2-hover);
+}
+
+.mobileContent {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 1.35rem;
+
+  min-height: 0;
+  padding:
+    1rem clamp(1rem, 5vw, 1.4rem) calc(1.15rem + env(safe-area-inset-bottom));
+
+  overflow: hidden;
+}
+
+.primaryNav {
+  display: grid;
+  gap: 0;
+}
+
+.navItemGroup {
+  display: grid;
+  gap: 0;
+}
+
+.primaryLink,
+.productLink,
+.primaryLinkAc {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  border-bottom: 1px solid color-mix(in srgb, var(--primary-color) 8%, transparent);
+
+  color: var(--text-secondary);
+  background: transparent;
+
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.primaryLink {
+  min-height: 3.05rem;
+
+  font-size: .88rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.primaryLinkAc {
+  min-height: 3.05rem;
+  padding: 0;
+  border-top: 0;
+  cursor: pointer;
+
+  font-size: .88rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: space-between;
+  gap: .5rem;
+  align-items: center;
+  color: var(--text-accent);
+}
+
+.primaryLinkAc svg {
+  flex: 0 0 auto;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.primaryLinkAcOpen svg {
+  transform: rotate(180deg);
+}
+
+.primaryLink:hover,
+.primaryLinkAc:hover,
+.productLink:hover {
+  color: var(--text-accent);
+  transform: translateX(0.16rem);
+}
+
+.catalogArea {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 0.85rem;
+
+  min-height: 0;
+  max-height: 0;
+  opacity: 0;
+  transform: translate3d(0, -0.45rem, 0);
+  pointer-events: none;
+  overflow: hidden;
+
+  transition:
+    max-height 340ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 220ms ease,
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.catalogAreaOpen {
+  max-height: 100%;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+}
+
+.sectionHeader {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.sectionEyebrow {
+  color: var(--text-accent-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.categoryRail {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+  max-width: 100%;
+
+  gap: 0.65rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-padding-left: 1.25rem;
+  scroll-snap-type: x proximity;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.categoryRail::-webkit-scrollbar {
+  display: none;
+}
+
+.categoryButton {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  max-width: 78vw;
+  min-height: 2.35rem;
+  padding: 0.64rem 0.82rem;
+
+  border: 1px solid color-mix(in srgb, var(--primary-color) 9%, transparent);
+  border-radius: 999px;
+  cursor: pointer;
+
+  color: color-mix(in srgb, var(--text-secondary) 78%, transparent);
+  background: transparent;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.categoryButton span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.categoryButton small {
+  flex: 0 0 auto;
+  color: var(--text-accent-soft);
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.categoryButton:hover,
+.categoryButtonActive {
+  color: var(--text-accent);
+  background: color-mix(in srgb, var(--primary-color) 7%, transparent);
+  border-color: color-mix(in srgb, var(--primary-color) 22%, transparent);
+}
+
+.productArea {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 0.35rem;
+
+  min-height: 0;
+  overflow: hidden;
+}
+
+.categoryTitle {
+  margin: 0;
+  padding-bottom: 0.35rem;
+
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 1.25;
+}
+
+.productList {
+  display: grid;
+  align-content: start;
+  gap: 0;
+
+  min-height: 0;
+  padding-right: 0.15rem;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--primary-color) 26%, transparent) transparent;
+}
+
+.productList::-webkit-scrollbar {
+  width: 0.32rem;
+}
+
+.productList::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--primary-color) 24%, transparent);
+  border-radius: 999px;
+}
+
+.productLink {
+  min-height: 2.72rem;
+  padding-block: 0.74rem;
+
+  font-size: 0.79rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+.emptyText {
+  margin: 0;
+  padding: 0.85rem 0;
+
+  color: color-mix(in srgb, var(--text-secondary) 66%, transparent);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+@media (min-width: 960px) {
+
+  .menuWrap {
+    display: inline-flex;
+  }
+
+  .mobileOverlay {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .menuButton,
+  .closeButton,
+  .primaryLink,
+  .primaryLinkAc,
+  .categoryButton,
+  .productLink,
+  .mobileOverlay,
+  .catalogArea {
+    transition: none;
+  }
+}

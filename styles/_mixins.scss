@@ -1,0 +1,103 @@
+@use "variables" as *;
+
+@mixin content-shell {
+  width: min(100%, var(--content-max));
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+@mixin section-frame($background: var(--section-surface), $radius: var(--radius-lg), $shadow: var(--shadow-md)) {
+  border: 1px solid var(--section-border);
+  border-radius: $radius;
+  background: $background;
+  box-shadow: $shadow;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+@mixin card($background: var(--card-surface), $radius: var(--radius-md), $shadow: var(--shadow-sm)) {
+  border: 1px solid var(--card-border);
+  border-radius: $radius;
+  background: $background;
+  box-shadow: $shadow;
+}
+
+@mixin lift-on-hover {
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    background 0.28s ease;
+
+  &:hover {
+    transform: translateY(-0.35rem);
+    border-color: var(--card-border-strong);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+@mixin eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.25rem;
+  padding-inline: 0.9rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@mixin action-button($variant: "secondary") {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3.25rem;
+  padding: 0.9rem 1.3rem;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+
+  @if $variant == "primary" {
+    background: var(--accent-gradient);
+    color: var(--button-primary-text);
+    box-shadow: 0 18px 40px var(--accent-shadow);
+  } @else if $variant == "ghost" {
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-primary);
+  } @else {
+    border: 1px solid var(--card-border);
+    background: var(--button-secondary-surface);
+    color: var(--button-secondary-text);
+    box-shadow: var(--shadow-xs);
+  }
+
+  &:hover {
+    transform: translateY(-0.15rem);
+  }
+}
+
+@mixin auto-grid($min, $gap: clamp(1rem, 2vw, 1.5rem)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, $min), 1fr));
+  gap: $gap;
+}
+
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+}

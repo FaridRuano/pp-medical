@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import SiteShell from "@app/_components/layout/shell/SiteShell";
 import "@styles/globals.scss";
 
 const gilroy = localFont({
@@ -34,14 +35,19 @@ const gilroy = localFont({
 });
 
 export const metadata = {
-  title: "P&P Medical",
+  title: {
+    default: "P&P Medical",
+    template: "%s",
+  },
   description: "Equipos médicos veterinarios y humanos",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="es" className={gilroy.variable}>
-      <body>{children}</body>
+      <body className={gilroy.className}>
+        <SiteShell>{children}</SiteShell>
+      </body>
     </html>
   );
 }

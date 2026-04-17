@@ -1,0 +1,442 @@
+@use "@styles/variables" as *;
+
+.catalogWrap {
+  position: relative;
+  isolation: isolate;
+  z-index: 100;
+}
+
+.catalogTrigger,
+.catalogAllLink,
+.selectedCategoryLink,
+.productLink {
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.catalogTrigger {
+  position: relative;
+  z-index: 120;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+
+  padding: 0.75rem 0.95rem;
+  border-radius: 999px;
+  cursor: pointer;
+
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+
+  font-weight: 500;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.catalogTrigger svg {
+  transition: transform 220ms ease;
+}
+
+.catalogTrigger:hover {
+  background: color-mix(in srgb, var(--primary-color) 6%, transparent);
+  color: var(--text-accent);
+}
+
+.catalogWrapOpen .catalogTrigger {
+  background: color-mix(in srgb, var(--primary-color) 8%, transparent);
+  border-color: color-mix(in srgb, var(--primary-color) 12%, transparent);
+  color: var(--text-accent);
+}
+
+.catalogWrapOpen .catalogTrigger svg {
+  transform: rotate(180deg);
+}
+
+.catalogBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+
+  background: var(--surface-1);
+  backdrop-filter: blur(10px) saturate(145%);
+  -webkit-backdrop-filter: blur(10px) saturate(145%);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 220ms ease,
+    visibility 220ms ease;
+}
+
+.catalogWrapOpen .catalogBackdrop {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.catalogPanel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 100px;
+  z-index: 90;
+
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 1.1rem;
+
+  width: 100%;
+  height: clamp(22rem, 52vh, 29rem);
+  padding: 1.4rem 2rem 1.3rem;
+
+  color: var(--text-secondary);
+
+  border-top: 1px solid color-mix(in srgb, var(--primary-color) 8%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--primary-color) 8%, transparent);
+
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--neutral-color-2) 78%, transparent),
+      color-mix(in srgb, var(--neutral-color-2) 58%, var(--surface-2)));
+
+  box-shadow:
+    0 22px 60px color-mix(in srgb, var(--text-secondary) 12%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--neutral-color-2) 58%, transparent),
+    inset 0 -1px 0 var(--surface-border-1),
+    inset 0 0 24px color-mix(in srgb, var(--neutral-color-2) 22%, transparent);
+
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform: translate3d(0, -0.75rem, 0) scaleY(0.985);
+  transform-origin: top center;
+
+  transition:
+    opacity 220ms ease,
+    transform 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 220ms ease;
+
+  overflow: hidden;
+  will-change: opacity, transform;
+}
+
+.catalogPanel::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+
+  background: linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb, var(--neutral-color-2) 80%, transparent),
+      transparent);
+
+  pointer-events: none;
+}
+
+.catalogPanel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at top left,
+      color-mix(in srgb, var(--neutral-color-2) 38%, transparent),
+      transparent 36%),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--neutral-color-2) 24%, transparent),
+      transparent);
+
+  pointer-events: none;
+}
+
+.catalogWrapOpen .catalogPanel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0) scaleY(1);
+}
+
+.catalogIntro,
+.catalogColumns {
+  position: relative;
+  z-index: 2;
+}
+
+.catalogIntro {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 1rem;
+
+  width: 100%;
+  max-width: 1220px;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 0 0 1rem;
+
+  border-bottom: 1px solid color-mix(in srgb, var(--primary-color) 10%, transparent);
+}
+
+.catalogIntroText {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.catalogEyebrow,
+.columnLabel {
+  color: var(--text-accent-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.catalogTitle,
+.selectedCategoryTitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.15;
+}
+
+.catalogText {
+  max-width: 46ch;
+  color: color-mix(in srgb, var(--text-secondary) 70%, transparent);
+  font-size: 0.88rem;
+}
+
+.catalogAllLink,
+.selectedCategoryLink {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: fit-content;
+  min-height: auto;
+  padding: 0.15rem 0;
+
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+
+  color: var(--text-accent);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.catalogAllLink:hover,
+.selectedCategoryLink:hover {
+  color: var(--text-secondary);
+}
+
+.catalogAllLink::after,
+.selectedCategoryLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.08rem;
+
+  width: 100%;
+  height: 1px;
+
+  background: currentColor;
+  opacity: 0.35;
+
+  transform: scaleX(0.7);
+  transform-origin: left center;
+
+  transition:
+    opacity 180ms ease,
+    transform 220ms ease;
+}
+
+.catalogAllLink:hover::after,
+.selectedCategoryLink:hover::after {
+  opacity: 0.8;
+  transform: scaleX(1);
+}
+
+.catalogColumns {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  gap: 2rem;
+
+  width: 100%;
+  max-width: 1220px;
+  height: 100%;
+  min-height: 0;
+  margin: 0 auto;
+
+  overflow: hidden;
+}
+
+.categoryColumn,
+.productColumn {
+  display: grid;
+  gap: 0.85rem;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+.categoryColumn {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.productColumn {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.categoryList,
+.productList {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.categoryList,
+.productScrollArea {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--primary-color) 28%, transparent) transparent;
+}
+
+.categoryList::-webkit-scrollbar,
+.productScrollArea::-webkit-scrollbar {
+  width: 0.35rem;
+}
+
+.categoryList::-webkit-scrollbar-thumb,
+.productScrollArea::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--primary-color) 24%, transparent);
+  border-radius: 999px;
+}
+
+.categoryButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+
+  width: 100%;
+  padding: 0.65rem 0;
+
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--primary-color) 8%, transparent);
+  cursor: pointer;
+
+  text-align: left;
+  background: transparent;
+  color: var(--text-secondary);
+
+  font-size: 0.79rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.categoryButton:hover {
+  color: var(--text-accent);
+  transform: translateX(0.16rem);
+}
+
+.categoryButtonActive {
+  color: var(--text-accent);
+  border-bottom-color: color-mix(in srgb, var(--primary-color) 24%, transparent);
+}
+
+.categoryName {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.categoryCount {
+  flex: 0 0 auto;
+  color: color-mix(in srgb, var(--text-secondary) 56%, transparent);
+  font-size: 0.69rem;
+}
+
+.productColumnHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 0;
+}
+
+.productScrollArea {
+  height: 100%;
+  padding-right: 0.3rem;
+}
+
+.productLink {
+  display: block;
+
+  padding: 0.65rem 0;
+
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--primary-color) 8%, transparent);
+
+  color: var(--text-secondary);
+  background: transparent;
+
+  font-size: 0.79rem;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.productLink:hover {
+  color: var(--text-accent);
+  transform: translateX(0.2rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .catalogTrigger,
+  .catalogTrigger svg,
+  .catalogPanel,
+  .catalogBackdrop,
+  .catalogAllLink,
+  .selectedCategoryLink,
+  .productLink,
+  .categoryButton {
+    transition: none;
+  }
+}
+
+@media (max-width: 959px) {
+
+  .catalogBackdrop,
+  .catalogPanel {
+    display: none;
+  }
+}
