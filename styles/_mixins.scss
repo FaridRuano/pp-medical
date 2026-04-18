@@ -1,4 +1,4 @@
-@use "variables" as *;
+@use "@styles/variables" as *;
 
 @mixin content-shell {
   width: min(100%, var(--content-max));

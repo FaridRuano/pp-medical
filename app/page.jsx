@@ -1,9 +1,15 @@
-import React from 'react'
+import HomeHero from "@app/_components/home/hero/HomeHero";
+import HomeBrands from "@app/_components/home/brands/HomeBrands";
+import HomeClients from "@app/_components/home/clients/HomeClients";
+import HomeEquipments from "@app/_components/home/equipments/HomeEquipments";
 
-const page = () => {
+export default function HomePage() {
   return (
-    <div>page</div>
-  )
+    <>
+      <HomeHero />
+      <HomeBrands />
+      <HomeEquipments />
+      <HomeClients />
+    </>
+  );
 }
-
-export default page

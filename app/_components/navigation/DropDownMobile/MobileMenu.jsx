@@ -3,16 +3,20 @@
 import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { createPortal } from "react-dom";
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./MobileMenu.module.scss";
 
+const CLOSE_ANIMATION_MS = 360;
+
 export default function MobileMenu({ navigation = [], equipmentCategories = [] }) {
+  const closeTimeoutRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [shouldRenderOverlay, setShouldRenderOverlay] = useState(false);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [activeCategorySlug, setActiveCategorySlug] = useState(
     equipmentCategories[0]?.slug ?? ""
   );
+  const [activeAudienceSlug, setActiveAudienceSlug] = useState("");
 
   const cleanNavigation = useMemo(() => {
     return Array.isArray(navigation) ? navigation : [];
@@ -23,7 +27,9 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
   }, [equipmentCategories]);
 
   const navigationWithoutEquipment = useMemo(() => {
-    return cleanNavigation.filter((item) => item.label?.trim().toLowerCase() !== "equipos");
+    return cleanNavigation.filter(
+      (item) => item.label?.trim().toLowerCase() !== "equipos"
+    );
   }, [cleanNavigation]);
 
   const hasServicesItem = useMemo(() => {
@@ -32,76 +38,100 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
     );
   }, [navigationWithoutEquipment]);
 
+  const resolvedCategorySlug = useMemo(() => {
+    const exists = cleanCategories.some((category) => category.slug === activeCategorySlug);
+
+    if (exists) return activeCategorySlug;
+    return cleanCategories[0]?.slug ?? "";
+  }, [cleanCategories, activeCategorySlug]);
+
   const activeCategory = useMemo(() => {
     return (
-      cleanCategories.find((category) => category.slug === activeCategorySlug) ??
+      cleanCategories.find((category) => category.slug === resolvedCategorySlug) ??
       cleanCategories[0] ??
       null
     );
-  }, [cleanCategories, activeCategorySlug]);
+  }, [cleanCategories, resolvedCategorySlug]);
 
-  const products = activeCategory?.products ?? [];
+  const resolvedAudienceSlug = useMemo(() => {
+    if (!activeCategory?.audiences?.length) return "";
+
+    const exists = activeCategory.audiences.some(
+      (audience) => audience.slug === activeAudienceSlug
+    );
+
+    if (exists) return activeAudienceSlug;
+    return activeCategory.audiences[0]?.slug ?? "";
+  }, [activeAudienceSlug, activeCategory]);
+
+  const activeAudience = useMemo(() => {
+    if (!activeCategory?.audiences?.length) return null;
+
+    return (
+      activeCategory.audiences.find(
+        (audience) => audience.slug === resolvedAudienceSlug
+      ) ?? activeCategory.audiences[0]
+    );
+  }, [resolvedAudienceSlug, activeCategory]);
+
+  const products = activeAudience?.products ?? activeCategory?.products ?? [];
   const shouldShowEquipment = cleanCategories.length > 0;
+
+  const openMenu = () => {
+    if (closeTimeoutRef.current) {
+      window.clearTimeout(closeTimeoutRef.current);
+    }
+
+    setShouldRenderOverlay(true);
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        setIsOpen(true);
+      });
+    });
+  };
 
   const closeMenu = () => {
     setIsOpen(false);
     setIsCatalogOpen(false);
+
+    if (closeTimeoutRef.current) {
+      window.clearTimeout(closeTimeoutRef.current);
+    }
+
+    closeTimeoutRef.current = window.setTimeout(() => {
+      setShouldRenderOverlay(false);
+    }, CLOSE_ANIMATION_MS);
   };
 
-  const openMenu = () => setIsOpen(true);
+  const toggleMenu = () => {
+    if (isOpen) {
+      closeMenu();
+      return;
+    }
+
+    openMenu();
+  };
 
   const toggleCatalog = () => {
     setIsCatalogOpen((current) => !current);
   };
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!cleanCategories.length) return;
-
-    const exists = cleanCategories.some(
-      (category) => category.slug === activeCategorySlug
-    );
-
-    if (!activeCategorySlug || !exists) {
-      setActiveCategorySlug(cleanCategories[0].slug);
-    }
-  }, [cleanCategories, activeCategorySlug]);
-
-  useEffect(() => {
     if (!isOpen) return;
 
-    const scrollY = window.scrollY;
     const html = document.documentElement;
     const body = document.body;
 
     const previousHtmlOverflow = html.style.overflow;
     const previousBodyOverflow = body.style.overflow;
-    const previousBodyPosition = body.style.position;
-    const previousBodyTop = body.style.top;
-    const previousBodyLeft = body.style.left;
-    const previousBodyRight = body.style.right;
-    const previousBodyWidth = body.style.width;
 
     html.style.overflow = "hidden";
     body.style.overflow = "hidden";
-    body.style.position = "fixed";
-    body.style.top = `-${scrollY}px`;
-    body.style.left = "0";
-    body.style.right = "0";
-    body.style.width = "100%";
 
     return () => {
       html.style.overflow = previousHtmlOverflow;
       body.style.overflow = previousBodyOverflow;
-      body.style.position = previousBodyPosition;
-      body.style.top = previousBodyTop;
-      body.style.left = previousBodyLeft;
-      body.style.right = previousBodyRight;
-      body.style.width = previousBodyWidth;
-      window.scrollTo(0, scrollY);
     };
   }, [isOpen]);
 
@@ -119,11 +149,20 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        window.clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const equipmentToggle = shouldShowEquipment ? (
     <button
       type="button"
-      className={`${styles.primaryLinkAc} ${isCatalogOpen ? styles.primaryLinkAcOpen : ""
-        }`}
+      className={`${styles.primaryLinkAc} ${styles.navMotion} ${
+        isCatalogOpen ? styles.primaryLinkAcOpen : ""
+      }`}
       aria-expanded={isCatalogOpen}
       aria-controls="mobile-equipment-catalog"
       onClick={toggleCatalog}
@@ -135,19 +174,20 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
 
   const overlay = (
     <div
-      className={`${styles.mobileOverlay} ${isOpen ? styles.mobileOverlayOpen : ""}`}
+      className={`${styles.mobileOverlay} ${
+        isOpen ? styles.mobileOverlayOpen : styles.mobileOverlayClosing
+      }`}
       role="dialog"
       aria-modal="true"
-      aria-label="Menú móvil"
-      aria-hidden={!isOpen}
+      aria-label="Menu movil"
     >
       <header className={styles.mobileHeader}>
-        <span className={styles.mobileHeaderLabel}>Menú</span>
+        <span className={styles.mobileHeaderLabel}>Menu</span>
 
         <button
           type="button"
           className={styles.closeButton}
-          aria-label="Cerrar menú"
+          aria-label="Cerrar menu"
           onClick={closeMenu}
         >
           <X size={20} aria-hidden="true" />
@@ -155,7 +195,7 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
       </header>
 
       <main className={styles.mobileContent}>
-        <nav className={styles.primaryNav} aria-label="Navegación principal">
+        <nav className={styles.primaryNav} aria-label="Navegacion principal">
           {navigationWithoutEquipment.map((item) => {
             const isServices = item.label?.trim().toLowerCase() === "servicios";
 
@@ -163,7 +203,7 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
               <Fragment key={`${item.label}-${item.href}`}>
                 <Link
                   href={item.href}
-                  className={styles.primaryLink}
+                  className={`${styles.primaryLink} ${styles.navMotion}`}
                   onClick={closeMenu}
                 >
                   {item.label}
@@ -180,27 +220,30 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
         {shouldShowEquipment ? (
           <section
             id="mobile-equipment-catalog"
-            className={`${styles.catalogArea} ${isCatalogOpen ? styles.catalogAreaOpen : ""
-              }`}
-            aria-label="Catálogo de equipos"
+            className={`${styles.catalogArea} ${isCatalogOpen ? styles.catalogAreaOpen : ""}`}
+            aria-label="Catalogo de equipos"
             aria-hidden={!isCatalogOpen}
           >
             <div className={styles.sectionHeader}>
-              <span className={styles.sectionEyebrow}>Categorías</span>
+              <span className={styles.sectionEyebrow}>Categorias</span>
             </div>
 
-            <div className={styles.categoryRail} role="tablist" aria-label="Categorías">
+            <div className={styles.categoryRail} role="tablist" aria-label="Categorias">
               {cleanCategories.map((category) => (
                 <button
                   key={category.slug}
                   type="button"
                   role="tab"
                   aria-selected={activeCategory?.slug === category.slug}
-                  className={`${styles.categoryButton} ${activeCategory?.slug === category.slug
+                  className={`${styles.categoryButton} ${
+                    activeCategory?.slug === category.slug
                       ? styles.categoryButtonActive
                       : ""
-                    }`}
-                  onClick={() => setActiveCategorySlug(category.slug)}
+                  }`}
+                  onClick={() => {
+                    setActiveCategorySlug(category.slug);
+                    setActiveAudienceSlug("");
+                  }}
                 >
                   <span>{category.name}</span>
                   <small>{category.productCount ?? category.products?.length ?? 0}</small>
@@ -213,13 +256,33 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
                 <h3 className={styles.categoryTitle}>{activeCategory.name}</h3>
               ) : null}
 
+              {activeCategory?.audiences?.length ? (
+                <div className={styles.audienceRail} aria-label="Subcategorias">
+                  {activeCategory.audiences.map((audience) => (
+                    <button
+                      key={audience.slug}
+                      type="button"
+                      className={`${styles.audienceButton} ${
+                        activeAudience?.slug === audience.slug
+                          ? styles.audienceButtonActive
+                          : ""
+                      }`}
+                      onClick={() => setActiveAudienceSlug(audience.slug)}
+                    >
+                      <span>{audience.name}</span>
+                      <small>{audience.productCount}</small>
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+
               <div className={styles.productList}>
                 {products.length ? (
                   products.map((product) => (
                     <Link
                       key={product.slug}
                       href={product.href}
-                      className={styles.productLink}
+                      className={`${styles.productLink} ${styles.navMotion}`}
                       onClick={closeMenu}
                     >
                       {product.name}
@@ -227,7 +290,7 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
                   ))
                 ) : (
                   <p className={styles.emptyText}>
-                    No hay productos disponibles en esta categoría.
+                    No hay productos disponibles en esta categoria.
                   </p>
                 )}
               </div>
@@ -244,14 +307,16 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
         type="button"
         className={`${styles.menuButton} ${isOpen ? styles.menuButtonActive : ""}`}
         aria-expanded={isOpen}
-        aria-label="Abrir menú"
-        onClick={openMenu}
+        aria-label={isOpen ? "Cerrar menu" : "Abrir menu"}
+        onClick={toggleMenu}
       >
         <Menu size={18} aria-hidden="true" />
-        <span>Menú</span>
+        <span>Menu</span>
       </button>
 
-      {mounted ? createPortal(overlay, document.body) : null}
+      {shouldRenderOverlay && typeof document !== "undefined"
+        ? createPortal(overlay, document.body)
+        : null}
     </div>
   );
 }

@@ -1,0 +1,187 @@
+.section {
+  position: relative;
+  width: 100%;
+  padding: 0 0 clamp(2.5rem, 5vw, 4rem);
+}
+
+.section::before,
+.section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: clamp(2.5rem, 5vw, 4rem);
+  width: clamp(2.5rem, 8vw, 8rem);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.section::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--neutral-color) 0%, transparent 100%);
+}
+
+.section::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--neutral-color-2) 0%, transparent 100%);
+}
+
+.header{
+  display: grid;
+  gap: clamp(0.9rem, 2vw, 1.4rem);
+  max-width: 40rem;
+  padding-left: 50px;
+  margin-bottom: 50px;
+}
+
+.kicker {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 2rem;
+  align-items: center;
+  padding-inline: 0.9rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary-color) 8%, transparent);
+  color: var(--text-accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  color: var(--text-secondary);
+  font-size: clamp(1.7rem, 3vw, 2.7rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+}
+
+.track {
+  width: 100%;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.2rem, 2.4vw, 2rem);
+  width: max-content;
+  padding-inline: clamp(1rem, 2vw, 2rem);
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+  padding: 10px 0 10px 0;
+}
+
+.logoCard {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(12.5rem, 18vw, 16rem);
+  height: clamp(6rem, 8.5vw, 7.25rem);
+  padding: 1.15rem 1.6rem;
+  border: 1px solid color-mix(in srgb, var(--text-secondary) 8%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--neutral-color-2) 88%, transparent);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s ease,
+    background-color 0.45s ease;
+}
+
+.logoCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(120deg,
+      rgba(255, 255, 255, 0) 10%,
+      color-mix(in srgb, var(--neutral-color-2) 72%, transparent) 50%,
+      rgba(255, 255, 255, 0) 88%);
+  opacity: 0;
+  transform: translateX(-120%);
+  transition:
+    opacity 0.35s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.72;
+  transform: scale(1);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.4s ease,
+    opacity 0.4s ease;
+}
+
+@media (hover: hover) {
+  .track:hover .slider {
+    animation-play-state: paused;
+  }
+
+  .logoCard:hover {
+    transform: translateY(-0.35rem) scale(1.02);
+    border-color: color-mix(in srgb, var(--primary-color) 18%, transparent);
+    background: color-mix(in srgb, var(--neutral-color-2) 96%, transparent);
+    box-shadow:
+      0 22px 46px rgba(42, 35, 34, 0.1),
+      0 0 0 1px color-mix(in srgb, var(--neutral-color-2) 45%, transparent) inset;
+  }
+
+  .logoCard:hover::before {
+    opacity: 1;
+    transform: translateX(120%);
+  }
+
+  .logoCard:hover .logo {
+    transform: scale(1.08);
+    filter: grayscale(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-bottom: 2.25rem;
+  }
+
+  .section::before,
+  .section::after {
+    bottom: 2.25rem;
+    width: 2.5rem;
+  }
+
+  .slider {
+    animation-duration: 24s;
+  }
+
+  .logoCard {
+    width: 10rem;
+    height: 5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slider {
+    animation: none;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}

@@ -8,21 +8,24 @@ import styles from "./CatalogDropdown.module.scss";
 export default function CatalogDropdown({ categories = [] }) {
   const containerRef = useRef(null);
   const [selectedSlug, setSelectedSlug] = useState(categories[0]?.slug ?? "");
+  const [selectedAudienceSlug, setSelectedAudienceSlug] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const selectedCategory = useMemo(() => {
     return categories.find((category) => category.slug === selectedSlug) ?? categories[0];
   }, [categories, selectedSlug]);
 
-  useEffect(() => {
-    if (!categories.length) return;
+  const selectedAudience = useMemo(() => {
+    if (!selectedCategory?.audiences?.length) return null;
 
-    const stillExists = categories.some((category) => category.slug === selectedSlug);
+    return (
+      selectedCategory.audiences.find(
+        (audience) => audience.slug === selectedAudienceSlug
+      ) ?? selectedCategory.audiences[0]
+    );
+  }, [selectedAudienceSlug, selectedCategory]);
 
-    if (!selectedSlug || !stillExists) {
-      setSelectedSlug(categories[0].slug);
-    }
-  }, [categories, selectedSlug]);
+  const visibleProducts = selectedAudience?.products ?? selectedCategory?.products ?? [];
 
   useEffect(() => {
     if (!isOpen) return;
@@ -108,9 +111,27 @@ export default function CatalogDropdown({ categories = [] }) {
               </div>
             </div>
 
+            {selectedCategory.audiences?.length ? (
+              <div className={styles.audienceList} aria-label="Subcategorias">
+                {selectedCategory.audiences.map((audience) => (
+                  <button
+                    key={audience.slug}
+                    type="button"
+                    className={`${styles.audienceButton} ${
+                      selectedAudience?.slug === audience.slug ? styles.audienceButtonActive : ""
+                    }`}
+                    onClick={() => setSelectedAudienceSlug(audience.slug)}
+                  >
+                    <span>{audience.name}</span>
+                    <small>{audience.productCount}</small>
+                  </button>
+                ))}
+              </div>
+            ) : null}
+
             <div className={styles.productScrollArea}>
               <div className={styles.productList}>
-                {selectedCategory.products.map((product) => (
+                {visibleProducts.map((product) => (
                   <Link
                     key={product.slug}
                     href={product.href}

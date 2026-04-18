@@ -1,0 +1,166 @@
+@use "@styles/mixins" as *;
+
+.hero {
+  position: relative;
+  overflow: clip;
+  display: grid;
+  min-height: calc(100vh - 6rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+  place-items: center;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 14% 18% auto;
+  height: clamp(10rem, 24vw, 18rem);
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    rgba(193, 0, 39, 0.08) 0%,
+    rgba(193, 0, 39, 0.035) 30%,
+    rgba(193, 0, 39, 0) 72%
+  );
+  filter: blur(42px);
+  pointer-events: none;
+  animation: auroraDrift 16s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+.inner {
+  @include content-shell;
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  display: grid;
+  gap: clamp(0.35rem, 1vw, 0.75rem);
+  max-width: 56rem;
+  text-align: center;
+  color: #2a2322;
+  font-size: clamp(1.7rem, 3.8vw, 3.65rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  text-wrap: balance;
+  gap: 4rem;
+}
+
+.line {
+  display: block;
+  opacity: 0;
+  animation: lineReveal 1.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.line:first-child {
+  animation-delay: 0.12s;
+}
+
+.line:last-child {
+  animation-delay: 0.34s;
+}
+
+.lead {
+  font-size: 1.1em;
+  font-weight: 780;
+  letter-spacing: -0.035em;
+}
+
+.emphasis {
+  font-size: 1.04em;
+  font-weight: 740;
+}
+
+.accent {
+  color: transparent;
+  background: linear-gradient(
+    120deg,
+    rgba(193, 0, 39, 0.9) 0%,
+    rgba(244, 0, 19, 1) 40%,
+    rgba(193, 0, 39, 0.88) 68%,
+    rgba(244, 0, 19, 1) 100%
+  );
+  background-size: 220% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-size: 1.02em;
+  font-weight: 740;
+  animation: accentShift 12s ease-in-out infinite;
+}
+
+.support {
+  font-size: 0.94em;
+  letter-spacing: -0.01em;
+}
+
+.line:last-child {
+  color: rgba(42, 35, 34, 0.68);
+  font-size: 0.8em;
+}
+
+@media (max-width: 840px) {
+  .title {
+    font-size: clamp(2.55rem, 6vw, 2.8rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: calc(100vh - 5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .title {
+    animation: none !important;
+  }
+
+  .line,
+  .accent {
+    animation: none !important;
+    opacity: 1;
+  }
+}
+
+@keyframes lineReveal {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes accentShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes auroraDrift {
+  0% {
+    transform: translate3d(-3%, -1%, 0) scale(0.98);
+    opacity: 0.45;
+  }
+
+  50% {
+    transform: translate3d(1%, 2.5%, 0) scale(1.01);
+    opacity: 0.68;
+  }
+
+  100% {
+    transform: translate3d(4%, -1%, 0) scale(1);
+    opacity: 0.5;
+  }
+}

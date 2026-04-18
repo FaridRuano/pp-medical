@@ -1,41 +1,58 @@
 import Image from "next/image";
 import Link from "next/link";
 import { navigation } from "@app/_data/site";
-import { productCatalog } from "@app/_data/catalog";
-import CatalogDropdown from "@app/_components/navigation/CatalogDropdown";
-import MobileMenu from "@app/_components/navigation/MobileMenu";
+import {
+  audienceLabels,
+  categoryAudienceGroups,
+  categoryLabels,
+  productCatalog,
+} from "@app/_data/catalog";
 import styles from "./SiteNavbar.module.scss";
-
-const CATEGORY_LABELS = {
-  "rayos-x": "Rayos X",
-  ecografia: "Ecografia",
-  digitalizacion: "Digitalizacion",
-  dental: "Dental",
-  fluoroscopia: "Fluoroscopia",
-  densitometria: "Densitometria",
-};
+import CatalogDropdown from "@app/_components/navigation/DropDownDesktop/CatalogDropdown";
+import MobileMenu from "@app/_components/navigation/DropDownMobile/MobileMenu.jsx";
 
 function buildEquipmentCategories(catalog) {
   const groupedCategories = new Map();
 
   catalog.forEach((product) => {
+    const categoryAudiences = categoryAudienceGroups[product.category] ?? [];
+
     if (!groupedCategories.has(product.category)) {
       groupedCategories.set(product.category, {
         slug: product.category,
-        name: CATEGORY_LABELS[product.category] ?? product.category,
+        name: categoryLabels[product.category] ?? product.category,
         productCount: 0,
         anchorHref: `/equipos#categoria-${product.category}`,
         products: [],
+        audiences: categoryAudiences.map((audience) => ({
+          slug: audience,
+          name: audienceLabels[audience] ?? audience,
+          productCount: 0,
+          products: [],
+        })),
       });
     }
 
     const category = groupedCategories.get(product.category);
-
-    category.products.push({
+    const productEntry = {
       slug: product.slug,
       name: product.name,
       href: `/equipos/${product.slug}`,
-    });
+    };
+
+    if (category.audiences.length) {
+      const audienceGroup = category.audiences.find(
+        (audience) => audience.slug === product.audience
+      );
+
+      if (audienceGroup) {
+        audienceGroup.products.push(productEntry);
+        audienceGroup.productCount += 1;
+      }
+    } else {
+      category.products.push(productEntry);
+    }
+
     category.productCount += 1;
   });
 
@@ -44,6 +61,12 @@ function buildEquipmentCategories(catalog) {
     products: category.products.sort((left, right) =>
       left.name.localeCompare(right.name, "es")
     ),
+    audiences: category.audiences.map((audience) => ({
+      ...audience,
+      products: audience.products.sort((left, right) =>
+        left.name.localeCompare(right.name, "es")
+      ),
+    })),
   }));
 }
 

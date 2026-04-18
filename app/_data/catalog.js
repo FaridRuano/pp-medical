@@ -1,3 +1,23 @@
+export const categoryLabels = {
+  "rayos-x": "Rayos X",
+  ecografia: "Ecografia",
+  digitalizacion: "Digitalizacion",
+  dental: "Dental",
+  fluoroscopia: "Fluoroscopia",
+  densitometria: "Densitometria",
+};
+
+export const audienceLabels = {
+  humano: "Humano",
+  veterinario: "Veterinario",
+  general: "General",
+};
+
+export const categoryAudienceGroups = {
+  "rayos-x": ["humano", "veterinario"],
+  ecografia: ["humano", "veterinario"],
+};
+
 export const productCatalog = [
   {
     name: "Ultra 100",

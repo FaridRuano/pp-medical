@@ -1,0 +1,329 @@
+@use "@styles/mixins" as *;
+
+.section {
+  position: relative;
+  padding: 0 0 clamp(3rem, 6vw, 5rem);
+}
+
+.section .header,
+.section .rowViewport,
+.section .footer {
+  opacity: 0;
+  filter: blur(16px);
+  transform: translateY(1.4rem);
+  transition:
+    opacity 0.8s ease,
+    filter 0.8s ease,
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section .rowTrack {
+  animation-play-state: paused;
+}
+
+.sectionActive .header,
+.sectionActive .rowViewport,
+.sectionActive .footer {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.sectionActive .header {
+  transition-delay: 0.04s;
+}
+
+.sectionActive .rowViewport {
+  transition-delay: 0.16s;
+}
+
+.sectionActive .footer {
+  transition-delay: 0.26s;
+}
+
+.sectionActive .rowTrack {
+  animation-play-state: running;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 2rem 0 auto;
+  height: 20rem;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.shell {
+  @include content-shell;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(1.2rem, 3vw, 2rem);
+}
+
+.header {
+  display: grid;
+  gap: 0.7rem;
+  max-width: 40rem;
+  padding-left: 50px;
+}
+
+.kicker {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 2rem;
+  align-items: center;
+  padding-inline: 0.9rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary-color) 8%, transparent);
+  color: var(--text-accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  color: var(--text-secondary);
+  font-size: clamp(1.7rem, 3vw, 2.7rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+}
+
+.rowViewport {
+  position: relative;
+  overflow: hidden;
+  padding-block: 1.4rem 1.6rem;
+}
+
+.rowViewport::before,
+.rowViewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(1.5rem, 5vw, 5rem);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.rowViewport::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--neutral-color) 0%, transparent 100%);
+}
+
+.rowViewport::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--neutral-color-2) 0%, transparent 100%);
+}
+
+.rowTrack {
+  display: flex;
+  gap: clamp(0.85rem, 1.6vw, 1rem);
+  width: max-content;
+  will-change: transform;
+  animation: clientsLoop 34s linear infinite;
+}
+
+.card {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(12.25rem, 18vw, 15rem);
+  aspect-ratio: 4 / 5;
+  border-radius: 1.6rem;
+  overflow: visible;
+  transition: transform 0.35s ease;
+}
+
+.cardShadow {
+  position: absolute;
+  inset: 1rem 0.7rem 0.25rem;
+  border-radius: 1.45rem;
+  background: rgba(42, 35, 34, 0.18);
+  filter: blur(24px);
+  opacity: 0.5;
+  transition:
+    opacity 0.35s ease,
+    filter 0.35s ease;
+  pointer-events: none;
+}
+
+.cardLift {
+  transform: translateY(-0.45rem);
+}
+
+.cardDrop {
+  transform: translateY(0.55rem);
+}
+
+.cardTiltLeft {
+  transform: translateY(0.15rem) rotate(-1.35deg);
+}
+
+.cardTiltRight {
+  transform: translateY(-0.15rem) rotate(1.35deg);
+}
+
+.cardMedia {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  background: var(--neutral-color-2);
+  border: 1px solid color-mix(in srgb, var(--text-primary) 8%, transparent);
+}
+
+.cardImage {
+  object-fit: cover;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.35s ease;
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: auto 0 0;
+  display: grid;
+  gap: 0.6rem;
+  align-content: end;
+  min-height: 38%;
+  padding: 1rem;
+  z-index: 2;
+  background: linear-gradient(180deg, transparent, rgba(18, 12, 12, 0.72));
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.cardTag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding-inline: 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--text-primary) 14%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-1) 85%, transparent);
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.25rem;
+}
+
+.instagramButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.2rem;
+  padding: 0.9rem 1.4rem;
+  border: 1px solid color-mix(in srgb, var(--text-secondary) 12%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--neutral-color-2) 84%, transparent);
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    background-color 0.28s ease,
+    color 0.28s ease;
+}
+
+.cardIndex {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.cardCaption {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.86rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+@media (hover: hover) {
+  .rowViewport:hover .rowTrack {
+    animation-play-state: paused;
+  }
+
+  .card:hover {
+    transform: translateY(-0.6rem) rotate(0deg);
+  }
+
+  .card:hover .cardShadow {
+    opacity: 0.66;
+    filter: blur(28px);
+  }
+
+  .card:hover .cardImage {
+    transform: scale(1.04);
+    filter: saturate(1.06);
+  }
+
+  .instagramButton:hover {
+    transform: translateY(-0.18rem);
+    border-color: color-mix(in srgb, var(--primary-color) 20%, transparent);
+    background: color-mix(in srgb, var(--neutral-color-2) 95%, transparent);
+    color: var(--text-accent);
+  }
+}
+
+@media (max-width: 699px) {
+  .rowTrack {
+    animation-duration: 26s;
+    gap: 0.85rem;
+  }
+
+  .card {
+    width: 13.25rem;
+  }
+
+  .cardLift,
+  .cardDrop,
+  .cardTiltLeft,
+  .cardTiltRight {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section .header,
+  .section .rowViewport,
+  .section .footer {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+
+  .rowTrack {
+    animation: none;
+  }
+}
+
+@keyframes clientsLoop {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
