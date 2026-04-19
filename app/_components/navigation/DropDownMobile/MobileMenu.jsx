@@ -160,9 +160,8 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
   const equipmentToggle = shouldShowEquipment ? (
     <button
       type="button"
-      className={`${styles.primaryLinkAc} ${styles.navMotion} ${
-        isCatalogOpen ? styles.primaryLinkAcOpen : ""
-      }`}
+      className={`${styles.primaryLinkAc} ${styles.navMotion} ${isCatalogOpen ? styles.primaryLinkAcOpen : ""
+        }`}
       aria-expanded={isCatalogOpen}
       aria-controls="mobile-equipment-catalog"
       onClick={toggleCatalog}
@@ -174,9 +173,8 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
 
   const overlay = (
     <div
-      className={`${styles.mobileOverlay} ${
-        isOpen ? styles.mobileOverlayOpen : styles.mobileOverlayClosing
-      }`}
+      className={`${styles.mobileOverlay} ${isOpen ? styles.mobileOverlayOpen : styles.mobileOverlayClosing
+        }`}
       role="dialog"
       aria-modal="true"
       aria-label="Menu movil"
@@ -225,6 +223,13 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
             aria-hidden={!isCatalogOpen}
           >
             <div className={styles.sectionHeader}>
+              <Link
+                href="/equipos"
+                className={styles.catalogAllLink}
+                onClick={() => setIsOpen(false)}
+              >
+                Ver catalogo
+              </Link>
               <span className={styles.sectionEyebrow}>Categorias</span>
             </div>
 
@@ -235,11 +240,10 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
                   type="button"
                   role="tab"
                   aria-selected={activeCategory?.slug === category.slug}
-                  className={`${styles.categoryButton} ${
-                    activeCategory?.slug === category.slug
-                      ? styles.categoryButtonActive
-                      : ""
-                  }`}
+                  className={`${styles.categoryButton} ${activeCategory?.slug === category.slug
+                    ? styles.categoryButtonActive
+                    : ""
+                    }`}
                   onClick={() => {
                     setActiveCategorySlug(category.slug);
                     setActiveAudienceSlug("");
@@ -262,11 +266,10 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
                     <button
                       key={audience.slug}
                       type="button"
-                      className={`${styles.audienceButton} ${
-                        activeAudience?.slug === audience.slug
-                          ? styles.audienceButtonActive
-                          : ""
-                      }`}
+                      className={`${styles.audienceButton} ${activeAudience?.slug === audience.slug
+                        ? styles.audienceButtonActive
+                        : ""
+                        }`}
                       onClick={() => setActiveAudienceSlug(audience.slug)}
                     >
                       <span>{audience.name}</span>

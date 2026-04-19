@@ -60,11 +60,9 @@
   height: 100dvh;
   color: var(--text-secondary);
   background:
-    linear-gradient(
-      180deg,
+    linear-gradient(180deg,
       color-mix(in srgb, var(--neutral-color-2) 92%, transparent),
-      color-mix(in srgb, var(--neutral-color) 96%, var(--neutral-color-2))
-    );
+      color-mix(in srgb, var(--neutral-color) 96%, var(--neutral-color-2)));
   backdrop-filter: var(--blur-glass);
   -webkit-backdrop-filter: var(--blur-glass);
   overflow: hidden;
@@ -83,16 +81,12 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(
-      circle at 18% 0%,
+    radial-gradient(circle at 18% 0%,
       color-mix(in srgb, var(--primary-color) 7%, transparent),
-      transparent 32%
-    ),
-    linear-gradient(
-      135deg,
+      transparent 32%),
+    linear-gradient(135deg,
       color-mix(in srgb, var(--neutral-color-2) 58%, transparent),
-      transparent 42%
-    );
+      transparent 42%);
   pointer-events: none;
 }
 
@@ -186,33 +180,33 @@
   animation: navItemOut 260ms ease both;
 }
 
-.primaryNav > :nth-child(1),
-.productList > :nth-child(1) {
+.primaryNav> :nth-child(1),
+.productList> :nth-child(1) {
   animation-delay: 40ms;
 }
 
-.primaryNav > :nth-child(2),
-.productList > :nth-child(2) {
+.primaryNav> :nth-child(2),
+.productList> :nth-child(2) {
   animation-delay: 80ms;
 }
 
-.primaryNav > :nth-child(3),
-.productList > :nth-child(3) {
+.primaryNav> :nth-child(3),
+.productList> :nth-child(3) {
   animation-delay: 120ms;
 }
 
-.primaryNav > :nth-child(4),
-.productList > :nth-child(4) {
+.primaryNav> :nth-child(4),
+.productList> :nth-child(4) {
   animation-delay: 160ms;
 }
 
-.primaryNav > :nth-child(5),
-.productList > :nth-child(5) {
+.primaryNav> :nth-child(5),
+.productList> :nth-child(5) {
   animation-delay: 200ms;
 }
 
-.primaryNav > :nth-child(6),
-.productList > :nth-child(6) {
+.primaryNav> :nth-child(6),
+.productList> :nth-child(6) {
   animation-delay: 240ms;
 }
 
@@ -290,7 +284,58 @@
 
 .sectionHeader {
   display: grid;
-  gap: 0.15rem;
+  gap: 1rem;
+}
+
+.catalogAllLink {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: fit-content;
+  min-height: auto;
+  padding: 0.15rem 0;
+
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+
+  color: var(--text-accent);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.catalogAllLink:hover {
+  color: var(--text-secondary);
+}
+
+.catalogAllLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.08rem;
+
+  width: 100%;
+  height: 1px;
+
+  background: currentColor;
+  opacity: 0.35;
+
+  transform: scaleX(0.7);
+  transform-origin: left center;
+
+  transition:
+    opacity 180ms ease,
+    transform 220ms ease;
+}
+
+.catalogAllLink:hover::after {
+  opacity: 0.8;
+  transform: scaleX(1);
 }
 
 .sectionEyebrow {
@@ -476,6 +521,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .menuButton,
   .closeButton,
   .primaryLink,
