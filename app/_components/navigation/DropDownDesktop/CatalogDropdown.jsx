@@ -51,7 +51,6 @@ export default function CatalogDropdown({ categories = [] }) {
   if (!selectedCategory) return null;
 
   return (
-    
     <div
       ref={containerRef}
       className={`${styles.catalogWrap} ${isOpen ? styles.catalogWrapOpen : ""}`}
@@ -66,6 +65,7 @@ export default function CatalogDropdown({ categories = [] }) {
         <span>Equipos</span>
         <ChevronDown size={16} aria-hidden="true" />
       </button>
+
       <div
         id="catalog-dropdown-panel"
         className={styles.catalogPanel}
@@ -74,11 +74,21 @@ export default function CatalogDropdown({ categories = [] }) {
         <div className={styles.catalogIntro}>
           <div className={styles.catalogIntroText}>
             <span className={styles.catalogEyebrow}>Catálogo</span>
-            <h3 className={styles.catalogTitle}>Explora una selección curada por categoría.</h3>
+            <h3 className={styles.catalogTitle}>
+              Explora una selección curada por categoría.
+            </h3>
             <p className={styles.catalogText}>
               Una navegación más refinada para encontrar equipos con rapidez.
             </p>
           </div>
+
+          <Link
+            href="/equipos"
+            className={styles.catalogAllLink}
+            onClick={() => setIsOpen(false)}
+          >
+            Ver catalogo
+          </Link>
         </div>
 
         <div className={styles.catalogColumns}>
@@ -90,8 +100,11 @@ export default function CatalogDropdown({ categories = [] }) {
                 <button
                   key={category.slug}
                   type="button"
-                  className={`${styles.categoryButton} ${selectedCategory.slug === category.slug ? styles.categoryButtonActive : ""
-                    }`}
+                  className={`${styles.categoryButton} ${
+                    selectedCategory.slug === category.slug
+                      ? styles.categoryButtonActive
+                      : ""
+                  }`}
                   onMouseEnter={() => setSelectedSlug(category.slug)}
                   onFocus={() => setSelectedSlug(category.slug)}
                   onClick={() => setSelectedSlug(category.slug)}
@@ -118,7 +131,9 @@ export default function CatalogDropdown({ categories = [] }) {
                     key={audience.slug}
                     type="button"
                     className={`${styles.audienceButton} ${
-                      selectedAudience?.slug === audience.slug ? styles.audienceButtonActive : ""
+                      selectedAudience?.slug === audience.slug
+                        ? styles.audienceButtonActive
+                        : ""
                     }`}
                     onClick={() => setSelectedAudienceSlug(audience.slug)}
                   >

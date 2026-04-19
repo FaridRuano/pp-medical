@@ -133,13 +133,13 @@ export default function HomeEquipments() {
   const handlePrevious = () => {
     stopAutoplay();
     setActiveIndex((current) => Math.max(current - 1, 0));
-    startAutoplay(5000);
+    startAutoplay(3000);
   };
 
   const handleNext = () => {
     stopAutoplay();
     setActiveIndex((current) => Math.min(current + 1, maxIndex));
-    startAutoplay(5000);
+    startAutoplay(3000);
   };
 
   return (

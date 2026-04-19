@@ -1,0 +1,239 @@
+.about {
+    position: relative;
+    padding: clamp(4rem, 8vw, 7rem) 0;
+    background: var(--bg-gradient);
+    overflow: hidden;
+}
+
+.container {
+    width: min(100%, 1280px);
+    margin: 0 auto;
+    padding-inline: clamp(1rem, 3vw, 2rem);
+}
+
+.copy {
+    max-width: 52rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    padding-left: clamp(0rem, 3vw, 3rem);
+    opacity: 0;
+    transform: translate3d(0, 1.5rem, 0);
+
+    b {
+        color: var(--text-accent);
+        font-weight: 700;
+    }
+}
+
+.title {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: clamp(1.9rem, 3.8vw, 3.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+}
+
+.text {
+    margin: 1.5rem auto 0;
+    max-width: 46rem;
+    color: color-mix(in srgb, var(--text-secondary) 76%, transparent);
+    font-size: clamp(1rem, 1.2vw, 1.06rem);
+    line-height: 1.7;
+    text-align: center;
+    opacity: 0;
+    transform: translate3d(0, 1.5rem, 0);
+}
+
+.brandGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    opacity: 0;
+    transform: translate3d(0, 2rem, 0);
+}
+
+.brandCard {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 7.5rem;
+    border-radius: 1.35rem;
+    border: 1px solid var(--surface-border-2);
+    background-color: var(--neutral-color-2);
+    backdrop-filter: var(--blur-glass);
+    -webkit-backdrop-filter: var(--blur-glass);
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    transition:
+        transform 260ms ease,
+        border-color 220ms ease,
+        background-color 220ms ease;
+}
+
+.brandCard:hover {
+    transform: translateY(-0.3rem);
+    border-color: var(--surface-border-2-hover);
+}
+
+.brandLogoWrap {
+    position: relative;
+    width: 300px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.brandLogo {
+    width: auto;
+    height: auto;
+    max-height: 6rem;
+    object-fit: contain;
+}
+
+.mobileSlider {
+    --marquee-gap: 1rem;
+    display: none;
+    position: relative;
+    padding: 80px 0;
+    opacity: 0;
+    transform: translate3d(0, 2rem, 0);
+    mask-image: linear-gradient(90deg,
+            transparent 0,
+            black 10%,
+            black 90%,
+            transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg,
+            transparent 0,
+            black 10%,
+            black 90%,
+            transparent 100%);
+}
+
+.mobileTrack {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    gap: var(--marquee-gap);
+    will-change: transform;
+}
+
+.aboutActive .copy {
+    animation: aboutCopyReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.aboutActive .brandGrid,
+.aboutActive .mobileSlider {
+    animation: aboutGridReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+}
+
+.aboutActive .mobileTrack {
+    animation: brandsMarquee 20s linear infinite;
+}
+
+.aboutActive .text {
+    animation: aboutCopyReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+@keyframes aboutCopyReveal {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 1.5rem, 0);
+        filter: blur(8px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        filter: blur(0);
+    }
+}
+
+@keyframes aboutGridReveal {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 2rem, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes brandsMarquee {
+    0% {
+        transform: translate3d(calc(-50% - (var(--marquee-gap) / 2)), 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@media (max-width: 959px) {
+    .brandGrid {
+        display: none;
+    }
+
+    .mobileSlider {
+        display: block;
+    }
+
+    .mobileBrandCard {
+        flex-basis: clamp(9.25rem, 44vw, 10.5rem);
+        width: clamp(14rem, 54vw, 18rem);
+    }
+
+    .brandLogoWrap {
+        width: 500px !important;
+        height: 100px;
+    }
+}
+
+@media (max-width: 639px) {
+    .copy {
+        padding-left: 0;
+    }
+
+    .mobileSlider {
+        --marquee-gap: 0.85rem;
+        margin-inline: -0.15rem;
+    }
+
+    .mobileTrack {
+        padding-inline: 1rem;
+        animation-duration: 18s;
+    }
+
+    .mobileBrandCard {
+        flex-basis: clamp(9.25rem, 44vw, 10.5rem);
+        width: clamp(9.25rem, 44vw, 10.5rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .copy,
+    .brandGrid,
+    .mobileSlider,
+    .text {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+
+    .mobileTrack,
+    .brandCard {
+        transition: none;
+        animation: none;
+    }
+}
+
+@media (hover: hover) {
+    .mobileSlider:hover .mobileTrack {
+        animation-play-state: paused;
+    }
+}

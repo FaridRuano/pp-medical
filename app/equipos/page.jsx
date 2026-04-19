@@ -1,9 +1,5 @@
-import React from 'react'
+import EquipmentCatalog from "@app/_components/equipments/catalog/EquipmentCatalog";
 
-const page = () => {
-  return (
-    <div>page</div>
-  )
+export default function Page() {
+  return <EquipmentCatalog />;
 }
-
-export default page

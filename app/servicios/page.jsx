@@ -1,9 +1,11 @@
-import React from 'react'
+import ServicesHero from "@app/_components/services/hero/ServicesHero";
+import ServicesSections from "@app/_components/services/sections/ServicesSections";
 
-const page = () => {
+export default function Page() {
   return (
-    <div>page</div>
-  )
+    <>
+      <ServicesHero />
+      <ServicesSections />
+    </>
+  );
 }
-
-export default page
