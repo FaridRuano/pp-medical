@@ -19,7 +19,7 @@ const services = [
     body:
       "Supervisión especializada en cada proceso de entrega, asegurando confianza, correcto funcionamiento y puesta en marcha óptima en el entorno clínico.",
     icon: Truck,
-    imageSlot: "/imgs/service-entrega.webp",
+    imageSlot: "/imgs/services/service-entrega.webp",
   },
   {
     title: "Instalación",
