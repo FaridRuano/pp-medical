@@ -79,10 +79,15 @@ export default async function Page({ params }) {
             </section>
 
             <div className={styles.actions}>
-              <Link href={whatsappHref} className={styles.quoteButton}>
+              <a
+                href={whatsappHref}
+                className={styles.quoteButton}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <MessageCircleMore size={18} />
                 <span>Cotizar</span>
-              </Link>
+              </a>
             </div>
           </div>
         </div>

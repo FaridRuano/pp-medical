@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Phone } from "lucide-react";
+import { MailIcon, MapPin, Phone } from "lucide-react";
 import styles from "./SiteFooter.module.scss";
 import { whatsappUrl } from "@app/_data/site";
 import { socialLinks } from "@app/_data/site";
@@ -22,14 +22,11 @@ export default function SiteFooter() {
                   className={styles.logo}
                 />
               </Link>
-              <p className={styles.brandCopy}>
-                Soluciones para medicina humana y veterinaria en todo Ecuador.
-              </p>
             </section>
 
             <section className={styles.column} aria-labelledby="footer-address">
               <h2 id="footer-address" className={styles.title}>
-                Direccion
+                Dirección
               </h2>
               <div className={styles.infoRow}>
                 <span className={styles.infoIcon} aria-hidden="true">
@@ -53,6 +50,14 @@ export default function SiteFooter() {
                   +593 998 883 103
                 </a>
               </div>
+              <div className={styles.infoRow}>
+                <span className={styles.infoIcon} aria-hidden="true">
+                  <MailIcon size={18} strokeWidth={2.1} />
+                </span>
+                <a className={styles.copy} href={whatsappUrl} target="_blank" rel="noreferrer">
+                  info@pypmedical.ec
+                </a>
+              </div>
             </section>
 
             <section className={styles.column} aria-labelledby="footer-social">
@@ -61,11 +66,11 @@ export default function SiteFooter() {
               </h2>
               <div className={styles.socialList}>
                 {socialLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={styles.socialLink}
-                    target="_blank"
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={styles.socialLink}
+                  target="_blank"
                     rel="noreferrer"
                     aria-label={link.name}
                   >
@@ -78,7 +83,6 @@ export default function SiteFooter() {
                         aria-hidden="true"
                       />
                     </span>
-                    <span className={styles.socialLabel}>{link.name}</span>
                   </Link>
                 ))}
               </div>

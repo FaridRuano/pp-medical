@@ -7,8 +7,8 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
-      <HomeBrands />
       <HomeEquipments />
+      <HomeBrands />
       <HomeClients />
     </>
   );

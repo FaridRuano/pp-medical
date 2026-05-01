@@ -9,13 +9,13 @@
 }
 
 .inner {
-  display: grid;
-  grid-template-columns: minmax(0, 360px) 1fr auto;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 1.2rem;
   width: 100%;
   margin: 0 auto;
-  padding: 1.35rem 2rem 1.1rem;
+  padding: 1.35rem 6rem 1.1rem 10rem;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.22));
   backdrop-filter: blur(14px);
 }
@@ -68,10 +68,11 @@
 .desktopNav {
   display: none;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 0.25rem;
   min-width: 0;
-  justify-self: center;
+  justify-self: end;
+  padding-right: 1.35rem;
 }
 
 .desktopDropdown {
@@ -99,6 +100,12 @@
   color: var(--text-accent);
 }
 
+@media (max-width: 1024px) {
+  .inner {
+    padding: 1.35rem 1rem 1.1rem 4rem;
+  }
+}
+
 @media (min-width: 960px) {
   .desktopNav {
     display: flex;
@@ -113,7 +120,7 @@
   .inner {
     grid-template-columns: 1fr auto;
     gap: 0.7rem;
-    padding: 1rem 1rem 0.8rem;
+    padding: 1rem 1rem 0.8rem 1.35rem;
   }
 
   .brand {
@@ -140,7 +147,7 @@
 
 @media (max-width: 640px) {
   .inner {
-    padding: 0.95rem 0.75rem 0.7rem;
+    padding: 0.95rem 0.75rem 0.7rem 1rem;
   }
 
   .brandText strong {

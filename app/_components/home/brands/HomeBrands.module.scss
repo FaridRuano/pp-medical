@@ -1,7 +1,34 @@
 .section {
   position: relative;
   width: 100%;
-  padding: 0 0 clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(1.5rem, 4vw, 2.5rem) 0 clamp(3rem, 6vw, 4.5rem);
+  background: #fff;
+}
+
+.header,
+.track {
+  opacity: 0;
+  transform: translateY(1.4rem);
+  filter: blur(12px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.8s ease;
+}
+
+.sectionActive .header,
+.sectionActive .track {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.sectionActive .header {
+  transition-delay: 0.04s;
+}
+
+.sectionActive .track {
+  transition-delay: 0.18s;
 }
 
 .section::before,
@@ -17,43 +44,39 @@
 
 .section::before {
   left: 0;
-  background: linear-gradient(90deg, var(--neutral-color) 0%, transparent 100%);
+  background: linear-gradient(90deg, #fff 0%, transparent 100%);
 }
 
 .section::after {
   right: 0;
-  background: linear-gradient(270deg, var(--neutral-color-2) 0%, transparent 100%);
+  background: linear-gradient(270deg, #fff 0%, transparent 100%);
 }
 
-.header{
+.header {
   display: grid;
-  gap: clamp(0.9rem, 2vw, 1.4rem);
-  max-width: 40rem;
-  padding-left: 50px;
-  margin-bottom: 50px;
-}
-
-.kicker {
-  display: inline-flex;
-  width: fit-content;
-  min-height: 2rem;
-  align-items: center;
-  padding-inline: 0.9rem;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--primary-color) 8%, transparent);
-  color: var(--text-accent);
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  gap: 0.95rem;
+  max-width: 46rem;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+  margin: 0 auto clamp(2rem, 4vw, 3rem);
+  justify-items: center;
+  text-align: center;
 }
 
 .title {
+  margin: 0;
   color: var(--text-secondary);
-  font-size: clamp(1.7rem, 3vw, 2.7rem);
-  line-height: 1;
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+  line-height: 0.98;
   letter-spacing: -0.045em;
-  font-weight: 700;
+  font-weight: 800;
+}
+
+.copy {
+  margin: 0;
+  color: rgba(42, 35, 34, 0.66);
+  font-size: clamp(1rem, 1.5vw, 1.08rem);
+  line-height: 1.72;
+  text-wrap: pretty;
 }
 
 .track {
@@ -68,54 +91,26 @@
   padding-inline: clamp(1rem, 2vw, 2rem);
   animation: marquee 30s linear infinite;
   will-change: transform;
-  padding: 10px 0 10px 0;
+  padding: 0.6rem 0;
 }
 
-.logoCard {
-  position: relative;
+.logoItem {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(12.5rem, 18vw, 16rem);
-  height: clamp(6rem, 8.5vw, 7.25rem);
-  padding: 1.15rem 1.6rem;
-  border: 1px solid color-mix(in srgb, var(--text-secondary) 8%, transparent);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--neutral-color-2) 88%, transparent);
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(10px);
-  overflow: hidden;
+  width: clamp(10rem, 15vw, 13rem);
+  height: clamp(4.5rem, 6vw, 5.5rem);
+  padding: 0.35rem 0.7rem;
   cursor: pointer;
-  transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.45s ease,
-    background-color 0.45s ease;
-}
-
-.logoCard::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(120deg,
-      rgba(255, 255, 255, 0) 10%,
-      color-mix(in srgb, var(--neutral-color-2) 72%, transparent) 50%,
-      rgba(255, 255, 255, 0) 88%);
-  opacity: 0;
-  transform: translateX(-120%);
-  transition:
-    opacity 0.35s ease,
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  pointer-events: none;
 }
 
 .logo {
-  width: 200px;
+  width: 100%;
+  max-width: 11.5rem;
   height: auto;
   object-fit: contain;
-  filter: grayscale(1);
-  opacity: 0.72;
+  filter: grayscale(1) saturate(0.2);
+  opacity: 0.58;
   transform: scale(1);
   transition:
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -128,21 +123,7 @@
     animation-play-state: paused;
   }
 
-  .logoCard:hover {
-    transform: translateY(-0.35rem) scale(1.02);
-    border-color: color-mix(in srgb, var(--primary-color) 18%, transparent);
-    background: color-mix(in srgb, var(--neutral-color-2) 96%, transparent);
-    box-shadow:
-      0 22px 46px rgba(42, 35, 34, 0.1),
-      0 0 0 1px color-mix(in srgb, var(--neutral-color-2) 45%, transparent) inset;
-  }
-
-  .logoCard:hover::before {
-    opacity: 1;
-    transform: translateX(120%);
-  }
-
-  .logoCard:hover .logo {
+  .logoItem:hover .logo {
     transform: scale(1.08);
     filter: grayscale(0);
     opacity: 1;
@@ -164,13 +145,21 @@
     animation-duration: 24s;
   }
 
-  .logoCard {
-    width: 10rem;
-    height: 5rem;
+  .logoItem {
+    width: 8.75rem;
+    height: 4.6rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .header,
+  .track {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
   .slider {
     animation: none;
   }

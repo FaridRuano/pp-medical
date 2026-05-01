@@ -2,44 +2,63 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { productCatalog } from "@app/_data/catalog";
+import { useEffect, useRef, useState } from "react";
 import styles from "./HomeEquipments.module.scss";
 
-const featuredEquipments = productCatalog.filter(
-  (product) => product.featured && product.image
-);
-
-const COUNTER_TARGET = 1000;
-
-function getCardsPerView(width) {
-  if (width < 700) return 1;
-  if (width < 1100) return 2;
-  return 3;
-}
+const equipmentGroups = [
+  {
+    title: "Rayos X",
+    href: "/equipos#categoria-rayos-x",
+    image: "/imgs/equipments/hf-525-plus.jpg",
+    alt: "Equipo de Rayos X HF-525 Plus",
+    description:
+      "Equipos fijos y portatiles con tecnologia de alto rendimiento para diagnostico radiologico en medicina humana y veterinaria.",
+  },
+  {
+    title: "Ecografos",
+    href: "/equipos#categoria-ecografia",
+    image: "/imgs/equipments/sonoscape-x11.jpg",
+    alt: "Ecografo SonoScape X11",
+    description:
+      "Sistemas avanzados para diagnostico en multiples especialidades de medicina humana y veterinaria.",
+  },
+  {
+    title: "Detectores digitales",
+    href: "/equipos#categoria-digitalizacion",
+    image: "/imgs/equipments/lg-x-ray.jpg",
+    alt: "Flat panel para digitalizacion radiografica",
+    description:
+      "Captura de imagenes de alta calidad con rapidez y precision para aplicaciones medicas y veterinarias.",
+  },
+  {
+    title: "Rayos X dental",
+    href: "/equipos#categoria-dental",
+    image: "/imgs/equipments/i-max-ceph-pro.jpg",
+    alt: "Equipo dental I-MAX CEPH PRO",
+    description:
+      "Soluciones 2D y 3D para diagnostico odontologico preciso y eficiente.",
+  },
+  {
+    title: "Arco en C",
+    href: "/equipos#categoria-fluoroscopia",
+    image: "/imgs/equipments/arco-c.jpg",
+    alt: "Equipo Arco en C Garion",
+    description:
+      "Fluoroscopia en tiempo real para procedimientos quirurgicos de alta precision.",
+  },
+  {
+    title: "Densitometros oseos",
+    href: "/equipos#categoria-densitometria",
+    image: "/imgs/equipments/primus.jpg",
+    alt: "Equipo de densitometria Primus",
+    description:
+      "Tecnologia DXA para evaluacion de salud osea y analisis de composicion corporal.",
+  },
+];
 
 export default function HomeEquipments() {
   const sectionRef = useRef(null);
-  const autoplayTimeoutRef = useRef(null);
-  const autoplayIntervalRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [cardsPerView, setCardsPerView] = useState(3);
-  const [counterValue, setCounterValue] = useState(0);
-  const [hasEnteredView, setHasEnteredView] = useState(false);
-
-  useEffect(() => {
-    const syncCardsPerView = () => {
-      setCardsPerView(getCardsPerView(window.innerWidth));
-    };
-
-    syncCardsPerView();
-    window.addEventListener("resize", syncCardsPerView);
-
-    return () => {
-      window.removeEventListener("resize", syncCardsPerView);
-    };
-  }, []);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const node = sectionRef.current;
@@ -49,10 +68,10 @@ export default function HomeEquipments() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
-        setHasEnteredView(true);
+        setIsVisible(true);
         observer.disconnect();
       },
-      { threshold: 0.35 }
+      { threshold: 0.18 }
     );
 
     observer.observe(node);
@@ -62,182 +81,50 @@ export default function HomeEquipments() {
     };
   }, []);
 
-  useEffect(() => {
-    if (!hasEnteredView) return;
-
-    let frameId = 0;
-    const start = performance.now();
-    const duration = 2200;
-
-    const animate = (timestamp) => {
-      const progress = Math.min((timestamp - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 4);
-
-      setCounterValue(Math.round(COUNTER_TARGET * eased));
-
-      if (progress < 1) {
-        frameId = window.requestAnimationFrame(animate);
-      }
-    };
-
-    frameId = window.requestAnimationFrame(animate);
-
-    return () => {
-      window.cancelAnimationFrame(frameId);
-    };
-  }, [hasEnteredView]);
-
-  const maxIndex = Math.max(featuredEquipments.length - cardsPerView, 0);
-  const safeActiveIndex = Math.min(activeIndex, maxIndex);
-  const canGoBack = safeActiveIndex > 0;
-  const canGoForward = safeActiveIndex < maxIndex;
-
-  const stopAutoplay = useCallback(() => {
-    if (autoplayTimeoutRef.current) {
-      window.clearTimeout(autoplayTimeoutRef.current);
-      autoplayTimeoutRef.current = null;
-    }
-
-    if (autoplayIntervalRef.current) {
-      window.clearInterval(autoplayIntervalRef.current);
-      autoplayIntervalRef.current = null;
-    }
-  }, []);
-
-  const stepForward = useCallback(() => {
-    setActiveIndex((current) => {
-      if (current >= maxIndex) return 0;
-      return current + 1;
-    });
-  }, [maxIndex]);
-
-  const startAutoplay = useCallback((delay = 1500) => {
-    stopAutoplay();
-
-    if (!hasEnteredView || maxIndex <= 0) return;
-
-    autoplayTimeoutRef.current = window.setTimeout(() => {
-      stepForward();
-      autoplayIntervalRef.current = window.setInterval(stepForward, 3000);
-    }, delay);
-  }, [hasEnteredView, maxIndex, stepForward, stopAutoplay]);
-
-  useEffect(() => {
-    startAutoplay(1500);
-
-    return () => {
-      stopAutoplay();
-    };
-  }, [hasEnteredView, maxIndex, startAutoplay, stopAutoplay]);
-
-  const handlePrevious = () => {
-    stopAutoplay();
-    setActiveIndex((current) => Math.max(current - 1, 0));
-    startAutoplay(3000);
-  };
-
-  const handleNext = () => {
-    stopAutoplay();
-    setActiveIndex((current) => Math.min(current + 1, maxIndex));
-    startAutoplay(3000);
-  };
-
   return (
     <section
       ref={sectionRef}
-      className={`${styles.section} ${hasEnteredView ? styles.sectionActive : ""}`}
+      className={`${styles.section} ${isVisible ? styles.sectionActive : ""}`}
       aria-labelledby="home-equipments-title"
     >
       <div className={styles.shell}>
-        <div className={styles.header}>
-          <div className={styles.counterBlock}>
-            <div className={styles.counterRow}>
-              <strong className={styles.counter}>+ {counterValue}</strong>
-              <Image
-                src="/icons/ecuador.webp"
-                alt="Bandera de Ecuador"
-                width={86}
-                height={86}
-                className={styles.flag}
-              />
-            </div>
-            <p className={styles.counterCopy}>
-              Entregas, instalaciones y capacitaciones en todo Ecuador.
-            </p>
-          </div>
-        </div>
-        <div className={styles.viewportFrame}>
-          <div
-            className={styles.viewport}
-            onMouseEnter={stopAutoplay}
-            onMouseLeave={() => startAutoplay(5000)}
-          >
-            <div
-              className={styles.track}
-              style={{
-                width: `${(featuredEquipments.length * 100) / cardsPerView}%`,
-                transform: `translate3d(calc(-${safeActiveIndex} * (100% / ${featuredEquipments.length})), 0, 0)`,
-              }}
-            >
-              {featuredEquipments.map((equipment) => (
-                <article
-                  key={equipment.slug}
-                  className={styles.slide}
-                  style={{ flexBasis: `${100 / featuredEquipments.length}%` }}
-                >
-                  <Link href={`/equipos/${equipment.slug}`} className={styles.card}>
-                    <div className={styles.media}>
-                      <Image
-                        src={equipment.image}
-                        alt={equipment.name}
-                        width={400}
-                        height={400}
-                        className={styles.image}
-                      />
-                    </div>
-                    <div className={styles.cardBody}>
-                      <span className={styles.cardLabel}>Equipo destacado</span>
-                      <h3 className={styles.name}>{equipment.name}</h3>
-                    </div>
-                  </Link>
-                </article>
-              ))}
-            </div>
-          </div>
+        <header className={styles.header}>
+          <h2 id="home-equipments-title" className={styles.title}>
+            Soluciones en <span>imagenologia médica</span>
+          </h2>
+          <p className={styles.copy}>
+            Tecnologia avanzda para un diagnostico preciso en medicina humana y
+            veterinaria.
+          </p>
+        </header>
+
+        <div className={styles.grid}>
+          {equipmentGroups.map((group) => (
+            <article key={group.title} className={styles.card}>
+              <div className={styles.media}>
+                <Image
+                  src={group.image}
+                  alt={group.alt}
+                  width={1040}
+                  height={1040}
+                  className={styles.image}
+                />
+              </div>
+
+              <div className={styles.body}>
+                <Link href={group.href} className={styles.cardLink}>
+                  {group.title}
+                </Link>
+                <p className={styles.description}>{group.description}</p>
+              </div>
+            </article>
+          ))}
         </div>
 
-        <div className={styles.footer}>
-          <div className={styles.progress} aria-hidden="true">
-            {featuredEquipments.map((equipment, index) => (
-              <span
-                key={equipment.slug}
-                className={`${styles.progressDot} ${
-                  index === safeActiveIndex ? styles.progressDotActive : ""
-                }`}
-              />
-            ))}
-          </div>
-
-          <div className={styles.controls} aria-label="Controles del carrusel">
-            <button
-              type="button"
-              className={styles.controlButton}
-              onClick={handlePrevious}
-              disabled={!canGoBack}
-              aria-label="Ver equipos anteriores"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              type="button"
-              className={styles.controlButton}
-              onClick={handleNext}
-              disabled={!canGoForward}
-              aria-label="Ver mas equipos"
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
+        <div className={styles.actions}>
+          <Link href="/equipos" className={styles.catalogButton}>
+            Conocer catalogo
+          </Link>
         </div>
       </div>
     </section>

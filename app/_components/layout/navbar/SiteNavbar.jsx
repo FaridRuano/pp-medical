@@ -10,7 +10,7 @@ import {
 import styles from "./SiteNavbar.module.scss";
 import CatalogDropdown from "@app/_components/navigation/DropDownDesktop/CatalogDropdown";
 import MobileMenu from "@app/_components/navigation/DropDownMobile/MobileMenu.jsx";
-
+ 
 function buildEquipmentCategories(catalog) {
   const groupedCategories = new Map();
 
@@ -79,10 +79,10 @@ export default function SiteNavbar() {
         <Link href="/" className={styles.brand} aria-label="Ir al inicio de P&P Medical">
           <span className={styles.logoFrame}>
             <Image
-              src="/imgs/pp-medical.webp"
+              src="/imgs/pp-medical-long.webp"
               alt="P&P Medical"
-              width={172}
-              height={56}
+              width={874}
+              height={272}
               className={styles.logo}
               priority
             />

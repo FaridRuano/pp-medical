@@ -1,7 +1,7 @@
 .section {
     position: relative;
     padding: 100px 0 clamp(4rem, 8vw, 7rem);
-    background: var(--bg-gradient);
+    background: #fff;
 }
 
 .container {
@@ -55,7 +55,6 @@
     border-radius: 1.8rem;
     border: 1px solid var(--surface-border-2);
     background: color-mix(in srgb, var(--surface-2) 92%, white 8%);
-    box-shadow: var(--shadow-soft);
     opacity: 0;
     transform: translate3d(0, 2rem, 0);
 }
@@ -139,7 +138,7 @@
     min-height: inherit;
     border-radius: 1.45rem;
     overflow: hidden;
-    border: 1px dashed color-mix(in srgb, var(--text-accent) 30%, transparent);
+    box-shadow: 0 18px 40px rgba(24, 29, 36, 0.08);
 }
 
 .image {

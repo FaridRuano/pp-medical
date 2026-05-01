@@ -1,5 +1,6 @@
 import SiteFooter from "../footer/SiteFooter";
 import SiteNavbar from "../navbar/SiteNavbar";
+import WhatsappFloat from "../whatsapp-float/WhatsappFloat";
 import styles from "./SiteShell.module.scss";
 
 export default function SiteShell({ children }) {
@@ -7,6 +8,7 @@ export default function SiteShell({ children }) {
     <div className={styles.shell}>
       <SiteNavbar />
       <main className={styles.main}>{children}</main>
+      <WhatsappFloat />
       <SiteFooter />
     </div>
   );

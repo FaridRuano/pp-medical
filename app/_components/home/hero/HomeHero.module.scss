@@ -4,129 +4,186 @@
   position: relative;
   overflow: clip;
   display: grid;
-  min-height: calc(100vh - 6rem);
+  min-height: min(88vh, 52rem);
   padding: clamp(1.5rem, 3vw, 2.5rem) 0;
   place-items: center;
 }
 
-.hero::before {
-  content: "";
+.media,
+.overlay,
+.imageLayer {
   position: absolute;
-  inset: 14% 18% auto;
-  height: clamp(10rem, 24vw, 18rem);
-  border-radius: 999px;
-  background: radial-gradient(
-    circle,
-    rgba(193, 0, 39, 0.08) 0%,
-    rgba(193, 0, 39, 0.035) 30%,
-    rgba(193, 0, 39, 0) 72%
-  );
-  filter: blur(42px);
+  inset: 0;
+}
+
+.media {
+  z-index: 0;
+}
+
+.imageLayer {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0;
   pointer-events: none;
-  animation: auroraDrift 16s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  transform: scale(1.03);
+  animation-duration: 7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.imageOne {
+  background-image: url("/imgs/pp-hero-1.jpeg");
+  animation-name: heroSwapOne;
+}
+
+.imageTwo {
+  background-image: url("/imgs/pp-hero-2.jpeg");
+  animation-name: heroSwapTwo;
+}
+
+.overlay {
+  background:
+    linear-gradient(180deg, rgba(7, 10, 18, 0.38), rgba(7, 10, 18, 0.56)),
+    linear-gradient(90deg, rgba(12, 17, 27, 0.82) 0%, rgba(12, 17, 27, 0.52) 42%, rgba(12, 17, 27, 0.26) 100%);
+  animation: overlayReveal 1.1s ease both;
 }
 
 .inner {
   @include content-shell;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.content {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 42rem;
+  padding: clamp(2.5rem, 8vw, 5.25rem) clamp(1.1rem, 3vw, 2.25rem);
+  animation: heroContentReveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
 }
 
 .title {
-  display: grid;
-  gap: clamp(0.35rem, 1vw, 0.75rem);
-  max-width: 56rem;
-  text-align: center;
-  color: #2a2322;
-  font-size: clamp(1.7rem, 3.8vw, 3.65rem);
-  line-height: 1.1;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.15rem, 4.8vw, 4.4rem);
+  line-height: 1.02;
   letter-spacing: -0.03em;
-  font-weight: 700;
+  font-weight: 800;
   text-wrap: balance;
-  gap: 4rem;
 }
 
-.line {
-  display: block;
-  opacity: 0;
-  animation: lineReveal 1.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+.copy {
+  margin: 0;
+  max-width: 36rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(1rem, 1.8vw, 1.18rem);
+  line-height: 1.7;
+  text-wrap: pretty;
 }
 
-.line:first-child {
-  animation-delay: 0.12s;
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 3.5rem;
+  padding: 0.95rem 1.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c10027 0%, #e21d3f 100%);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 18px 44px rgba(193, 0, 39, 0.34);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
 }
 
-.line:last-child {
-  animation-delay: 0.34s;
+.cta:hover,
+.cta:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 56px rgba(193, 0, 39, 0.4);
+  filter: saturate(1.08);
 }
 
-.lead {
-  font-size: 1.1em;
-  font-weight: 780;
-  letter-spacing: -0.035em;
-}
-
-.emphasis {
-  font-size: 1.04em;
-  font-weight: 740;
-}
-
-.accent {
-  color: transparent;
-  background: linear-gradient(
-    120deg,
-    rgba(193, 0, 39, 0.9) 0%,
-    rgba(244, 0, 19, 1) 40%,
-    rgba(193, 0, 39, 0.88) 68%,
-    rgba(244, 0, 19, 1) 100%
-  );
-  background-size: 220% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  font-size: 1.02em;
-  font-weight: 740;
-  animation: accentShift 12s ease-in-out infinite;
-}
-
-.support {
-  font-size: 0.94em;
-  letter-spacing: -0.01em;
-}
-
-.line:last-child {
-  color: rgba(42, 35, 34, 0.68);
-  font-size: 0.8em;
+.cta:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.28);
+  outline-offset: 4px;
 }
 
 @media (max-width: 840px) {
-  .title {
-    font-size: clamp(2.55rem, 6vw, 2.8rem);
+  .hero {
+    min-height: 38rem;
+  }
+
+  .content {
+    max-width: 35rem;
+    padding: 3rem 1.25rem;
   }
 }
 
 @media (max-width: 640px) {
   .hero {
-    min-height: calc(100vh - 5rem);
+    min-height: 34rem;
+  }
+
+  .overlay {
+    background:
+      linear-gradient(180deg, rgba(8, 12, 19, 0.48), rgba(8, 12, 19, 0.68)),
+      linear-gradient(180deg, rgba(12, 17, 27, 0.7) 0%, rgba(12, 17, 27, 0.35) 100%);
+  }
+
+  .content {
+    gap: 1rem;
+    max-width: 100%;
+    padding: 2.5rem 1rem 2.75rem;
+  }
+
+  .title {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+
+  .copy {
+    line-height: 1.55;
+  }
+
+  .cta {
+    width: 100%;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero::before,
-  .title {
+  .imageLayer {
     animation: none !important;
   }
 
-  .line,
-  .accent {
+  .overlay,
+  .content {
     animation: none !important;
+  }
+
+  .imageOne,
+  .imageTwo {
     opacity: 1;
+    transform: none;
+  }
+
+  .imageTwo {
+    display: none;
   }
 }
 
-@keyframes lineReveal {
+@keyframes heroContentReveal {
   from {
     opacity: 0;
-    transform: translateY(1rem);
+    transform: translateY(1.4rem);
     filter: blur(8px);
   }
 
@@ -137,30 +194,46 @@
   }
 }
 
-@keyframes accentShift {
-  0%,
-  100% {
-    background-position: 0% 50%;
+@keyframes overlayReveal {
+  from {
+    opacity: 0;
   }
 
-  50% {
-    background-position: 100% 50%;
+  to {
+    opacity: 1;
   }
 }
 
-@keyframes auroraDrift {
-  0% {
-    transform: translate3d(-3%, -1%, 0) scale(0.98);
-    opacity: 0.45;
+@keyframes heroSwapOne {
+  0%,
+  45% {
+    opacity: 1;
+    transform: scale(1);
   }
-
-  50% {
-    transform: translate3d(1%, 2.5%, 0) scale(1.01);
-    opacity: 0.68;
+  55%,
+  95% {
+    opacity: 0;
+    transform: scale(1.04);
   }
-
   100% {
-    transform: translate3d(4%, -1%, 0) scale(1);
-    opacity: 0.5;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes heroSwapTwo {
+  0%,
+  45% {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  55%,
+  95% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.04);
   }
 }

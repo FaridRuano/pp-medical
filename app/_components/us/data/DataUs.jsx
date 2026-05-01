@@ -10,21 +10,18 @@ const stats = [
     value: 30,
     prefix: "+",
     title: "Ciudades",
-    description: "Con cobertura activa a nivel nacional.",
     icon: MapPinned,
   },
   {
     value: 400,
     prefix: "+",
     title: "Instituciones de salud equipadas",
-    description: "Aliados de confianza en medicina humana y veterinaria.",
     icon: Building2,
   },
   {
     value: 1000,
     prefix: "+",
     title: "Equipos entregados",
-    description: "Tecnología instalada con acompañamiento técnico especializado.",
     icon: ScanLine,
   },
 ];
@@ -70,10 +67,12 @@ export default function DataUs() {
     >
       <div className={styles.container}>
         <header className={styles.header}>
-          <span className={styles.eyebrow}>Alcance nacional</span>
           <h2 id="data-us-title" className={styles.title}>
-            Presencia, confianza y resultados medibles en todo Ecuador.
+            Alcance Nacional
           </h2>
+          <p className={styles.copy}>
+            Presencia, confianza y resultados medibles en todo el Ecuador.
+          </p>
         </header>
 
         <div className={styles.grid}>
@@ -94,7 +93,6 @@ export default function DataUs() {
                   <span>{stat.prefix}</span> {formatStat(counts[index])}
                 </p>
                 <h3 className={styles.cardTitle}>{stat.title}</h3>
-                <p className={styles.cardText}>{stat.description}</p>
               </article>
             );
           })}

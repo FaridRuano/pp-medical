@@ -1,0 +1,128 @@
+@use "@styles/mixins" as *;
+
+.section {
+  background: #fff;
+  padding: 0 0 clamp(4rem, 8vw, 6rem);
+}
+
+.container {
+  @include content-shell;
+}
+
+.panel {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  padding: clamp(2.1rem, 5vw, 3.2rem);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at top, rgba(193, 0, 39, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 248, 250, 0.94));
+  border: 1px solid rgba(29, 33, 40, 0.06);
+  box-shadow: 0 16px 42px rgba(24, 29, 36, 0.05);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(1.5rem);
+  filter: blur(10px);
+  transition:
+    opacity 0.85s ease,
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.85s ease;
+}
+
+.sectionActive .panel {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 0;
+  max-width: 52rem;
+  color: #1f1b1c;
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+.titleAccent {
+  color: var(--text-accent);
+}
+
+.copy {
+  margin: 0;
+  max-width: 64rem;
+  color: rgba(31, 27, 28, 0.88);
+  font-size: clamp(1.02rem, 1.7vw, 1.22rem);
+  line-height: 1.62;
+  font-weight: 560;
+  text-wrap: pretty;
+}
+
+.copy strong {
+  color: #1f1b1c;
+  font-weight: 780;
+}
+
+.inlineAccent {
+  color: #1f1b1c;
+  font-weight: 760;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5rem;
+  margin-top: 0.35rem;
+  padding: 0.95rem 1.65rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c10027 0%, #e21d3f 100%);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 18px 44px rgba(193, 0, 39, 0.24);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+
+.button:hover,
+.button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 54px rgba(193, 0, 39, 0.3);
+  filter: saturate(1.06);
+}
+
+.button:focus-visible {
+  outline: 3px solid rgba(193, 0, 39, 0.16);
+  outline-offset: 4px;
+}
+
+@media (max-width: 640px) {
+  .panel {
+    border-radius: 1.35rem;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}

@@ -15,45 +15,45 @@ const services = [
   {
     title: "Entrega",
     lead:
-      "Entrega directa y personalizada de cada equipo, garantizando seguridad, integridad del producto y cumplimiento en tiempos de instalación.",
+      "Realizamos la entrega de cada equipo bajo planificación y control técnico, asegurando su integridad y las condiciones adecuadas para una instalación ordenada.",
     body:
-      "Supervisión especializada en cada proceso de entrega, asegurando confianza, correcto funcionamiento y puesta en marcha óptima en el entorno clínico.",
+      "Supervisamos cada proceso para garantizar una puesta en marcha eficiente en el entorno clínico.",
     icon: Truck,
-    imageSlot: "/imgs/services/service-entrega.webp",
+    imageSlot: "/imgs/services/service-entregas.webp",
   },
   {
-    title: "Instalación",
+    title: "Instalación especializada",
     lead:
-      "Instalación técnica que garantiza la correcta configuración, integración y puesta en marcha del equipo en el entorno clínico.",
+      "Realizamos la instalación de cada equipo bajo estándares técnicos, asegurando su correcta configuración, calibración, integración y puesta en marcha en el entorno clínico.",
     body:
-      "Ejecución bajo estándares técnicos, asegurando funcionamiento óptimo, seguridad operativa y rendimiento desde el primer uso.",
+      "Cada implementación es ejecutada con precisión para garantizar un funcionamiento óptimo, seguro y eficiente desde el primer uso.",
     icon: BadgeCheck,
-    imageSlot: "/imgs/services/service-instalacion.webp",
+    imageSlot: "/imgs/services/service-instalaciones.webp",
   },
   {
-    title: "Capacitación",
+    title: "Capacitación profesional",
     lead:
-      "Capacitación especializada orientada al uso eficiente y seguro de la tecnología médica, asegurando el dominio operativo de cada equipo.",
+      "Brindamos capacitación enfocada en el uso correcto, seguro y eficiente de la tecnología medica, asegurando el adecuado manejo y aprovechamiento de cada equipo.",
     body:
-      "Formación técnica aplicada que optimiza el rendimiento clínico, la correcta configuración y la toma de decisiones diagnósticas, garantizando un aprovechamiento integral del sistema.",
+      "Acompañamos a su personal en la operación y funciones clave para optimizar el rendimiento clínico y fortalecer la práctica diagnóstica.",
     icon: GraduationCap,
     imageSlot: "/imgs/services/service-capacitacion.webp",
   },
   {
-    title: "Postventa",
+    title: "Servicio postventa",
     lead:
-      "Soporte postventa continuo orientado a garantizar el rendimiento del equipo y la continuidad operativa.",
+      "Brindamos soporte postventa orientado a asegurar el rendimiento sostenido de cada equipo y la continuidad operativa de su institucion.",
     body:
-      "Acompañamiento permanente al cliente, brindando respuesta oportuna, seguimiento técnico y confianza en cada etapa de uso.",
+      "Integramos respuesta tecnica oportuna, seguimiento especializado y un acompanamiento integral en los procesos asociados al uso y gestion del equipo, ofreciendo soluciones agiles y adaptadas a cada necesidad.",
     icon: Headset,
     imageSlot: "/imgs/services/service-postventa.webp",
   },
   {
     title: "Servicio técnico y mantenimiento",
     lead:
-      "Respaldamos a nuestros clientes más allá de la compra, con servicio técnico y mantenimiento. Aseguramos la continuidad operativa de sus equipos.",
+      "Contamos con un equipo técnico calificado para la atención, diagnóstico y mantenimiento de equipos de imagenologia medica, incluyendo intervenciones preventivas y correctivas que aseguran su funcionamiento optimo y contribuyen a prolongar su vida util.",
     body:
-      "Ante cualquier inconveniente, nuestro equipo está disponible para ofrecer soporte oportuno y soluciones efectivas.",
+      "Brindamos respuesta oportuna y con criterio tecnico ante cada requerimiento, respaldando la continuidad operativa de su servicio.",
     icon: Settings2,
     imageSlot: "/imgs/services/service-tecnico.webp",
   },
@@ -109,12 +109,6 @@ export default function ServicesSections() {
       aria-labelledby="services-sections-title"
     >
       <div className={styles.container}>
-        <header className={`${styles.header} ${hasEnteredView ? styles.headerVisible : ""}`}>
-          <span className={styles.eyebrow}>Cobertura completa</span>
-          <h2 id="services-sections-title" className={styles.heading}>
-            Un servicio integral para cada etapa del ciclo de vida del equipo.
-          </h2>
-        </header>
 
         <div className={styles.stack}>
           {services.map((service, index) => (

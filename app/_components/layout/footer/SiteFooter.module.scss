@@ -66,14 +66,13 @@
     font-size: 0.82rem;
     font-weight: 800;
     letter-spacing: 0.12em;
-    text-transform: uppercase;
     color: var(--text-primary);
 
 }
 
 .infoRow {
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: 0.85rem;
     transition: .3s ease-out;
     cursor: pointer;
@@ -105,38 +104,31 @@
 
 .socialList {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 0.85rem;
 }
 
 .socialLink {
     display: inline-flex;
     align-items: center;
-    max-width: fit-content;
-    gap: 0.75rem;
-    min-height: 3rem;
-    padding: 0.35rem 0.9rem 0.35rem 0.35rem;
-    border: 1px solid var(--surface-border-1);
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
     border-radius: 999px;
-    background: var(--surface-1);
     color: var(--text-primary);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     transition:
         transform 0.25s ease,
-        border-color 0.25s ease,
-        background 0.25s ease;
+        filter 0.25s ease,
+        opacity 0.25s ease;
 
     &:hover {
         transform: translateY(-0.15rem);
-        border-color: var(--surface-border-1-hover);
-        background: var(--surface-1-hover);
+        filter: brightness(1.03);
+        opacity: 1;
     }
-}
-
-.socialLabel {
-    font-size: 0.92rem;
-    font-weight: 700;
 }
 
 @media (max-width: 1100px) {
@@ -160,11 +152,6 @@
     }
 
     .socialList {
-        flex-direction: column;
-    }
-
-    .socialLink {
-        width: 100%;
-        justify-content: flex-start;
+        flex-direction: row;
     }
 }
