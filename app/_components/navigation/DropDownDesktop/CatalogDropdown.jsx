@@ -2,30 +2,12 @@
 
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./CatalogDropdown.module.scss";
 
 export default function CatalogDropdown({ categories = [] }) {
   const containerRef = useRef(null);
-  const [selectedSlug, setSelectedSlug] = useState(categories[0]?.slug ?? "");
-  const [selectedAudienceSlug, setSelectedAudienceSlug] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-
-  const selectedCategory = useMemo(() => {
-    return categories.find((category) => category.slug === selectedSlug) ?? categories[0];
-  }, [categories, selectedSlug]);
-
-  const selectedAudience = useMemo(() => {
-    if (!selectedCategory?.audiences?.length) return null;
-
-    return (
-      selectedCategory.audiences.find(
-        (audience) => audience.slug === selectedAudienceSlug
-      ) ?? selectedCategory.audiences[0]
-    );
-  }, [selectedAudienceSlug, selectedCategory]);
-
-  const visibleProducts = selectedAudience?.products ?? selectedCategory?.products ?? [];
 
   useEffect(() => {
     if (!isOpen) return;
@@ -48,8 +30,6 @@ export default function CatalogDropdown({ categories = [] }) {
     };
   }, [isOpen]);
 
-  if (!selectedCategory) return null;
-
   return (
     <div
       ref={containerRef}
@@ -71,93 +51,28 @@ export default function CatalogDropdown({ categories = [] }) {
         className={styles.catalogPanel}
         aria-hidden={!isOpen}
       >
-        <div className={styles.catalogIntro}>
-          <div className={styles.catalogIntroText}>
-            <span className={styles.catalogEyebrow}>Catálogo</span>
-            <h3 className={styles.catalogTitle}>
-              Explora una selección curada por categoría.
-            </h3>
-            <p className={styles.catalogText}>
-              Una navegación más refinada para encontrar equipos con rapidez.
-            </p>
+        <div className={styles.catalogSimple}>
+          <div className={styles.categoryGrid}>
+            {categories.map((category) => (
+              <Link
+                key={category.slug}
+                href={category.anchorHref}
+                className={styles.categoryLink}
+                onClick={() => setIsOpen(false)}
+              >
+                <span className={styles.categoryName}>{category.name}</span>
+              </Link>
+            ))}
           </div>
 
-          <Link
-            href="/equipos"
-            className={styles.catalogAllLink}
-            onClick={() => setIsOpen(false)}
-          >
-            Ver catalogo
-          </Link>
-        </div>
-
-        <div className={styles.catalogColumns}>
-          <div className={styles.categoryColumn}>
-            <span className={styles.columnLabel}>Categorías</span>
-
-            <div className={styles.categoryList}>
-              {categories.map((category) => (
-                <button
-                  key={category.slug}
-                  type="button"
-                  className={`${styles.categoryButton} ${
-                    selectedCategory.slug === category.slug
-                      ? styles.categoryButtonActive
-                      : ""
-                  }`}
-                  onMouseEnter={() => setSelectedSlug(category.slug)}
-                  onFocus={() => setSelectedSlug(category.slug)}
-                  onClick={() => setSelectedSlug(category.slug)}
-                >
-                  <span className={styles.categoryName}>{category.name}</span>
-                  <span className={styles.categoryCount}>{category.productCount}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.productColumn}>
-            <div className={styles.productColumnHeader}>
-              <div>
-                <span className={styles.columnLabel}>Productos</span>
-                <h4 className={styles.selectedCategoryTitle}>{selectedCategory.name}</h4>
-              </div>
-            </div>
-
-            {selectedCategory.audiences?.length ? (
-              <div className={styles.audienceList} aria-label="Subcategorias">
-                {selectedCategory.audiences.map((audience) => (
-                  <button
-                    key={audience.slug}
-                    type="button"
-                    className={`${styles.audienceButton} ${
-                      selectedAudience?.slug === audience.slug
-                        ? styles.audienceButtonActive
-                        : ""
-                    }`}
-                    onClick={() => setSelectedAudienceSlug(audience.slug)}
-                  >
-                    <span>{audience.name}</span>
-                    <small>{audience.productCount}</small>
-                  </button>
-                ))}
-              </div>
-            ) : null}
-
-            <div className={styles.productScrollArea}>
-              <div className={styles.productList}>
-                {visibleProducts.map((product) => (
-                  <Link
-                    key={product.slug}
-                    href={product.href}
-                    className={styles.productLink}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {product.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
+          <div className={styles.catalogFooter}>
+            <Link
+              href="/equipos"
+              className={styles.catalogCta}
+              onClick={() => setIsOpen(false)}
+            >
+              Ver catalogo completo
+            </Link>
           </div>
         </div>
       </div>

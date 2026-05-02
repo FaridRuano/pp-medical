@@ -22,8 +22,8 @@
 .inner {
     @include content-shell;
     position: relative;
-    padding-top: clamp(2.5rem, 5vw, 4rem);
-    padding-bottom: clamp(2rem, 4vw, 3rem);
+    padding-top: clamp(1rem, 5vw, 2rem);
+    padding-bottom: clamp(.85rem, 4vw, 1rem);
 }
 
 .surface {

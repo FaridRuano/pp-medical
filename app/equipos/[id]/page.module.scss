@@ -79,9 +79,10 @@
 
 .layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(17rem, 25rem) minmax(0, 1fr);
     gap: clamp(1.25rem, 3vw, 2rem);
     margin-top: clamp(1.75rem, 4vw, 2.5rem);
+    align-items: start;
 }
 
 .mediaCard,
@@ -94,60 +95,10 @@
 
 .mediaCard {
     overflow: hidden;
+    width: 100%;
+    max-width: 25rem;
+    justify-self: start;
     animation: fadeLift 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-}
-
-.mediaFrame {
-    position: relative;
-    aspect-ratio: 1 / 1;
-    background:
-        radial-gradient(circle at top right,
-            rgba(193, 0, 39, 0.12) 0%,
-            transparent 34%),
-        linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
-}
-
-.image {
-    object-fit: cover;
-}
-
-.placeholder {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 0.55rem;
-    height: 100%;
-    padding: 1.25rem;
-    color: var(--text-secondary);
-    background:
-        linear-gradient(145deg,
-            rgba(193, 0, 39, 0.12) 0%,
-            rgba(255, 255, 255, 0.84) 52%,
-            rgba(41, 41, 41, 0.06) 100%);
-}
-
-.placeholder strong {
-    font-size: 1.2rem;
-    line-height: 1.15;
-}
-
-.placeholder small {
-    color: color-mix(in srgb, var(--text-secondary) 64%, transparent);
-    font-size: 0.8rem;
-    word-break: break-word;
-}
-
-.placeholderTag {
-    display: inline-flex;
-    width: fit-content;
-    padding: 0.35rem 0.6rem;
-    border-radius: 999px;
-    color: var(--text-accent);
-    background: rgba(255, 255, 255, 0.78);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
 }
 
 .contentCard {
@@ -172,11 +123,85 @@
     box-shadow: var(--shadow-soft);
 }
 
+.brandCard,
+.specCard {
+    width: 100%;
+    max-width: 42rem;
+    padding: clamp(1.2rem, 2vw, 1.6rem);
+    border-radius: 1.6rem;
+    border: 1px solid var(--surface-border-2);
+    background: color-mix(in srgb, var(--surface-2) 92%, white 8%);
+    box-shadow: var(--shadow-soft);
+}
+
 .description {
     margin: 0;
     color: color-mix(in srgb, var(--text-secondary) 78%, transparent);
     font-size: 1rem;
     line-height: 1.75;
+}
+
+.brandList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.brandItem {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 7rem;
+    min-height: 4rem;
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(31, 35, 40, 0.06);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.brandLogo {
+    width: auto;
+    max-width: 7.25rem;
+    height: 2.4rem;
+    object-fit: contain;
+}
+
+.specSections {
+    display: grid;
+    gap: 1rem;
+}
+
+.specSection {
+    display: grid;
+    gap: 0.7rem;
+}
+
+.specTitle {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.specList {
+    margin: 0;
+    padding-left: 1.15rem;
+    display: grid;
+    gap: 0.55rem;
+}
+
+.specItem {
+    color: color-mix(in srgb, var(--text-secondary) 78%, transparent);
+    font-size: 0.98rem;
+    line-height: 1.65;
+}
+
+.infoFallback {
+    margin: 0;
+    color: color-mix(in srgb, var(--text-secondary) 74%, transparent);
+    font-size: 0.96rem;
+    line-height: 1.65;
 }
 
 .actions {
@@ -219,6 +244,10 @@
     .layout {
         grid-template-columns: 1fr;
     }
+
+    .mediaCard {
+        max-width: min(100%, 30rem);
+    }
 }
 
 @media (max-width: 700px) {
@@ -231,7 +260,9 @@
     }
 
     .mediaCard,
-    .descriptionCard {
+    .descriptionCard,
+    .brandCard,
+    .specCard {
         border-radius: 1.25rem;
     }
 }

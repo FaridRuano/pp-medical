@@ -28,6 +28,7 @@
     opacity 0.85s ease,
     transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
     filter 0.85s ease;
+  margin: 0 clamp(1rem, 3vw, 2rem);
 }
 
 .sectionActive .panel {
@@ -111,6 +112,7 @@
 @media (max-width: 640px) {
   .panel {
     border-radius: 1.35rem;
+    margin: 0 1rem;
   }
 
   .button {

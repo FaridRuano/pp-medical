@@ -37,7 +37,7 @@ const services = [
     body:
       "Acompañamos a su personal en la operación y funciones clave para optimizar el rendimiento clínico y fortalecer la práctica diagnóstica.",
     icon: GraduationCap,
-    imageSlot: "/imgs/services/service-capacitacion.webp",
+    imageSlot: "/imgs/services/service-capacitaciones.webp",
   },
   {
     title: "Servicio postventa",
@@ -46,7 +46,7 @@ const services = [
     body:
       "Integramos respuesta tecnica oportuna, seguimiento especializado y un acompanamiento integral en los procesos asociados al uso y gestion del equipo, ofreciendo soluciones agiles y adaptadas a cada necesidad.",
     icon: Headset,
-    imageSlot: "/imgs/services/service-postventa.webp",
+    imageSlot: "/imgs/services/service-postventas.webp",
   },
   {
     title: "Servicio técnico y mantenimiento",
@@ -55,7 +55,7 @@ const services = [
     body:
       "Brindamos respuesta oportuna y con criterio tecnico ante cada requerimiento, respaldando la continuidad operativa de su servicio.",
     icon: Settings2,
-    imageSlot: "/imgs/services/service-tecnico.webp",
+    imageSlot: "/imgs/services/service-tecnicos.webp",
   },
 ];
 

@@ -1,0 +1,221 @@
+.mediaTrigger {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.mediaTriggerActive {
+  cursor: zoom-in;
+}
+
+.mediaFrame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top right,
+      rgba(193, 0, 39, 0.12) 0%,
+      transparent 34%),
+    linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+}
+
+.mediaTags {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.38rem 0.6rem;
+  border-radius: 999px;
+  color: var(--text-accent);
+  background: rgba(193, 0, 39, 0.1);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.image,
+.modalImage {
+  object-fit: cover;
+}
+
+.zoomHint {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.42rem 0.68rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  box-shadow: 0 12px 28px rgba(31, 35, 40, 0.12);
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  height: 100%;
+  padding: 1.25rem;
+  color: var(--text-secondary);
+  background:
+    linear-gradient(145deg,
+      rgba(193, 0, 39, 0.12) 0%,
+      rgba(255, 255, 255, 0.84) 52%,
+      rgba(41, 41, 41, 0.06) 100%);
+}
+
+.placeholder strong {
+  font-size: 1.2rem;
+  line-height: 1.15;
+}
+
+.placeholder small {
+  color: color-mix(in srgb, var(--text-secondary) 64%, transparent);
+  font-size: 0.8rem;
+  word-break: break-word;
+}
+
+.placeholderTag {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  color: var(--text-accent);
+  background: rgba(255, 255, 255, 0.78);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem 1.25rem;
+  background: rgba(18, 18, 18, 0.74);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 220ms ease,
+    visibility 220ms ease;
+}
+
+.overlayOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.overlayClosing {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.modalBody {
+  width: min(78vw, 36rem);
+  max-width: calc(100vw - 2.5rem);
+  max-height: calc(100vh - 5rem);
+  max-height: calc(100dvh - 5rem);
+}
+
+.modalFrame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-height: calc(100vh - 5rem);
+  max-height: calc(100dvh - 5rem);
+  overflow: hidden;
+  border-radius: 1.4rem;
+  background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+  transform: translate3d(0, 1rem, 0) scale(0.965);
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.overlayOpen .modalFrame {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.overlayClosing .modalFrame {
+  transform: translate3d(0, 0.5rem, 0) scale(0.98);
+}
+
+@media (max-width: 700px) {
+  .mediaTags {
+    top: 0.85rem;
+    left: 0.85rem;
+    right: 0.85rem;
+  }
+
+  .zoomHint {
+    right: 0.85rem;
+    bottom: 0.85rem;
+  }
+
+  .modalBody {
+    width: min(86vw, 24rem);
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100vh - 4.5rem);
+    max-height: calc(100dvh - 4.5rem);
+  }
+
+  .modalFrame {
+    border-radius: 1rem;
+    max-height: calc(100vh - 4.5rem);
+    max-height: calc(100dvh - 4.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .modalFrame,
+  .closeButton {
+    transition: none;
+  }
+}

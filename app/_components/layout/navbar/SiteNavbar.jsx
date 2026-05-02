@@ -18,14 +18,14 @@ function buildEquipmentCategories(catalog) {
     const categoryAudiences = categoryAudienceGroups[product.category] ?? [];
 
     if (!groupedCategories.has(product.category)) {
-      groupedCategories.set(product.category, {
-        slug: product.category,
-        name: categoryLabels[product.category] ?? product.category,
-        productCount: 0,
-        anchorHref: `/equipos#categoria-${product.category}`,
-        products: [],
-        audiences: categoryAudiences.map((audience) => ({
-          slug: audience,
+        groupedCategories.set(product.category, {
+          slug: product.category,
+          name: categoryLabels[product.category] ?? product.category,
+          productCount: 0,
+          anchorHref: `/equipos/categoria/${product.category}`,
+          products: [],
+          audiences: categoryAudiences.map((audience) => ({
+            slug: audience,
           name: audienceLabels[audience] ?? audience,
           productCount: 0,
           products: [],

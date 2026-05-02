@@ -10,10 +10,9 @@
 .menuButton,
 .closeButton,
 .primaryLink,
-.categoryButton,
-.audienceButton,
-.productLink,
-.primaryLinkAc {
+.primaryLinkAc,
+.categoryLink,
+.catalogCta {
   transition:
     color 180ms ease,
     background-color 180ms ease,
@@ -154,7 +153,7 @@
 .mobileContent {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  gap: 1.35rem;
+  gap: 1.1rem;
   min-height: 0;
   padding:
     1rem clamp(1rem, 5vw, 1.4rem) calc(1.15rem + env(safe-area-inset-bottom));
@@ -180,38 +179,31 @@
   animation: navItemOut 260ms ease both;
 }
 
-.primaryNav> :nth-child(1),
-.productList> :nth-child(1) {
+.primaryNav> :nth-child(1) {
   animation-delay: 40ms;
 }
 
-.primaryNav> :nth-child(2),
-.productList> :nth-child(2) {
+.primaryNav> :nth-child(2) {
   animation-delay: 80ms;
 }
 
-.primaryNav> :nth-child(3),
-.productList> :nth-child(3) {
+.primaryNav> :nth-child(3) {
   animation-delay: 120ms;
 }
 
-.primaryNav> :nth-child(4),
-.productList> :nth-child(4) {
+.primaryNav> :nth-child(4) {
   animation-delay: 160ms;
 }
 
-.primaryNav> :nth-child(5),
-.productList> :nth-child(5) {
+.primaryNav> :nth-child(5) {
   animation-delay: 200ms;
 }
 
-.primaryNav> :nth-child(6),
-.productList> :nth-child(6) {
+.primaryNav> :nth-child(6) {
   animation-delay: 240ms;
 }
 
 .primaryLink,
-.productLink,
 .primaryLinkAc {
   display: flex;
   align-items: center;
@@ -233,7 +225,6 @@
 .primaryLinkAc {
   min-height: 3.05rem;
   padding: 0;
-  border-top: 0;
   cursor: pointer;
   justify-content: space-between;
   gap: 0.5rem;
@@ -253,15 +244,14 @@
 }
 
 .primaryLink:hover,
-.primaryLinkAc:hover,
-.productLink:hover {
+.primaryLinkAc:hover {
   color: var(--text-accent);
   transform: translateX(0.16rem);
 }
 
 .catalogArea {
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
   gap: 0.85rem;
   min-height: 0;
   max-height: 0;
@@ -282,232 +272,53 @@
   pointer-events: auto;
 }
 
-.sectionHeader {
+.categoryList {
   display: grid;
-  gap: 1rem;
+  gap: 0.4rem;
 }
 
-.catalogAllLink {
-  position: relative;
+.categoryLink {
+  display: flex;
+  align-items: center;
+  min-height: 2.7rem;
+  padding: 0.72rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--neutral-color-2) 55%, transparent);
+  color: var(--text-secondary);
+}
 
+.categoryLink:hover {
+  color: var(--text-accent);
+  background: color-mix(in srgb, var(--primary-color) 4%, transparent);
+  transform: translateX(0.12rem);
+}
+
+.categoryLinkText {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.catalogAreaFooter {
+  padding-top: 0.15rem;
+}
+
+.catalogCta {
   display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
-
-  width: fit-content;
-  min-height: auto;
-  padding: 0.15rem 0;
-
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-
-  color: var(--text-accent);
-  font-weight: 500;
+  justify-content: center;
+  width: 100%;
+  min-height: 3.2rem;
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c10027 0%, #e21d3f 100%);
+  color: #fff;
   font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.catalogAllLink:hover {
-  color: var(--text-secondary);
-}
-
-.catalogAllLink::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.08rem;
-
-  width: 100%;
-  height: 1px;
-
-  background: currentColor;
-  opacity: 0.35;
-
-  transform: scaleX(0.7);
-  transform-origin: left center;
-
-  transition:
-    opacity 180ms ease,
-    transform 220ms ease;
-}
-
-.catalogAllLink:hover::after {
-  opacity: 0.8;
-  transform: scaleX(1);
-}
-
-.sectionEyebrow {
-  color: var(--text-accent-soft);
-  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.categoryRail {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  max-width: 100%;
-  gap: 0.65rem;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-padding-left: 1.25rem;
-  scroll-snap-type: x proximity;
-  -webkit-overflow-scrolling: touch;
-}
-
-.categoryRail::-webkit-scrollbar {
-  display: none;
-}
-
-.categoryButton {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  max-width: 78vw;
-  min-height: 2.35rem;
-  padding: 0.64rem 0.82rem;
-  border: 1px solid color-mix(in srgb, var(--primary-color) 9%, transparent);
-  border-radius: 999px;
-  cursor: pointer;
-  color: color-mix(in srgb, var(--text-secondary) 78%, transparent);
-  background: transparent;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.categoryButton span {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.categoryButton small {
-  flex: 0 0 auto;
-  color: var(--text-accent-soft);
-  font-size: 0.66rem;
-  font-weight: 700;
-}
-
-.categoryButton:hover,
-.categoryButtonActive {
-  color: var(--text-accent);
-  background: color-mix(in srgb, var(--primary-color) 7%, transparent);
-  border-color: color-mix(in srgb, var(--primary-color) 22%, transparent);
-}
-
-.productArea {
-  display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
-  gap: 0.35rem;
-  min-height: 0;
-  overflow: hidden;
-}
-
-.categoryTitle {
-  margin: 0;
-  padding-bottom: 0.35rem;
-  color: var(--text-secondary);
-  font-size: 1.1rem;
-  font-weight: 700;
-  line-height: 1.25;
-}
-
-.audienceRail {
-  display: flex;
-  align-items: flex-start;
-  align-self: start;
-  gap: 0.65rem;
-  width: fit-content;
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-}
-
-.audienceRail::-webkit-scrollbar {
-  display: none;
-}
-
-.audienceButton {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  min-height: fit-content;
-  padding: 0.42rem 0.8rem;
-  border: 1px solid color-mix(in srgb, var(--primary-color) 9%, transparent);
-  border-radius: 999px;
-  cursor: pointer;
-  color: color-mix(in srgb, var(--text-secondary) 78%, transparent);
-  background: transparent;
-  font-size: 0.7rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.audienceButton small {
-  color: var(--text-accent-soft);
-  font-size: 0.64rem;
-}
-
-.audienceButton:hover,
-.audienceButtonActive {
-  color: var(--text-accent);
-  background: color-mix(in srgb, var(--primary-color) 7%, transparent);
-  border-color: color-mix(in srgb, var(--primary-color) 22%, transparent);
-}
-
-.productList {
-  display: grid;
-  align-content: start;
-  gap: 0;
-  min-height: 0;
-  padding-right: 0.15rem;
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--primary-color) 26%, transparent) transparent;
-}
-
-.productList::-webkit-scrollbar {
-  width: 0.32rem;
-}
-
-.productList::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--primary-color) 24%, transparent);
-  border-radius: 999px;
-}
-
-.productLink {
-  min-height: 2.72rem;
-  padding-block: 0.74rem;
-  font-size: 0.79rem;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-}
-
-.emptyText {
-  margin: 0;
-  padding: 0.85rem 0;
-  color: color-mix(in srgb, var(--text-secondary) 66%, transparent);
-  font-size: 0.86rem;
-  line-height: 1.45;
+  box-shadow: 0 14px 34px rgba(193, 0, 39, 0.22);
 }
 
 @media (min-width: 960px) {
@@ -521,14 +332,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .menuButton,
   .closeButton,
   .primaryLink,
   .primaryLinkAc,
-  .categoryButton,
-  .audienceButton,
-  .productLink,
+  .categoryLink,
+  .catalogCta,
   .mobileOverlay,
   .catalogArea,
   .navMotion {

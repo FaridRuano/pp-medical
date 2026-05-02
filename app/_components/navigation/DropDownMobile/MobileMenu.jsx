@@ -13,10 +13,6 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
   const [isOpen, setIsOpen] = useState(false);
   const [shouldRenderOverlay, setShouldRenderOverlay] = useState(false);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
-  const [activeCategorySlug, setActiveCategorySlug] = useState(
-    equipmentCategories[0]?.slug ?? ""
-  );
-  const [activeAudienceSlug, setActiveAudienceSlug] = useState("");
 
   const cleanNavigation = useMemo(() => {
     return Array.isArray(navigation) ? navigation : [];
@@ -38,43 +34,6 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
     );
   }, [navigationWithoutEquipment]);
 
-  const resolvedCategorySlug = useMemo(() => {
-    const exists = cleanCategories.some((category) => category.slug === activeCategorySlug);
-
-    if (exists) return activeCategorySlug;
-    return cleanCategories[0]?.slug ?? "";
-  }, [cleanCategories, activeCategorySlug]);
-
-  const activeCategory = useMemo(() => {
-    return (
-      cleanCategories.find((category) => category.slug === resolvedCategorySlug) ??
-      cleanCategories[0] ??
-      null
-    );
-  }, [cleanCategories, resolvedCategorySlug]);
-
-  const resolvedAudienceSlug = useMemo(() => {
-    if (!activeCategory?.audiences?.length) return "";
-
-    const exists = activeCategory.audiences.some(
-      (audience) => audience.slug === activeAudienceSlug
-    );
-
-    if (exists) return activeAudienceSlug;
-    return activeCategory.audiences[0]?.slug ?? "";
-  }, [activeAudienceSlug, activeCategory]);
-
-  const activeAudience = useMemo(() => {
-    if (!activeCategory?.audiences?.length) return null;
-
-    return (
-      activeCategory.audiences.find(
-        (audience) => audience.slug === resolvedAudienceSlug
-      ) ?? activeCategory.audiences[0]
-    );
-  }, [resolvedAudienceSlug, activeCategory]);
-
-  const products = activeAudience?.products ?? activeCategory?.products ?? [];
   const shouldShowEquipment = cleanCategories.length > 0;
 
   const openMenu = () => {
@@ -111,10 +70,6 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
     }
 
     openMenu();
-  };
-
-  const toggleCatalog = () => {
-    setIsCatalogOpen((current) => !current);
   };
 
   useEffect(() => {
@@ -160,11 +115,10 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
   const equipmentToggle = shouldShowEquipment ? (
     <button
       type="button"
-      className={`${styles.primaryLinkAc} ${styles.navMotion} ${isCatalogOpen ? styles.primaryLinkAcOpen : ""
-        }`}
+      className={`${styles.primaryLinkAc} ${styles.navMotion} ${isCatalogOpen ? styles.primaryLinkAcOpen : ""}`}
       aria-expanded={isCatalogOpen}
       aria-controls="mobile-equipment-catalog"
-      onClick={toggleCatalog}
+      onClick={() => setIsCatalogOpen((current) => !current)}
     >
       <span>Equipos</span>
       <ChevronDown size={16} aria-hidden="true" />
@@ -173,8 +127,7 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
 
   const overlay = (
     <div
-      className={`${styles.mobileOverlay} ${isOpen ? styles.mobileOverlayOpen : styles.mobileOverlayClosing
-        }`}
+      className={`${styles.mobileOverlay} ${isOpen ? styles.mobileOverlayOpen : styles.mobileOverlayClosing}`}
       role="dialog"
       aria-modal="true"
       aria-label="Menu movil"
@@ -222,81 +175,27 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
             aria-label="Catalogo de equipos"
             aria-hidden={!isCatalogOpen}
           >
-            <div className={styles.sectionHeader}>
-              <Link
-                href="/equipos"
-                className={styles.catalogAllLink}
-                onClick={() => setIsOpen(false)}
-              >
-                Ver catalogo
-              </Link>
-              <span className={styles.sectionEyebrow}>Categorias</span>
-            </div>
-
-            <div className={styles.categoryRail} role="tablist" aria-label="Categorias">
+            <div className={styles.categoryList}>
               {cleanCategories.map((category) => (
-                <button
+                <Link
                   key={category.slug}
-                  type="button"
-                  role="tab"
-                  aria-selected={activeCategory?.slug === category.slug}
-                  className={`${styles.categoryButton} ${activeCategory?.slug === category.slug
-                    ? styles.categoryButtonActive
-                    : ""
-                    }`}
-                  onClick={() => {
-                    setActiveCategorySlug(category.slug);
-                    setActiveAudienceSlug("");
-                  }}
+                  href={category.anchorHref}
+                  className={styles.categoryLink}
+                  onClick={closeMenu}
                 >
-                  <span>{category.name}</span>
-                  <small>{category.productCount ?? category.products?.length ?? 0}</small>
-                </button>
+                  <span className={styles.categoryLinkText}>{category.name}</span>
+                </Link>
               ))}
             </div>
 
-            <div className={styles.productArea}>
-              {activeCategory?.name ? (
-                <h3 className={styles.categoryTitle}>{activeCategory.name}</h3>
-              ) : null}
-
-              {activeCategory?.audiences?.length ? (
-                <div className={styles.audienceRail} aria-label="Subcategorias">
-                  {activeCategory.audiences.map((audience) => (
-                    <button
-                      key={audience.slug}
-                      type="button"
-                      className={`${styles.audienceButton} ${activeAudience?.slug === audience.slug
-                        ? styles.audienceButtonActive
-                        : ""
-                        }`}
-                      onClick={() => setActiveAudienceSlug(audience.slug)}
-                    >
-                      <span>{audience.name}</span>
-                      <small>{audience.productCount}</small>
-                    </button>
-                  ))}
-                </div>
-              ) : null}
-
-              <div className={styles.productList}>
-                {products.length ? (
-                  products.map((product) => (
-                    <Link
-                      key={product.slug}
-                      href={product.href}
-                      className={`${styles.productLink} ${styles.navMotion}`}
-                      onClick={closeMenu}
-                    >
-                      {product.name}
-                    </Link>
-                  ))
-                ) : (
-                  <p className={styles.emptyText}>
-                    No hay productos disponibles en esta categoria.
-                  </p>
-                )}
-              </div>
+            <div className={styles.catalogAreaFooter}>
+              <Link
+                href="/equipos"
+                className={styles.catalogCta}
+                onClick={closeMenu}
+              >
+                Ver catalogo completo
+              </Link>
             </div>
           </section>
         ) : null}

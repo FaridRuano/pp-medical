@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, MessageCircleMore } from "lucide-react";
 import { notFound } from "next/navigation";
+import ProductMediaLightbox from "./ProductMediaLightbox";
 import {
   audienceLabels,
   categoryLabels,
@@ -53,29 +54,76 @@ export default async function Page({ params }) {
 
         <div className={styles.layout}>
           <div className={styles.mediaCard}>
-            <div className={styles.mediaFrame}>
-              {product.image ? (
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  sizes="(max-width: 959px) 100vw, 48vw"
-                  className={styles.image}
-                />
-              ) : (
-                <div className={styles.placeholder}>
-                  <span className={styles.placeholderTag}>Imagen pendiente</span>
-                  <strong>{product.name}</strong>
-                  <small>{`/public/imgs/equipments/${product.slug}.jpg`}</small>
-                </div>
-              )}
-            </div>
+            <ProductMediaLightbox
+              image={product.image}
+              alt={product.name}
+              placeholderPath={`/public/imgs/equipments/${product.slug}.jpg`}
+              tags={[
+                categoryLabels[product.category],
+                ...(product.audience !== "general"
+                  ? [audienceLabels[product.audience]]
+                  : []),
+                ...(product.mobility ? [mobilityLabels[product.mobility]] : []),
+              ]}
+            />
           </div>
 
           <div className={styles.contentCard}>
             <section className={styles.descriptionCard}>
               <span className={styles.sectionEyebrow}>Descripción</span>
               <p className={styles.description}>{product.description}</p>
+            </section>
+
+            <section className={styles.brandCard}>
+              <span className={styles.sectionEyebrow}>Marcas</span>
+              {product.brandLogos?.length ? (
+                <div className={styles.brandList}>
+                  {product.brandLogos.map((logoPath) => (
+                    <div key={logoPath} className={styles.brandItem}>
+                      <Image
+                        src={logoPath}
+                        alt="Marca del equipo"
+                        width={160}
+                        height={70}
+                        className={styles.brandLogo}
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className={styles.infoFallback}>
+                  Marca disponible proximamente.
+                </p>
+              )}
+            </section>
+
+            <section className={styles.specCard}>
+              <span className={styles.sectionEyebrow}>Especificaciones</span>
+              {product.specSections?.length ? (
+                <div className={styles.specSections}>
+                  {product.specSections.map((section, index) => (
+                    <div
+                      key={`${product.slug}-spec-${index}`}
+                      className={styles.specSection}
+                    >
+                      {section.title ? (
+                        <h3 className={styles.specTitle}>{section.title}</h3>
+                      ) : null}
+                      <ul className={styles.specList}>
+                        {section.items.map((item) => (
+                          <li key={item} className={styles.specItem}>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className={styles.infoFallback}>
+                  Especificaciones disponibles proximamente.
+                </p>
+              )}
             </section>
 
             <div className={styles.actions}>
