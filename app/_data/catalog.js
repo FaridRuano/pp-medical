@@ -62,8 +62,8 @@ const productDescriptions = {
     "Sistema móvil digital diseñado para estudios radiográficos con flujo clínico ágil y operación confiable.",
   "ultra-100-vet":
     "Potencia en formato compacto con generador de alta frecuencia (5 kW), que ofrece imágenes radiográficas de alta calidad y precisión diagnóstica. Incorpora medición automática SID, colimador LED y compatibilidad con sistemas DR, garantizando portabilidad, eficiencia y versatilidad en aplicaciones veterinarias.",
-  "sistema-de-rayos-x-digital":
-    "Sistema digital orientado a obtener imágenes radiográficas confiables con operación práctica para entornos veterinarios.",
+  "sistema-portatil-digital-ultra-100-flat-panel-vet":
+    'Sistema de rayos X digital Ultra 100 Vet + LG Black 17"x17", con alta precision y respuesta inmediata. Optimiza portabilidad, conectividad y eficiencia clinica.',
   "sonoscape-e1-exp":
     "Nuevo desarrollo con sonda y funciones mejoradas que ofrecen imágenes de alta calidad y un flujo de trabajo eficiente. Equipado con tecnologías μ-Scan, PIH, Wide Scan y SR Flow, además de diseño compacto, pantalla LED HD y optimización automática de imagen.",
   "sonoscape-e2":
@@ -273,6 +273,39 @@ const productDetails = {
           "Compatible con solucion DR digital",
           "Peso neto: 16 kg - compacto y portatil",
           "Soporte movil y mesa opcionales",
+          "Certificado CE MDD para uso medico",
+        ],
+      },
+    ],
+  },
+  "sistema-portatil-digital-ultra-100-flat-panel-vet": {
+    brandLogos: ["/imgs/logos/ecoray.webp", "/imgs/logos/lg.webp"],
+    specSections: [
+      {
+        title: "Generador ULTRA 100 VET",
+        items: [
+          "Potencia: 5.0 kW / kV: 40-110 / mA: 25-100",
+          "Interfaz dedicada para veterinaria",
+          "Medicion automatica de SID por sensor ultrasonico",
+          "Puntero laser dual Clase 1",
+          "Peso neto: 16 kg - compacto y portatil",
+          "Apto para pequenos animales y equidos",
+        ],
+      },
+      {
+        title: 'Flat Panel Inalambrico 17"x17"',
+        items: [
+          "Tecnologia a-Si TFT / 16 bits",
+          "Matriz: 3,072 x 3,072 / Pixel pitch: 139 um",
+          "Conexion inalambrica (Wireless)",
+          "Bateria desmontable - hasta 300 disparos",
+        ],
+      },
+      {
+        title: "Sistema completo",
+        items: [
+          "Compatible con solucion DR digital",
+          "Compatible DICOM / PACS",
           "Certificado CE MDD para uso medico",
         ],
       },
@@ -788,8 +821,8 @@ const rawProductCatalog = [
     format: "portatil",
   },
   {
-    name: "Sistema de Rayos X Digital",
-    slug: "sistema-de-rayos-x-digital",
+    name: 'SISTEMA PORTATIL DIGITAL ULTRA 100 + FLAT PANEL 17"x17" VET',
+    slug: "sistema-portatil-digital-ultra-100-flat-panel-vet",
     category: "rayos-x",
     audience: "veterinario",
     format: "portatil",
