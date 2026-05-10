@@ -41,11 +41,10 @@ export default function HomeClients() {
     >
       <div className={styles.shell}>
         <header className={styles.header}>
-          <h2 id="home-clients-title" className={styles.title}>
-            <span>Clientes que confian en</span>
-            <span className={styles.titleAccent}>P&amp;P Medical</span>
+          <h2 id="home-clients-title" className="section-title">
+            Clientes que confían en P&amp;P Medical
           </h2>
-          <p className={styles.copy}>
+          <p className="section-copy">
             Equipos instalados y operativos en instituciones de salud en todo
             el Ecuador.
           </p>

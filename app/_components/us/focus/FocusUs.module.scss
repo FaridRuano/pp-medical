@@ -43,37 +43,15 @@
   text-align: center;
 }
 
-.title {
-  margin: 0;
+.sectionText strong,
+.note strong {
   color: #1f1b1c;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  line-height: 1;
-  letter-spacing: -0.05em;
-  font-weight: 800;
-}
-
-.titleAccent {
-  color: var(--text-accent);
-}
-
-.intro {
-  margin: 0;
-  color: rgba(31, 27, 28, 0.88);
-  font-size: clamp(1.02rem, 1.7vw, 1.2rem);
-  line-height: 1.58;
-  font-weight: 560;
-  text-wrap: pretty;
-}
-
-.intro strong,
-.copy strong {
-  color: #1f1b1c;
-  font-weight: 780;
+  font-weight: var(--font-weight-title-strong);
 }
 
 .inlineAccent {
   color: #1f1b1c;
-  font-weight: 760;
+  font-weight: var(--font-weight-title-strong);
 }
 
 .grid {
@@ -109,7 +87,7 @@
   box-shadow: 0 16px 42px rgba(24, 29, 36, 0.05);
 }
 
-.copy {
+.note {
   margin: 0;
   color: rgba(31, 27, 28, 0.72);
   font-size: clamp(1.04rem, 1.5vw, 1.22rem);

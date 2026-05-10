@@ -23,27 +23,9 @@
     margin-bottom: 0.85rem;
     color: var(--text-accent-soft);
     font-size: 0.78rem;
-    font-weight: 700;
+    font-weight: var(--font-weight-title);
     letter-spacing: 0.16em;
     text-transform: uppercase;
-}
-
-.title {
-    margin: 0;
-    color: var(--text-secondary);
-    font-size: clamp(2.2rem, 5vw, 4.4rem);
-    line-height: 0.98;
-    letter-spacing: -0.05em;
-    font-weight: 800;
-    text-wrap: balance;
-}
-
-.text {
-    margin: 1rem 0 0;
-    max-width: 46rem;
-    color: color-mix(in srgb, var(--text-secondary) 76%, transparent);
-    font-size: clamp(1rem, 1.45vw, 1.1rem);
-    line-height: 1.7;
 }
 
 .button {

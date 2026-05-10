@@ -22,12 +22,11 @@
 .inner {
     @include content-shell;
     position: relative;
-    padding-top: clamp(1rem, 5vw, 2rem);
     padding-bottom: clamp(.85rem, 4vw, 1rem);
 }
 
 .surface {
-    padding: clamp(2.5rem, 5vw, 4rem) clamp(3rem, 10vw, 20rem);
+    padding: clamp(1.5rem, 5vw, 3rem) clamp(3rem, 10vw, 20rem);
 }
 
 .grid {
@@ -50,7 +49,7 @@
 }
 
 .logo {
-    width: clamp(10rem, 18vw, 14rem);
+    width: clamp(8rem, 18vw, 12rem);
     height: auto;
     object-fit: contain;
 }
@@ -62,9 +61,9 @@
     line-height: 1.7;
 }
 
-.title {
+.footerHeading {
     font-size: 0.82rem;
-    font-weight: 800;
+    font-weight: var(--font-weight-title);
     letter-spacing: 0.12em;
     color: var(--text-primary);
 
@@ -95,7 +94,7 @@
     color: var(--text-primary);
 }
 
-.copy {
+.footerText {
     color: var(--text-soft);
     font-size: 0.96rem;
     font-style: normal;

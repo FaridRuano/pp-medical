@@ -39,7 +39,7 @@ export default async function Page({ params }) {
 
         <header className={styles.header}>
           <span className={styles.category}>{categoryLabels[product.category]}</span>
-          <h1 className={styles.title}>{product.name}</h1>
+          <h1 className="section-title">{product.name}</h1>
 
           <div className={styles.meta}>
             <span className={styles.tag}>{categoryLabels[product.category]}</span>
@@ -71,7 +71,7 @@ export default async function Page({ params }) {
           <div className={styles.contentCard}>
             <section className={styles.descriptionCard}>
               <span className={styles.sectionEyebrow}>Descripción</span>
-              <p className={styles.description}>{product.description}</p>
+              <p className={`body-copy ${styles.description}`}>{product.description}</p>
             </section>
 
             <section className={styles.brandCard}>
@@ -91,7 +91,7 @@ export default async function Page({ params }) {
                   ))}
                 </div>
               ) : (
-                <p className={styles.infoFallback}>
+                <p className={`body-copy ${styles.infoFallback}`}>
                   Marca disponible proximamente.
                 </p>
               )}
@@ -120,7 +120,7 @@ export default async function Page({ params }) {
                   ))}
                 </div>
               ) : (
-                <p className={styles.infoFallback}>
+                <p className={`body-copy ${styles.infoFallback}`}>
                   Especificaciones disponibles proximamente.
                 </p>
               )}

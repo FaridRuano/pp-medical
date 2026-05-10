@@ -39,10 +39,10 @@ export default function HomeBrands() {
       aria-label="Marcas aliadas"
     >
       <div className={styles.header}>
-        <h2 className={styles.title}>Marcas Aliadas</h2>
-        <p className={styles.copy}>
-          Trabajamos con marcas lideres a nivel mundial, seleccionadas por su
-          calidad, innovacion y respaldo en imagenologia medica.
+        <h2 className="section-title">Marcas Aliadas</h2>
+        <p className="section-copy">
+          Trabajamos con marcas líderes a nivel mundial, seleccionadas por su
+          calidad, innovación y respaldo en imagenología médica.
         </p>
       </div>
       <div className={styles.track}>
@@ -56,8 +56,8 @@ export default function HomeBrands() {
               <Image
                 src={brand.logo}
                 alt={brand.name}
-                width={200}
-                height={100}
+                width={220}
+                height={120}
                 className={styles.logo}
               />
             </div>

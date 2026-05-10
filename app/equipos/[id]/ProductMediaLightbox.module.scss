@@ -41,7 +41,7 @@
   color: var(--text-accent);
   background: rgba(193, 0, 39, 0.1);
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: var(--font-weight-ui-strong);
 }
 
 .image,

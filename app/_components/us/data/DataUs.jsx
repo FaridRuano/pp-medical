@@ -3,7 +3,6 @@
 import { Building2, MapPinned, ScanLine } from "lucide-react";
 import { useEffect, useState } from "react";
 import styles from "./DataUs.module.scss";
-import { useRevealOnScroll } from "../useRevealOnScroll";
 
 const stats = [
   {
@@ -30,51 +29,47 @@ function formatStat(value) {
   return new Intl.NumberFormat("es-EC").format(value);
 }
 
-export default function DataUs() {
-  const { sectionRef, hasEnteredView } = useRevealOnScroll(0.28);
-  const [counts, setCounts] = useState(stats.map(() => 0));
+function CountUp({ value, prefix = "" }) {
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (!hasEnteredView) return;
+    let cancelled = false;
+    const increment = value <= 50 ? 1 : Math.max(1, Math.floor(value / 80));
+    const delay = 16;
 
-    let frameId = 0;
-    const start = performance.now();
-    const duration = 1800;
+    const step = (currentValue) => {
+      if (cancelled) return;
 
-    const animate = (timestamp) => {
-      const progress = Math.min((timestamp - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 4);
+      const nextValue = Math.min(currentValue + increment, value);
+      setCount(nextValue);
 
-      setCounts(stats.map((item) => Math.round(item.value * eased)));
-
-      if (progress < 1) {
-        frameId = window.requestAnimationFrame(animate);
+      if (nextValue < value) {
+        window.setTimeout(() => {
+          step(nextValue);
+        }, delay);
       }
     };
 
-    frameId = window.requestAnimationFrame(animate);
+    window.setTimeout(() => {
+      step(0);
+    }, 0);
 
     return () => {
-      window.cancelAnimationFrame(frameId);
+      cancelled = true;
     };
-  }, [hasEnteredView]);
+  }, [value]);
 
   return (
-    <section
-      ref={sectionRef}
-      className={`${styles.section} ${hasEnteredView ? styles.sectionActive : ""}`}
-      aria-labelledby="data-us-title"
-    >
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <h2 id="data-us-title" className={styles.title}>
-            Alcance Nacional
-          </h2>
-          <p className={styles.copy}>
-            Presencia, confianza y resultados medibles en todo el Ecuador.
-          </p>
-        </header>
+    <>
+      <span>{prefix}</span> {formatStat(count)}
+    </>
+  );
+}
 
+export default function DataUs() {
+  return (
+    <section className={styles.section} aria-label="Cobertura y resultados">
+      <div className={styles.container}>
         <div className={styles.grid}>
           {stats.map((stat, index) => {
             const Icon = stat.icon;
@@ -83,16 +78,15 @@ export default function DataUs() {
               <article
                 key={stat.title}
                 className={styles.card}
-                style={{ animationDelay: `${index * 120}ms` }}
               >
                 <div className={styles.iconWrap} aria-hidden="true">
                   <Icon size={24} strokeWidth={1.9} />
                 </div>
 
                 <p className={styles.value}>
-                  <span>{stat.prefix}</span> {formatStat(counts[index])}
+                  <CountUp value={stat.value} prefix={stat.prefix} />
                 </p>
-                <h3 className={styles.cardTitle}>{stat.title}</h3>
+                <h3 className={`body-copy ${styles.cardTitle}`}>{stat.title}</h3>
               </article>
             );
           })}

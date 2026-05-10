@@ -52,7 +52,7 @@ function EquipmentCard({ product, index }) {
           <span className={styles.tag}>{audienceLabels[product.audience]}</span>
         </div>
 
-        <p className={styles.cardDescription}>{product.description}</p>
+        <p className={`body-copy ${styles.cardDescription}`}>{product.description}</p>
 
         <div className={styles.cardFooter}>
           <Link href={`/equipos/${product.slug}`} className={styles.cardButton}>
@@ -103,7 +103,7 @@ function EmptyState({ message }) {
   return (
     <div className={styles.emptyState}>
       <h3>No encontramos productos con esos filtros.</h3>
-      <p>{message}</p>
+      <p className="body-copy">{message}</p>
     </div>
   );
 }

@@ -15,10 +15,10 @@ export default function FocusUs() {
     >
       <div className={styles.container}>
         <header className={styles.header}>
-          <h2 id="focus-us-title" className={styles.title}>
-            Nuestro <span className={styles.titleAccent}>enfoque</span>
+          <h2 id="focus-us-title" className="section-title">
+            Nuestro enfoque
           </h2>
-          <p className={styles.intro}>
+          <p className={`section-copy ${styles.sectionText}`}>
             Mas que proveedores de equipos, somos <strong>aliados estratégicos</strong> en
             cada implementación. Acompañamos cada proyecto desde la
             <span className={styles.inlineAccent}> selección de la tecnología </span>
@@ -39,7 +39,7 @@ export default function FocusUs() {
           </div>
 
           <div className={styles.copyCard}>
-            <p className={styles.copy}>
+            <p className={styles.note}>
               Nuestra experiencia se evidencia en cada implementación y en el
               acompañamiento técnico que brindamos a nuestros clientes en todo
               el Ecuador.

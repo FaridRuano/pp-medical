@@ -1,6 +1,15 @@
 @use "variables" as *;
 
 :root {
+  --font-family-base: var(--font-gilroy), sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-heavy: 800;
+  --font-weight-title: var(--font-weight-bold);
+  --font-weight-title-strong: var(--font-weight-bold);
+  --font-weight-ui-strong: var(--font-weight-medium);
 
   // ==========================
   // DESIGN COLORS
@@ -33,7 +42,7 @@
   --text-secondary: #292929;
   --text-soft: rgba(255, 255, 255, 0.82);
   --text-accent: #c10027;
-  --text-accent-soft: rgba(193, 0, 39, 0.72);
+  --text-accent-soft: rgba(41, 41, 41, 0.56);
 }
 
 *,
@@ -55,7 +64,7 @@ body {
   min-height: 100vh;
   background: var(--bg-gradient);
   color: var(--text-primary);
-  font-family: var(--font-sans);
+  font-family: var(--font-family-base);
   font-size: 1rem;
   line-height: 1.5;
   text-rendering: optimizeLegibility;
@@ -69,6 +78,34 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+.section-title {
+  margin: 0;
+  color: var(--text-accent);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  font-weight: var(--font-weight-title);
+  text-wrap: balance;
+}
+
+.section-copy {
+  margin: 0;
+  color: rgba(32, 28, 29, 0.68);
+  font-size: clamp(1.2rem, 1.65vw, 1.3rem);
+  line-height: 1.72;
+  font-weight: var(--font-weight-medium);
+  text-wrap: pretty;
+}
+
+.body-copy {
+  margin: 0;
+  color: color-mix(in srgb, var(--text-secondary) 76%, transparent);
+  font-size: clamp(1.04rem, 1.18vw, 1.1rem);
+  line-height: 1.7;
+  font-weight: var(--font-weight-regular);
+  text-wrap: pretty;
 }
 
 main {

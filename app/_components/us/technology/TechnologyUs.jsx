@@ -22,11 +22,10 @@ export default function TechnologyUs() {
     >
       <div className={styles.container}>
         <div className={styles.panel}>
-          <h2 id="technology-us-title" className={styles.title}>
-            <span className={styles.titleAccent}>Tecnología confiable</span>
-            <span> para fortalecer tu servicio de diagnóstico</span>
+          <h2 id="technology-us-title" className="section-title">
+            Tecnología confiable para fortalecer tu servicio de diagnóstico
           </h2>
-          <p className={styles.copy}>
+          <p className={`section-copy ${styles.sectionText}`}>
             Te asesoramos para elegir la
             <span className={styles.inlineAccent}> solución en imagenología médica </span>
             más adecuada para tu institución, con <strong>acompañamiento técnico

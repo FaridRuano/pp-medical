@@ -46,6 +46,7 @@
   margin: 0;
   color: var(--text-secondary);
   font-size: 1rem;
+  font-weight: var(--font-weight-title);
 }
 
 .resultsPanel {
@@ -57,13 +58,18 @@
 .resultsTitle,
 .emptyState h3 {
   margin: 0;
-  color: var(--text-secondary);
+  color: var(--text-accent);
 }
 
 .pageTitle {
   font-size: clamp(1.95rem, 3vw, 2.9rem);
   line-height: 1.02;
   letter-spacing: -0.04em;
+  font-weight: var(--font-weight-title);
+}
+
+.emptyState h3 {
+  color: var(--text-secondary);
 }
 
 .resultsEyebrow {
@@ -80,7 +86,7 @@
   margin-bottom: 0.55rem;
   color: color-mix(in srgb, var(--text-secondary) 74%, transparent);
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: var(--font-weight-ui-strong);
 }
 
 .searchField {
@@ -124,6 +130,7 @@
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   line-height: 1.05;
   letter-spacing: -0.04em;
+  font-weight: var(--font-weight-title);
 }
 
 .resultsCount {
@@ -266,6 +273,7 @@
   font-size: 1.15rem;
   line-height: 1.08;
   letter-spacing: -0.03em;
+  font-weight: var(--font-weight-title);
 }
 
 .tags {
@@ -281,7 +289,7 @@
   padding: 0.35rem 0.55rem;
   border-radius: 999px;
   font-size: 0.76rem;
-  font-weight: 600;
+  font-weight: var(--font-weight-ui-strong);
   background: rgba(193, 0, 39, 0.1);
   color: var(--text-accent);
 }
@@ -289,9 +297,6 @@
 .cardDescription,
 .emptyState p {
   margin: 0.95rem 0 0;
-  color: color-mix(in srgb, var(--text-secondary) 76%, transparent);
-  font-size: 0.92rem;
-  line-height: 1.62;
 }
 
 .cardDescription {
@@ -313,7 +318,7 @@
   border: 1px solid rgba(193, 0, 39, 0.24);
   background: var(--text-accent);
   color: var(--text-primary);
-  font-weight: 600;
+  font-weight: var(--font-weight-ui-strong);
 }
 
 .optionButton:hover,

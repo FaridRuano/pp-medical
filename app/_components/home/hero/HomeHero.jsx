@@ -18,14 +18,12 @@ export default function HomeHero() {
 
       <div className={styles.inner}>
         <div className={styles.content}>
-          <h1 id="home-hero-title" className={styles.title}>
-            Tecnologia en imagenologia medica para diagnosticos precisos y
-            confiables
+          <h1 id="home-hero-title" className={`section-title ${styles.heroTitle}`}>
+            Tecnología en imagenología médica para diagnósticos precisos y confiables
           </h1>
 
-          <p className={styles.copy}>
-            Soluciones para medicina humana y veterinaria con soporte tecnico
-            especializado en todo el Ecuador.
+          <p className={`section-copy ${styles.heroCopy}`}>
+            Soluciones para medicina humana y veterinaria con soporte técnico especializado en todo el Ecuador.
           </p>
 
           <a

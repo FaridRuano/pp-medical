@@ -71,7 +71,7 @@ function ServiceBlock({ service, index }) {
         }`}
       style={{ animationDelay: `${index * 120}ms` }}
     >
-      <div className={styles.copy}>
+      <div className={styles.serviceCopy}>
         <div className={styles.badge}>
           <span className={styles.iconWrap} aria-hidden="true">
             <Icon size={22} strokeWidth={1.9} />
@@ -79,8 +79,8 @@ function ServiceBlock({ service, index }) {
           <span className={styles.badgeText}>Servicio especializado</span>
         </div>
 
-        <h2 className={styles.title}>{service.title}</h2>
-        <p className={styles.lead}>{service.lead}</p>
+        <h2 className={styles.serviceTitle}>{service.title}</h2>
+        <p className={styles.serviceLead}>{service.lead}</p>
         <p className={styles.body}>{service.body}</p>
       </div>
 

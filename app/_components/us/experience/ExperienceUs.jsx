@@ -14,17 +14,16 @@ export default function ExperienceUs() {
     >
       <div className={styles.container}>
         <header className={styles.header}>
-          <h2 id="experience-us-title" className={styles.title}>
-            <span>Experiencia y respaldo en</span>
-            <span className={styles.titleAccent}>imagenología médica</span>
+          <h2 id="experience-us-title" className="section-title">
+            Experiencia y respaldo en imagenología médica
           </h2>
-          <p className={styles.lead}>
+          <p className={`section-copy ${styles.sectionText}`}>
             En <strong>P&amp;P Medical</strong> nos dedicamos a la importación y
             distribución de <span className={styles.inlineAccent}>equipos de diagnóstico por imagen</span>,
             trabajando con <strong>marcas internacionales</strong> reconocidas
             por su calidad y confiabilidad.
           </p>
-          <p className={styles.lead}>
+          <p className={`section-copy ${styles.sectionText}`}>
             Nuestra experiencia nos permite acompañar cada proyecto con una
             <strong> visión técnica, comercial y operativa </strong>
             orientada a <span className={styles.inlineAccent}>resultados confiables</span>.

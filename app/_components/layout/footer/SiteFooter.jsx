@@ -25,28 +25,28 @@ export default function SiteFooter() {
             </section>
 
             <section className={styles.column} aria-labelledby="footer-address">
-              <h2 id="footer-address" className={styles.title}>
+              <h2 id="footer-address" className={styles.footerHeading}>
                 Dirección
               </h2>
               <div className={styles.infoRow}>
                 <span className={styles.infoIcon} aria-hidden="true">
                   <MapPin size={18} strokeWidth={2.1} />
                 </span>
-                <address className={styles.copy}>
-                  Mariscal Foch y Jose Tamayo, Quito, Ecuador, 170523
+                <address className={styles.footerText}>
+                  Mariscal Foch y José Tamayo, Quito, Ecuador, 170523
                 </address>
               </div>
             </section>
 
             <section className={styles.column} aria-labelledby="footer-contact">
-              <h2 id="footer-contact" className={styles.title}>
+              <h2 id="footer-contact" className={styles.footerHeading}>
                 Contacto
               </h2>
               <div className={styles.infoRow}>
                 <span className={styles.infoIcon} aria-hidden="true">
                   <Phone size={18} strokeWidth={2.1} />
                 </span>
-                <a className={styles.copy} href={whatsappUrl} target="_blank" rel="noreferrer">
+                <a className={styles.footerText} href={whatsappUrl} target="_blank" rel="noreferrer">
                   +593 998 883 103
                 </a>
               </div>
@@ -54,14 +54,14 @@ export default function SiteFooter() {
                 <span className={styles.infoIcon} aria-hidden="true">
                   <MailIcon size={18} strokeWidth={2.1} />
                 </span>
-                <a className={styles.copy} href={whatsappUrl} target="_blank" rel="noreferrer">
+                <a className={styles.footerText} href={whatsappUrl} target="_blank" rel="noreferrer">
                   info@pypmedical.ec
                 </a>
               </div>
             </section>
 
             <section className={styles.column} aria-labelledby="footer-social">
-              <h2 id="footer-social" className={styles.title}>
+              <h2 id="footer-social" className={styles.footerHeading}>
                 Redes Sociales
               </h2>
               <div className={styles.socialList}>

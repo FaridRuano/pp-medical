@@ -1,0 +1,160 @@
+@use "@styles/mixins" as *;
+
+.section {
+  position: relative;
+  padding: clamp(2.75rem, 6vw, 4.5rem) 20px clamp(3.25rem, 7vw, 5rem) 20px;
+  background:
+    radial-gradient(circle at top, rgba(193, 0, 39, 0.05), transparent 34%),
+    linear-gradient(180deg, #ffffff 0%, #fbfbfc 100%);
+}
+
+.shell {
+  @include content-shell;
+  display: grid;
+  gap: clamp(1.75rem, 3vw, 2.4rem);
+}
+
+.header,
+.card {
+  opacity: 0;
+  transform: translateY(1.4rem);
+  filter: blur(12px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.8s ease;
+}
+
+.sectionActive .header,
+.sectionActive .card {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.sectionActive .header {
+  transition-delay: 0.05s;
+}
+
+.sectionActive .card:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.sectionActive .card:nth-child(2) {
+  transition-delay: 0.18s;
+}
+
+.sectionActive .card:nth-child(3) {
+  transition-delay: 0.26s;
+}
+
+.sectionActive .card:nth-child(4) {
+  transition-delay: 0.34s;
+}
+
+.sectionActive .card:nth-child(5) {
+  transition-delay: 0.42s;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.8vw, 1.35rem);
+}
+
+.card {
+  display: grid;
+  justify-items: center;
+  gap: 1.15rem;
+  min-height: 100%;
+  padding: clamp(1.5rem, 2.6vw, 2rem) clamp(1rem, 1.8vw, 1.3rem);
+  border: 1px solid rgba(24, 28, 35, 0.06);
+  border-radius: 1.8rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(249, 250, 252, 0.92));
+  box-shadow:
+    0 16px 40px rgba(22, 26, 32, 0.06),
+    0 1px 0 rgba(255, 255, 255, 0.95) inset;
+  text-align: center;
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 1.35rem;
+  background: linear-gradient(180deg, rgba(193, 0, 39, 0.08), rgba(193, 0, 39, 0.02));
+  color: #b00025;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.cardText {
+  margin: 0;
+  color: #231f20;
+  font-size: clamp(1rem, 1.25vw, 1.14rem);
+  line-height: 1.28;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-0.35rem);
+    border-color: rgba(193, 0, 39, 0.12);
+    box-shadow:
+      0 22px 54px rgba(22, 26, 32, 0.1),
+      0 1px 0 rgba(255, 255, 255, 0.95) inset;
+  }
+}
+
+@media (max-width: 1120px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .section {
+    padding: 2.6rem 30px 3.25rem 30px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 540px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding-inline: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .card {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}

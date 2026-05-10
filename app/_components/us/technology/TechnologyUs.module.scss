@@ -37,43 +37,14 @@
   filter: blur(0);
 }
 
-.title {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.25rem;
-  margin: 0;
-  max-width: 52rem;
+.sectionText strong {
   color: #1f1b1c;
-  font-size: clamp(2rem, 4vw, 3.35rem);
-  line-height: 1;
-  letter-spacing: -0.05em;
-  font-weight: 800;
-  text-wrap: balance;
-}
-
-.titleAccent {
-  color: var(--text-accent);
-}
-
-.copy {
-  margin: 0;
-  max-width: 64rem;
-  color: rgba(31, 27, 28, 0.88);
-  font-size: clamp(1.02rem, 1.7vw, 1.22rem);
-  line-height: 1.62;
-  font-weight: 560;
-  text-wrap: pretty;
-}
-
-.copy strong {
-  color: #1f1b1c;
-  font-weight: 780;
+  font-weight: var(--font-weight-title-strong);
 }
 
 .inlineAccent {
   color: #1f1b1c;
-  font-weight: 760;
+  font-weight: var(--font-weight-title-strong);
 }
 
 .button {

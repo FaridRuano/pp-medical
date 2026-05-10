@@ -33,10 +33,11 @@
 
 .heading {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--text-accent);
     font-size: clamp(1.9rem, 4vw, 3.3rem);
     line-height: 1.04;
     letter-spacing: -0.04em;
+    font-weight: var(--font-weight-title);
     text-wrap: balance;
 }
 
@@ -75,7 +76,7 @@
     animation: cardReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.copy {
+.serviceCopy {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -108,15 +109,16 @@
     text-transform: uppercase;
 }
 
-.title {
+.serviceTitle {
     margin: 0;
     color: var(--text-secondary);
     font-size: clamp(1.6rem, 2.8vw, 2.5rem);
     line-height: 1.02;
     letter-spacing: -0.04em;
+    font-weight: var(--font-weight-title);
 }
 
-.lead,
+.serviceLead,
 .body {
     margin: 1rem 0 0;
     color: color-mix(in srgb, var(--text-secondary) 76%, transparent);

@@ -73,29 +73,6 @@
   text-align: center;
 }
 
-.title {
-  display: grid;
-  gap: 0.3rem;
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: clamp(1.9rem, 3.6vw, 2.95rem);
-  line-height: 0.98;
-  letter-spacing: -0.045em;
-  font-weight: 800;
-}
-
-.titleAccent {
-  color: var(--text-accent);
-}
-
-.copy {
-  margin: 0;
-  color: rgba(42, 35, 34, 0.68);
-  font-size: clamp(1rem, 1.5vw, 1.08rem);
-  line-height: 1.72;
-  text-wrap: pretty;
-}
-
 .rowViewport {
   position: relative;
   overflow: hidden;
@@ -216,21 +193,20 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 3.2rem;
-  padding: 0.9rem 1.4rem;
-  border: 1px solid color-mix(in srgb, var(--text-secondary) 12%, transparent);
+  min-height: 3.5rem;
+  padding: 0.95rem 1.65rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--neutral-color-2) 84%, transparent);
-  color: var(--text-secondary);
-  font-size: 0.96rem;
+  background: linear-gradient(135deg, #c10027 0%, #e21d3f 100%);
+  color: #fff;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.01em;
-  box-shadow: var(--shadow-soft);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 18px 44px rgba(193, 0, 39, 0.22);
   transition:
     transform 0.28s ease,
-    border-color 0.28s ease,
-    background-color 0.28s ease,
-    color 0.28s ease;
+    box-shadow 0.28s ease,
+    filter 0.28s ease;
 }
 
 .cardIndex {
@@ -268,9 +244,8 @@
 
   .instagramButton:hover {
     transform: translateY(-0.18rem);
-    border-color: color-mix(in srgb, var(--primary-color) 20%, transparent);
-    background: color-mix(in srgb, var(--neutral-color-2) 95%, transparent);
-    color: var(--text-accent);
+    box-shadow: 0 24px 54px rgba(193, 0, 39, 0.3);
+    filter: saturate(1.06);
   }
 }
 

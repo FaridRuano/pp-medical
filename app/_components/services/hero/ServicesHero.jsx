@@ -14,10 +14,10 @@ export default function ServicesHero() {
       <div className={styles.container}>
         <div className={styles.content}>
           <span className={styles.eyebrow}>Servicios</span>
-          <h1 id="services-hero-title" className={styles.title}>
+          <h1 id="services-hero-title" className="section-title">
             Servicio especializado en cada etapa de implementación
           </h1>
-          <p className={styles.text}>
+          <p className="section-copy">
             Integramos instalación, capacitación y soporte técnico
             especializado para garantizar un funcionamiento confiable,
             eficiente y continuo en el entorno clínico.
