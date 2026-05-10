@@ -19,11 +19,11 @@ export default function FocusUs() {
             Nuestro enfoque
           </h2>
           <p className={`section-copy ${styles.sectionText}`}>
-            Mas que proveedores de equipos, somos <strong>aliados estratégicos</strong> en
+            Mas que proveedores de equipos, somos aliados estratégicos en
             cada implementación. Acompañamos cada proyecto desde la
-            <span className={styles.inlineAccent}> selección de la tecnología </span>
+            selección de la tecnología
             hasta su puesta en marcha, garantizando un funcionamiento adecuado
-            y un <strong>soporte técnico continuo</strong>.
+            y un soporte técnico continuo.
           </p>
         </header>
 

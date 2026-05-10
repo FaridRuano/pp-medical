@@ -27,9 +27,9 @@ export default function TechnologyUs() {
           </h2>
           <p className={`section-copy ${styles.sectionText}`}>
             Te asesoramos para elegir la
-            <span className={styles.inlineAccent}> solución en imagenología médica </span>
-            más adecuada para tu institución, con <strong>acompañamiento técnico
-            especializado</strong> en todo el Ecuador.
+            solución en imagenología médica
+            más adecuada para tu institución, con acompañamiento técnico
+            especializado en todo el Ecuador.
           </p>
           <Link
             href={whatsappHref}

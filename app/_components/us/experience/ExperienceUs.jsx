@@ -18,16 +18,16 @@ export default function ExperienceUs() {
             Experiencia y respaldo en imagenología médica
           </h2>
           <p className={`section-copy ${styles.sectionText}`}>
-            En <strong>P&amp;P Medical</strong> nos dedicamos a la importación y
-            distribución de <span className={styles.inlineAccent}>equipos de diagnóstico por imagen</span>,
-            trabajando con <strong>marcas internacionales</strong> reconocidas
+            En P&amp;P Medical nos dedicamos a la importación y
+            distribución de equipos de diagnóstico por imagen,
+            trabajando con marcas internacionales reconocidas
             por su calidad y confiabilidad.
           </p>
           <p className={`section-copy ${styles.sectionText}`}>
             Nuestra experiencia nos permite acompañar cada proyecto con una
-            <strong> visión técnica, comercial y operativa </strong>
-            orientada a <span className={styles.inlineAccent}>resultados confiables</span>.
-            Brindamos <strong>asesoría integral, instalación y capacitación</strong>,
+            visión técnica, comercial y operativa
+            orientada a resultados confiables.
+            Brindamos asesoría integral, instalación y capacitación,
             con soporte técnico especializado, garantizando un funcionamiento
             optimo y la continuidad operativa en cada
             implementación.

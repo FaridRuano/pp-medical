@@ -32,16 +32,6 @@
   filter: blur(0);
 }
 
-.sectionText strong {
-  color: #1f1b1c;
-  font-weight: var(--font-weight-title-strong);
-}
-
-.inlineAccent {
-  color: #1f1b1c;
-  font-weight: var(--font-weight-title-strong);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .header {
     opacity: 1;
