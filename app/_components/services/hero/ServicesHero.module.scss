@@ -10,22 +10,42 @@
 
 .content {
     display: grid;
-    justify-items: center;
+    justify-items: start;
     max-width: 58rem;
-    margin: 0 auto;
     padding: clamp(1rem, 2vw, 1.4rem);
-    text-align: center;
+    text-align: left;
     animation: heroReveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .eyebrow {
     display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
     margin-bottom: 0.85rem;
     color: var(--text-accent-soft);
     font-size: 0.78rem;
     font-weight: var(--font-weight-title);
     letter-spacing: 0.16em;
     text-transform: uppercase;
+}
+
+.eyebrow::after {
+    content: "";
+    width: 2.4rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.72;
+}
+
+.title {
+    max-width: 42rem;
+}
+
+.copy {
+    max-width: 52rem;
+    margin: 1.1rem 0 0;
+    text-align: left;
+    text-align-last: start;
 }
 
 .button {

@@ -11,8 +11,15 @@ export default function HomeHero() {
   return (
     <section className={styles.hero} aria-labelledby="home-hero-title">
       <div className={styles.media} aria-hidden="true">
-        <div className={`${styles.imageLayer} ${styles.imageOne}`} />
-        <div className={`${styles.imageLayer} ${styles.imageTwo}`} />
+        <video
+          className={styles.video}
+          src="/imgs/hero-home-vid.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        />
         <div className={styles.overlay} />
       </div>
 

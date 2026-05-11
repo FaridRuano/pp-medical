@@ -19,7 +19,7 @@ const services = [
     body:
       "Supervisamos cada proceso para garantizar una puesta en marcha eficiente en el entorno clínico.",
     icon: Truck,
-    imageSlot: "/imgs/services/service-entregas.webp",
+    imageSlot: "/imgs/services/services-entrega.webp",
   },
   {
     title: "Instalación especializada",

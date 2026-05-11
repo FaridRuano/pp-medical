@@ -17,6 +17,7 @@ function EquipmentCard({ product, index }) {
   const { sectionRef, hasEnteredView } = useRevealOnScroll(0);
   const [imageError, setImageError] = useState(false);
   const showPlaceholder = !product.image || imageError;
+  const showTags = product.category !== "densitometria";
 
   return (
     <article
@@ -47,10 +48,11 @@ function EquipmentCard({ product, index }) {
           <h2 className={styles.cardTitle}>{product.name}</h2>
         </div>
 
-        <div className={styles.tags}>
-          <span className={styles.tag}>{formatLabels[product.format] ?? product.format}</span>
-          <span className={styles.tag}>{audienceLabels[product.audience]}</span>
-        </div>
+        {showTags ? (
+          <div className={styles.tags}>
+            <span className={styles.tag}>{formatLabels[product.format] ?? product.format}</span>
+          </div>
+        ) : null}
 
         <p className={`body-copy ${styles.cardDescription}`}>{product.description}</p>
 
@@ -331,6 +333,7 @@ function FullCatalog({ search, setSearch, deferredSearch }) {
 
 function CategorySection({ slug, label, products, fixedAudience = null }) {
   const [selectedFormat, setSelectedFormat] = useState("all");
+  const showFormatFilter = slug !== "dental" && fixedAudience !== "veterinario";
 
   const formatOptions = useMemo(
     () =>
@@ -366,7 +369,7 @@ function CategorySection({ slug, label, products, fixedAudience = null }) {
         </div>
       </div>
 
-      {formatOptions.length > 1 ? (
+      {showFormatFilter && formatOptions.length > 1 ? (
         <div className={styles.filterBar}>
           <FilterButtons
             title="Tipo"

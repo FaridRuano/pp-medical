@@ -21,7 +21,9 @@ export default async function Page({ params, searchParams }) {
     validAudiences.includes(requestedAudience) &&
     audienceLabels[requestedAudience]
       ? requestedAudience
-      : null;
+      : category === "ecografia"
+        ? "humano"
+        : null;
 
   return (
     <EquipmentCatalog

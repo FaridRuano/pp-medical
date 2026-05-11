@@ -4,7 +4,6 @@ import { ArrowLeft, MessageCircleMore } from "lucide-react";
 import { notFound } from "next/navigation";
 import ProductMediaLightbox from "./ProductMediaLightbox";
 import {
-  audienceLabels,
   categoryLabels,
   mobilityLabels,
   productCatalog,
@@ -39,64 +38,41 @@ export default async function Page({ params }) {
 
         <header className={styles.header}>
           <span className={styles.category}>{categoryLabels[product.category]}</span>
-          <h1 className="section-title">{product.name}</h1>
-
-          <div className={styles.meta}>
-            <span className={styles.tag}>{categoryLabels[product.category]}</span>
-            {product.audience !== "general" ? (
-              <span className={styles.tag}>{audienceLabels[product.audience]}</span>
-            ) : null}
-            {product.mobility ? (
-              <span className={styles.tag}>{mobilityLabels[product.mobility]}</span>
-            ) : null}
-          </div>
+          <h1 className={`section-title ${styles.title}`}>{product.name}</h1>
         </header>
 
         <div className={styles.layout}>
-          <div className={styles.mediaCard}>
-            <ProductMediaLightbox
-              image={product.image}
-              alt={product.name}
-              placeholderPath={`/public/imgs/equipments/${product.slug}.jpg`}
-              tags={[
-                categoryLabels[product.category],
-                ...(product.audience !== "general"
-                  ? [audienceLabels[product.audience]]
-                  : []),
-                ...(product.mobility ? [mobilityLabels[product.mobility]] : []),
-              ]}
-            />
+          <div className={styles.mediaColumn}>
+            <div className={styles.mediaCard}>
+              <ProductMediaLightbox
+                image={product.image}
+                alt={product.name}
+                placeholderPath={`/public/imgs/equipments/${product.slug}.jpg`}
+                tags={[
+                  categoryLabels[product.category],
+                  ...(product.mobility ? [mobilityLabels[product.mobility]] : []),
+                ]}
+              />
+            </div>
+
+            {product.brandLogos?.length ? (
+              <div className={styles.brandStrip} aria-label="Marcas del equipo">
+                {product.brandLogos.map((logoPath) => (
+                  <div key={logoPath} className={styles.brandBadge}>
+                    <Image
+                      src={logoPath}
+                      alt="Marca del equipo"
+                      width={130}
+                      height={52}
+                      className={styles.brandLogo}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : null}
           </div>
 
           <div className={styles.contentCard}>
-            <section className={styles.descriptionCard}>
-              <span className={styles.sectionEyebrow}>Descripción</span>
-              <p className={`body-copy ${styles.description}`}>{product.description}</p>
-            </section>
-
-            <section className={styles.brandCard}>
-              <span className={styles.sectionEyebrow}>Marcas</span>
-              {product.brandLogos?.length ? (
-                <div className={styles.brandList}>
-                  {product.brandLogos.map((logoPath) => (
-                    <div key={logoPath} className={styles.brandItem}>
-                      <Image
-                        src={logoPath}
-                        alt="Marca del equipo"
-                        width={160}
-                        height={70}
-                        className={styles.brandLogo}
-                      />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className={`body-copy ${styles.infoFallback}`}>
-                  Marca disponible proximamente.
-                </p>
-              )}
-            </section>
-
             <section className={styles.specCard}>
               <span className={styles.sectionEyebrow}>Especificaciones</span>
               {product.specSections?.length ? (
