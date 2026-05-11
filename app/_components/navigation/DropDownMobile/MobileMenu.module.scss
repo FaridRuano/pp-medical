@@ -12,6 +12,8 @@
 .primaryLink,
 .primaryLinkAc,
 .categoryLink,
+.categoryToggle,
+.submenuLink,
 .catalogCta {
   transition:
     color 180ms ease,
@@ -277,7 +279,9 @@
   gap: 0.4rem;
 }
 
-.categoryLink {
+.categoryLink,
+.categoryToggle,
+.submenuLink {
   display: flex;
   align-items: center;
   min-height: 2.7rem;
@@ -288,7 +292,24 @@
   color: var(--text-secondary);
 }
 
-.categoryLink:hover {
+.categoryToggle {
+  width: 100%;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.categoryToggle svg {
+  flex: 0 0 auto;
+  transition: transform 220ms ease;
+}
+
+.categoryToggleOpen svg {
+  transform: rotate(180deg);
+}
+
+.categoryLink:hover,
+.categoryToggle:hover,
+.submenuLink:hover {
   color: var(--text-accent);
   background: color-mix(in srgb, var(--primary-color) 4%, transparent);
   transform: translateX(0.12rem);
@@ -296,6 +317,44 @@
 
 .categoryLinkText {
   font-size: 0.9rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.01em;
+}
+
+.categorySubmenu {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.submenuList {
+  display: grid;
+  gap: 0.35rem;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translate3d(0, -0.2rem, 0);
+  transition:
+    max-height 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 180ms ease,
+    transform 220ms ease;
+}
+
+.submenuListOpen {
+  max-height: 12rem;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
+}
+
+.submenuLink {
+  min-height: 2.45rem;
+  margin-left: 0.85rem;
+  background: color-mix(in srgb, var(--neutral-color-2) 42%, transparent);
+}
+
+.submenuLinkText {
+  font-size: 0.88rem;
   font-weight: var(--font-weight-medium);
   letter-spacing: 0.01em;
 }
@@ -337,6 +396,8 @@
   .primaryLink,
   .primaryLinkAc,
   .categoryLink,
+  .categoryToggle,
+  .submenuLink,
   .catalogCta,
   .mobileOverlay,
   .catalogArea,

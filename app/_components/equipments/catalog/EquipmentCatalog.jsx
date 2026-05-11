@@ -329,21 +329,8 @@ function FullCatalog({ search, setSearch, deferredSearch }) {
   );
 }
 
-function CategorySection({ slug, label, products, search, onSearchChange }) {
-  const searchId = useId();
-  const [selectedAudience, setSelectedAudience] = useState("all");
+function CategorySection({ slug, label, products, fixedAudience = null }) {
   const [selectedFormat, setSelectedFormat] = useState("all");
-
-  const audienceOptions = useMemo(
-    () =>
-      Array.from(new Set(products.map((product) => product.audience))).map(
-        (value) => ({
-          value,
-          label: audienceLabels[value],
-        })
-      ),
-    [products]
-  );
 
   const formatOptions = useMemo(
     () =>
@@ -355,22 +342,15 @@ function CategorySection({ slug, label, products, search, onSearchChange }) {
   );
 
   const visibleProducts = useMemo(() => {
-    const normalizedSearch = search.trim().toLocaleLowerCase("es");
-
     return products.filter((product) => {
-      const matchesSearch =
-        !normalizedSearch ||
-        product.name.toLocaleLowerCase("es").includes(normalizedSearch) ||
-        product.description.toLocaleLowerCase("es").includes(normalizedSearch);
-
       const matchesAudience =
-        selectedAudience === "all" || product.audience === selectedAudience;
+        !fixedAudience || product.audience === fixedAudience;
       const matchesFormat =
         selectedFormat === "all" || product.format === selectedFormat;
 
-      return matchesSearch && matchesAudience && matchesFormat;
+      return matchesAudience && matchesFormat;
     });
-  }, [products, search, selectedAudience, selectedFormat]);
+  }, [fixedAudience, products, selectedFormat]);
 
   return (
     <section id={`categoria-${slug}`} className={styles.categorySection}>
@@ -386,42 +366,16 @@ function CategorySection({ slug, label, products, search, onSearchChange }) {
         </div>
       </div>
 
-      <div className={styles.filterBar}>
-        <div className={styles.searchWrap}>
-          <label htmlFor={searchId} className={styles.label}>
-            Buscar producto
-          </label>
-          <div className={styles.searchField}>
-            <Search size={16} />
-            <input
-              id={searchId}
-              type="search"
-              value={search}
-              onChange={(event) => onSearchChange(event.target.value)}
-              placeholder="Nombre o descripcion"
-              className={styles.searchInput}
-            />
-          </div>
-        </div>
-
-        {audienceOptions.length > 1 ? (
-          <FilterButtons
-            title="Humano / veterinario"
-            value={selectedAudience}
-            onChange={setSelectedAudience}
-            options={audienceOptions}
-          />
-        ) : null}
-
-        {formatOptions.length > 1 ? (
+      {formatOptions.length > 1 ? (
+        <div className={styles.filterBar}>
           <FilterButtons
             title="Tipo"
             value={selectedFormat}
             onChange={setSelectedFormat}
             options={formatOptions}
           />
-        ) : null}
-      </div>
+        </div>
+      ) : null}
 
       {visibleProducts.length ? (
         <div className={styles.grid}>
@@ -436,7 +390,10 @@ function CategorySection({ slug, label, products, search, onSearchChange }) {
   );
 }
 
-export default function EquipmentCatalog({ initialCategorySlug = null }) {
+export default function EquipmentCatalog({
+  initialCategorySlug = null,
+  initialAudienceSlug = null,
+}) {
   const [search, setSearch] = useState("");
   const deferredSearch = useDeferredValue(search);
 
@@ -463,8 +420,7 @@ export default function EquipmentCatalog({ initialCategorySlug = null }) {
           products={productCatalog.filter(
             (product) => product.category === initialCategorySlug
           )}
-          search={deferredSearch}
-          onSearchChange={setSearch}
+          fixedAudience={initialAudienceSlug}
         />
       </div>
     </section>

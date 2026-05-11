@@ -13,6 +13,7 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
   const [isOpen, setIsOpen] = useState(false);
   const [shouldRenderOverlay, setShouldRenderOverlay] = useState(false);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
+  const [isVeterinaryOpen, setIsVeterinaryOpen] = useState(false);
 
   const cleanNavigation = useMemo(() => {
     return Array.isArray(navigation) ? navigation : [];
@@ -35,6 +36,13 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
   }, [navigationWithoutEquipment]);
 
   const shouldShowEquipment = cleanCategories.length > 0;
+  const veterinaryCategories = useMemo(() => {
+    return cleanCategories.filter(
+      (category) =>
+        ["rayos-x", "ecografia"].includes(category.slug) &&
+        category.audiences?.some((audience) => audience.slug === "veterinario")
+    );
+  }, [cleanCategories]);
 
   const openMenu = () => {
     if (closeTimeoutRef.current) {
@@ -53,6 +61,7 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
   const closeMenu = () => {
     setIsOpen(false);
     setIsCatalogOpen(false);
+    setIsVeterinaryOpen(false);
 
     if (closeTimeoutRef.current) {
       window.clearTimeout(closeTimeoutRef.current);
@@ -186,6 +195,38 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
                   <span className={styles.categoryLinkText}>{category.name}</span>
                 </Link>
               ))}
+
+              {veterinaryCategories.length ? (
+                <div className={styles.categorySubmenu}>
+                  <button
+                    type="button"
+                    className={`${styles.categoryToggle} ${isVeterinaryOpen ? styles.categoryToggleOpen : ""}`}
+                    aria-expanded={isVeterinaryOpen}
+                    aria-controls="mobile-veterinary-submenu"
+                    onClick={() => setIsVeterinaryOpen((current) => !current)}
+                  >
+                    <span className={styles.categoryLinkText}>Veterinaria</span>
+                    <ChevronDown size={16} aria-hidden="true" />
+                  </button>
+
+                  <div
+                    id="mobile-veterinary-submenu"
+                    className={`${styles.submenuList} ${isVeterinaryOpen ? styles.submenuListOpen : ""}`}
+                    aria-hidden={!isVeterinaryOpen}
+                  >
+                    {veterinaryCategories.map((category) => (
+                      <Link
+                        key={`mobile-vet-${category.slug}`}
+                        href={`${category.anchorHref}?audience=veterinario`}
+                        className={styles.submenuLink}
+                        onClick={closeMenu}
+                      >
+                        <span className={styles.submenuLinkText}>{category.name}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
             </div>
 
             <div className={styles.catalogAreaFooter}>

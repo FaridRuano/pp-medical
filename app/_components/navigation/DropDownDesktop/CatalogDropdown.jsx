@@ -8,6 +8,11 @@ import styles from "./CatalogDropdown.module.scss";
 export default function CatalogDropdown({ categories = [] }) {
   const containerRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  const veterinaryCategories = categories.filter(
+    (category) =>
+      ["rayos-x", "ecografia"].includes(category.slug) &&
+      category.audiences?.some((audience) => audience.slug === "veterinario")
+  );
 
   useEffect(() => {
     if (!isOpen) return;
@@ -63,6 +68,28 @@ export default function CatalogDropdown({ categories = [] }) {
                 <span className={styles.categoryName}>{category.name}</span>
               </Link>
             ))}
+
+            {veterinaryCategories.length ? (
+              <div className={styles.categorySubmenu}>
+                <button type="button" className={styles.categoryLink}>
+                  <span className={styles.categoryName}>Veterinaria</span>
+                  <ChevronDown size={16} aria-hidden="true" />
+                </button>
+
+                <div className={styles.submenuPanel}>
+                  {veterinaryCategories.map((category) => (
+                    <Link
+                      key={`vet-${category.slug}`}
+                      href={`${category.anchorHref}?audience=veterinario`}
+                      className={styles.submenuLink}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <span className={styles.submenuName}>{category.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
 
           <div className={styles.catalogFooter}>
