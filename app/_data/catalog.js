@@ -808,7 +808,7 @@ const rawProductCatalog = [
   },
   {
     name: "Unidad Móvil Digital HF-525 Plus",
-    slug: "unidad-movil-digital-hf-525-pluss",
+    slug: "unidad-movil-digital-hf-525-plus",
     category: "rayos-x",
     audience: "humano",
     format: "movil",

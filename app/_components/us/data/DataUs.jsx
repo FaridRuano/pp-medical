@@ -34,28 +34,36 @@ function CountUp({ value, prefix = "" }) {
 
   useEffect(() => {
     let cancelled = false;
-    const increment = value <= 50 ? 1 : Math.max(1, Math.floor(value / 80));
-    const delay = 16;
+    let frameId = null;
+    const duration = 2200;
 
-    const step = (currentValue) => {
+    const step = (startTime) => {
       if (cancelled) return;
 
-      const nextValue = Math.min(currentValue + increment, value);
-      setCount(nextValue);
+      const tick = (currentTime) => {
+        if (cancelled) return;
 
-      if (nextValue < value) {
-        window.setTimeout(() => {
-          step(nextValue);
-        }, delay);
-      }
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+        setCount(Math.round(value * easedProgress));
+
+        if (progress < 1) {
+          frameId = window.requestAnimationFrame(tick);
+        }
+      };
+
+      frameId = window.requestAnimationFrame(tick);
     };
 
-    window.setTimeout(() => {
-      step(0);
-    }, 0);
+    frameId = window.requestAnimationFrame(step);
 
     return () => {
       cancelled = true;
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
     };
   }, [value]);
 

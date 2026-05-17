@@ -62,7 +62,7 @@
 .title {
   margin: 0;
   color: #151515;
-  font-size: clamp(2.6rem, 5vw, 4.8rem);
+  font-size: var(--font-size-title);
   line-height: 0.94;
   letter-spacing: -0.05em;
   font-weight: 700;
@@ -70,7 +70,7 @@
 
 .copy {
   color: rgba(26, 26, 26, 0.78);
-  font-size: clamp(1.08rem, 1.45vw, 1.18rem);
+  font-size: var(--font-size-description);
   line-height: 1.72;
 }
 
@@ -131,9 +131,11 @@
 .featureLabel {
   margin: 0;
   color: rgba(21, 21, 21, 0.88);
-  font-size: 0.98rem;
+  font-size: var(--font-size-description);
   line-height: 1.35;
   font-weight: 500;
+  text-align: center;
+  text-align-last: center;
 }
 
 @media (max-width: 1040px) {
@@ -174,9 +176,6 @@
     border-bottom: 1px solid rgba(23, 29, 36, 0.1);
   }
 
-  .title {
-    font-size: clamp(2.4rem, 11vw, 3.8rem);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

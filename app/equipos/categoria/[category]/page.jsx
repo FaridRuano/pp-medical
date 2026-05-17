@@ -21,7 +21,7 @@ export default async function Page({ params, searchParams }) {
     validAudiences.includes(requestedAudience) &&
     audienceLabels[requestedAudience]
       ? requestedAudience
-      : category === "ecografia"
+      : ["ecografia", "rayos-x"].includes(category)
         ? "humano"
         : null;
 

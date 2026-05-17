@@ -62,7 +62,7 @@
 }
 
 .pageTitle {
-  font-size: clamp(1.95rem, 3vw, 2.9rem);
+  font-size: var(--font-size-title);
   line-height: 1.02;
   letter-spacing: -0.04em;
   font-weight: var(--font-weight-title);
@@ -127,7 +127,7 @@
 }
 
 .resultsTitle {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: var(--font-size-title);
   line-height: 1.05;
   letter-spacing: -0.04em;
   font-weight: var(--font-weight-title);
@@ -270,7 +270,7 @@
 .cardTitle {
   margin: 0;
   color: var(--text-secondary);
-  font-size: 1.15rem;
+  font-size: var(--font-size-title);
   line-height: 1.08;
   letter-spacing: -0.03em;
   font-weight: var(--font-weight-title);
@@ -300,6 +300,7 @@
 }
 
 .cardDescription {
+  font-size: var(--font-size-description);
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;

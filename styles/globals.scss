@@ -10,6 +10,8 @@
   --font-weight-title: var(--font-weight-bold);
   --font-weight-title-strong: var(--font-weight-bold);
   --font-weight-ui-strong: var(--font-weight-medium);
+  --font-size-title: clamp(2rem, 4vw, 3.2rem);
+  --font-size-description: clamp(1.04rem, 1.18vw, 1.1rem);
 
   // ==========================
   // DESIGN COLORS
@@ -92,7 +94,7 @@ select {
 .section-title {
   margin: 0;
   color: var(--text-accent);
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: var(--font-size-title);
   line-height: 1.02;
   letter-spacing: -0.045em;
   font-weight: var(--font-weight-title);
@@ -102,7 +104,7 @@ select {
 .section-copy {
   margin: 0;
   color: rgba(32, 28, 29, 0.68);
-  font-size: clamp(1.2rem, 1.65vw, 1.3rem);
+  font-size: var(--font-size-description);
   line-height: 1.72;
   font-weight: var(--font-weight-medium);
   text-wrap: pretty;
@@ -111,7 +113,7 @@ select {
 .body-copy {
   margin: 0;
   color: color-mix(in srgb, var(--text-secondary) 76%, transparent);
-  font-size: clamp(1.04rem, 1.18vw, 1.1rem);
+  font-size: var(--font-size-description);
   line-height: 1.7;
   font-weight: var(--font-weight-regular);
   text-wrap: pretty;
