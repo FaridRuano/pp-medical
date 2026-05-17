@@ -66,11 +66,15 @@
 .header {
   display: grid;
   gap: 0.9rem;
-  max-width: 44rem;
+  max-width: min(100%, 72rem);
   padding: 0 clamp(1rem, 4vw, 3rem);
   margin: 0 auto;
   justify-items: center;
   text-align: center;
+}
+
+.header :global(.section-copy) {
+  max-width: 56rem;
 }
 
 .rowViewport {

@@ -24,7 +24,7 @@
 .eyebrow {
     display: inline-flex;
     margin-bottom: 0.85rem;
-    color: var(--text-accent-soft);
+    color: var(--text-subtitle);
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -33,10 +33,10 @@
 
 .heading {
     margin: 0;
-    color: var(--text-accent);
+    color: var(--text-title);
     font-size: var(--font-size-title);
     line-height: 1.04;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
     font-weight: var(--font-weight-title);
     text-wrap: balance;
 }
@@ -102,7 +102,7 @@
 }
 
 .badgeText {
-    color: color-mix(in srgb, var(--text-secondary) 68%, transparent);
+    color: var(--text-subtitle);
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -111,10 +111,10 @@
 
 .serviceTitle {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--text-title);
     font-size: var(--font-size-title);
     line-height: 1.02;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
     font-weight: var(--font-weight-title);
 }
 
@@ -166,7 +166,7 @@
     padding: 0.35rem 0.6rem;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.72);
-    color: var(--text-accent);
+    color: var(--text-subtitle);
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.1em;

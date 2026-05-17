@@ -49,7 +49,7 @@ export default function Hero() {
               target="_blank"
               rel="noreferrer"
             >
-              Solicitar asesoría
+              CONOCER MÁS
             </a>
           </div>
 

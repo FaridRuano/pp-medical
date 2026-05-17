@@ -38,7 +38,7 @@
 .sectionEyebrow {
     display: inline-flex;
     margin-bottom: 0.85rem;
-    color: var(--text-accent-soft);
+    color: var(--text-subtitle);
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -63,7 +63,7 @@
 }
 
 .tag {
-    color: var(--text-accent);
+    color: var(--text-subtitle);
     background: rgba(193, 0, 39, 0.1);
 }
 
@@ -166,8 +166,8 @@
 
 .specTitle {
     margin: 0;
-    color: var(--text-secondary);
-    font-size: var(--font-size-title);
+    color: var(--text-title);
+    font-size: var(--font-size-title-3);
     font-weight: var(--font-weight-title-strong);
     line-height: 1.3;
 }

@@ -8,31 +8,34 @@ import styles from "./HomeEquipments.module.scss";
 const equipmentGroups = [
   {
     title: "Rayos X",
-    href: "/equipos#categoria-rayos-x",
     image: "/imgs/equipments/hf-525-plus.jpg",
     alt: "Equipo de Rayos X HF-525 Plus",
     description:
       "Equipos fijos y portátiles con tecnología de alto rendimiento para diagnóstico radiológico en medicina humana y veterinaria.",
   },
   {
-    title: "Ecógrafos",
-    href: "/equipos#categoria-ecografia",
-    image: "/imgs/equipments/sonoscape-x11.jpg",
-    alt: "Ecografo SonoScape X11",
-    description:
-      "Sistemas avanzados para diagnósticos en múltiples especialidades de medicina humana y veterinaria.",
-  },
-  {
     title: "Detectores digitales",
-    href: "/equipos#categoria-digitalizacion",
     image: "/imgs/equipments/lg-x-ray.jpg",
-    alt: "Flat panel para digitalización radiográfica",
+    alt: "Equipo I-MAX CEPH PRO",
     description:
       "Captura de imágenes de alta calidad con rapidez y precisión para aplicaciones médicas y veterinarias.",
   },
   {
-    title: "Rayos X dental",
-    href: "/equipos#categoria-dental",
+    title: "Ecógrafos",
+    image: "/imgs/equipments/sonoscape-p60.jpg",
+    alt: "Ecógrafo SonoScape P60",
+    description:
+      "Sistemas avanzados para diagnósticos en múltiples especialidades de medicina humana y veterinaria.",
+  },
+  {
+    title: "Densitómetros óseos",
+    image: "/imgs/equipments/primus.jpg",
+    alt: "Equipo de densitometría Primus",
+    description:
+      "Tecnología DXA para evaluación de salud ósea y análisis de composición corporal.",
+  },
+  {
+    title: "Rayos X dentales",
     image: "/imgs/equipments/i-max-ceph-pro.jpg",
     alt: "Equipo dental I-MAX CEPH PRO",
     description:
@@ -40,19 +43,10 @@ const equipmentGroups = [
   },
   {
     title: "Arco en C",
-    href: "/equipos#categoria-fluoroscopia",
     image: "/imgs/equipments/arco-c.jpg",
     alt: "Equipo Arco en C Garion",
     description:
       "Fluoroscopia en tiempo real para procedimientos quirúrgicos de alta precisión.",
-  },
-  {
-    title: "Densitometros oseos",
-    href: "/equipos#categoria-densitometria",
-    image: "/imgs/equipments/primus.jpg",
-    alt: "Equipo de densitometría Primus",
-    description:
-      "Tecnología DXA para evaluación de salud ósea y análisis de composición corporal.",
   },
 ];
 
@@ -112,9 +106,7 @@ export default function HomeEquipments() {
               </div>
 
               <div className={styles.body}>
-                <Link href={group.href} className={styles.cardLink}>
-                  {group.title}
-                </Link>
+                <h3 className={styles.cardTitle}>{group.title}</h3>
                 <p className={`body-copy ${styles.description}`}>{group.description}</p>
               </div>
             </article>
@@ -123,7 +115,7 @@ export default function HomeEquipments() {
 
         <div className={styles.actions}>
           <Link href="/equipos" className={styles.catalogButton}>
-            Conocer catalogo
+            Explorar equipos
           </Link>
         </div>
       </div>

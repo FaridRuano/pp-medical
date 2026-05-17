@@ -1,7 +1,7 @@
 .wrap {
   position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
   z-index: 70;
 }
 
@@ -10,8 +10,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 4rem;
-  height: 4rem;
+  width: 5rem;
+  height: 5rem;
   border-radius: 999px;
   background: linear-gradient(180deg, #2fe26d, #16b84e);
   box-shadow: 0 20px 45px rgba(22, 184, 78, 0.28);
@@ -78,8 +78,8 @@
 }
 
 .icon {
-  width: 1.85rem;
-  height: 1.85rem;
+  width: 2.35rem;
+  height: 2.35rem;
 }
 
 @media (max-width: 640px) {

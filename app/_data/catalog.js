@@ -54,7 +54,7 @@ const productDescriptions = {
     "Portabilidad y precisión en un solo sistema, combinando generador de alta frecuencia y detector digital de alta resolución, para obtener imágenes radiográficas rápidas y confiables.",
   "hf-525-plus":
     "Generador de 40 kW con control por microprocesador, que garantiza precisión en exposición y rendimiento radiográfico. Optimiza eficiencia operativa y reducción de dosis.",
-  "hf-525-plus-digital":
+  "hf525-plus-digital":
     "Sistema radiográfico de alta frecuencia con potencia de hasta 40 kW, que ofrece precisión en exposición y versatilidad en estudios generales.",
   xfm:
     "Sistema móvil digital con motorización completa y detector inalámbrico, que ofrece alta movilidad y eficiencia operativa. Integra rotación ±90°, conectividad DICOM y diseño compacto.",
@@ -88,11 +88,11 @@ const productDescriptions = {
     "Equipo estacionario de ultrasonido pensado para aplicaciones clínicas exigentes con flujo de trabajo ágil y alta capacidad diagnóstica.",
   "sonoscape-e1-exp-vet":
     "Sistema veterinario con alta resolución de contraste y flujo de trabajo optimizado para diagnósticos precisos. Integra software especializado y herramientas configurables para múltiples especies.",
-  "sonoscape-x3-vet":
+  "sonoscape-x3vet":
     "Doppler color con imagen de alta definición y optimización automática, que ofrece precisión diagnóstica y facilidad de uso en diversos entornos veterinarios.",
   "sonoscape-x5-vet":
     "Equipo con alta calidad de imagen, resolución superior y penetración profunda. Cuenta con software veterinario especializado y compatibilidad con múltiples sondas.",
-  "sonoscape-propet-60":
+  "sonoscape-propet60":
     "Equipo diseñado para medicina veterinaria con μ-Scan+, SR Flow, elastografía y HQ Scan, que ofrece alta calidad de imagen y versatilidad clínica.",
   "flat-panel-lg-black-14x17":
     "Detector digital diseñado para digitalización radiográfica con flujo de trabajo rápido y captura de alta calidad.",
@@ -193,7 +193,7 @@ const productDetails = {
       },
     ],
   },
-  "hf-525-plus-digital": {
+  "hf525-plus-digital": {
     brandLogos: ["/imgs/logos/ecoray.webp"],
     specSections: [
       {
@@ -221,7 +221,7 @@ const productDetails = {
     ],
   },
   xfm: {
-    brandLogos: ["/imgs/logos/ecoray.webp", "/imgs/logos/italray.webp"],
+    brandLogos: ["/imgs/logos/italray.webp"],
     specSections: [
       {
         items: [
@@ -710,7 +710,7 @@ const productDetails = {
       },
     ],
   },
-  "sonoscape-x3-vet": {
+  "sonoscape-x3vet": {
     brandLogos: ["/imgs/logos/sonoscape.webp"],
     specSections: [
       {
@@ -748,7 +748,7 @@ const productDetails = {
       },
     ],
   },
-  "sonoscape-propet-60": {
+  "sonoscape-propet60": {
     brandLogos: ["/imgs/logos/sonoscape.webp"],
     specSections: [
       {
@@ -771,21 +771,21 @@ const productDetails = {
 
 const rawProductCatalog = [
   {
-    name: "Ultra 100",
+    name: "Ecoray Ultra 100",
     slug: "ultra-100",
     category: "rayos-x",
     audience: "humano",
     format: "portatil",
   },
   {
-    name: "Sistema Portátil Digital Ultra 100 + Flat Panel",
+    name: "Sistema Portátil Digital Ecoray Ultra 100 + Flat Panel LG Black",
     slug: "sistema-portatil-digital-ultra-100-flat-panel",
     category: "rayos-x",
     audience: "humano",
     format: "portatil",
   },
   {
-    name: "HF-525 Plus",
+    name: "Ecoray HF-525 Plus",
     slug: "hf-525-plus",
     category: "rayos-x",
     audience: "humano",
@@ -793,35 +793,35 @@ const rawProductCatalog = [
     featured: true,
   },
   {
-    name: "HF-525 Plus Digital",
-    slug: "hf-525-plus-digital",
+    name: "Ecoray HF-525 Plus Digital",
+    slug: "hf525-plus-digital",
     category: "rayos-x",
     audience: "humano",
     format: "fijo",
   },
   {
-    name: "XFM",
+    name: "Italray XFM",
     slug: "xfm",
     category: "rayos-x",
     audience: "humano",
     format: "movil",
   },
   {
-    name: "Unidad Móvil Digital HF-525 Plus",
+    name: "Unidad Móvil Digital Ecoray HF-525 Plus",
     slug: "unidad-movil-digital-hf-525-plus",
     category: "rayos-x",
     audience: "humano",
     format: "movil",
   },
   {
-    name: "Ultra 100 Vet",
+    name: "Ecoray Ultra 100 Vet",
     slug: "ultra-100-vet",
     category: "rayos-x",
     audience: "veterinario",
     format: "portatil",
   },
   {
-    name: 'Sistema Portátil Digital Ultra 100 + Flat Panel 17"x17" Vet',
+    name: 'Sistema Portátil Digital Ecoray Ultra 100 + Flat Panel LG Black 17"x17" Vet',
     slug: "sistema-portatil-digital-ultra-100-flat-panel-vet",
     category: "rayos-x",
     audience: "veterinario",
@@ -914,7 +914,7 @@ const rawProductCatalog = [
   },
   {
     name: "SonoScape X3 Vet",
-    slug: "sonoscape-x3-vet",
+    slug: "sonoscape-x3vet",
     category: "ecografia",
     audience: "veterinario",
     format: "portatil",
@@ -928,7 +928,7 @@ const rawProductCatalog = [
   },
   {
     name: "SonoScape ProPet 60",
-    slug: "sonoscape-propet-60",
+    slug: "sonoscape-propet60",
     category: "ecografia",
     audience: "veterinario",
     format: "estacionario",
@@ -950,49 +950,49 @@ const rawProductCatalog = [
     format: "detector",
   },
   {
-    name: "I-MAX PRO",
+    name: "Owandy Radiology I-MAX PRO",
     slug: "i-max-pro",
     category: "dental",
     audience: "general",
     format: "panoramico",
   },
   {
-    name: "I-MAX CEPH PRO",
+    name: "Owandy Radiology I-MAX CEPH PRO",
     slug: "i-max-ceph-pro",
     category: "dental",
     audience: "general",
     format: "panoramico",
   },
   {
-    name: "I-MAX 3D XPRO",
+    name: "Owandy Radiology I-MAX 3D XPRO",
     slug: "i-max-3d-xpro",
     category: "dental",
     audience: "general",
     format: "cone-beam",
   },
   {
-    name: "I-MAX 3D CEPH XPRO",
+    name: "Owandy Radiology I-MAX 3D CEPH XPRO",
     slug: "i-max-3d-ceph-xpro",
     category: "dental",
     audience: "general",
     format: "cone-beam",
   },
   {
-    name: "GARION",
+    name: "SG HealthCare GARION",
     slug: "garion",
     category: "fluoroscopia",
     audience: "general",
     format: "arco-en-c",
   },
   {
-    name: "CARMEX RK FP",
+    name: "SG HealthCare CARMEX RK FP",
     slug: "carmex-rk-fp",
     category: "fluoroscopia",
     audience: "general",
     format: "arco-en-c",
   },
   {
-    name: "PRIMUS",
+    name: "Osteosys PRIMUS",
     slug: "primus",
     category: "densitometria",
     audience: "general",

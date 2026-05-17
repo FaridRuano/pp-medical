@@ -11,6 +11,8 @@
   --font-weight-title-strong: var(--font-weight-bold);
   --font-weight-ui-strong: var(--font-weight-medium);
   --font-size-title: clamp(2rem, 4vw, 3.2rem);
+  --font-size-title-2: clamp(1.5rem, 3vw, 2rem);
+  --font-size-title-3: clamp(1.25rem, 2vw, 1.55rem);
   --font-size-description: clamp(1.04rem, 1.18vw, 1.1rem);
 
   // ==========================
@@ -42,6 +44,9 @@
   // ==========================
   --text-primary: #ffffff;
   --text-secondary: #292929;
+  --text-title: #242424;
+  --text-subtitle: rgba(36, 36, 36, 0.68);
+  --text-subtitle-2: #c10027;
   --text-soft: rgba(255, 255, 255, 0.82);
   --text-accent: #c10027;
   --text-accent-soft: rgba(41, 41, 41, 0.56);
@@ -93,17 +98,17 @@ select {
 
 .section-title {
   margin: 0;
-  color: var(--text-accent);
+  color: var(--text-title);
   font-size: var(--font-size-title);
   line-height: 1.02;
-  letter-spacing: -0.045em;
+  letter-spacing: 0;
   font-weight: var(--font-weight-title);
   text-wrap: balance;
 }
 
 .section-copy {
   margin: 0;
-  color: rgba(32, 28, 29, 0.68);
+  color: var(--text-subtitle);
   font-size: var(--font-size-description);
   line-height: 1.72;
   font-weight: var(--font-weight-medium);

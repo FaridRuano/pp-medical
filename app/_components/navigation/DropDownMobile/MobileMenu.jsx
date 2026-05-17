@@ -235,7 +235,7 @@ export default function MobileMenu({ navigation = [], equipmentCategories = [] }
                 className={styles.catalogCta}
                 onClick={closeMenu}
               >
-                Ver catalogo completo
+                Ver catÁlogo completo
               </Link>
             </div>
           </section>

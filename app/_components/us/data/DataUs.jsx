@@ -8,7 +8,7 @@ const stats = [
   {
     value: 30,
     prefix: "+",
-    title: "Ciudades",
+    title: "Ciudades atendidas",
     icon: MapPinned,
   },
   {

@@ -13,6 +13,7 @@
   display: grid;
   justify-items: center;
   gap: 1rem;
+  width: min(100% - 2rem, 82rem);
   padding: clamp(2.1rem, 5vw, 3.2rem);
   border-radius: 2rem;
   background:
@@ -28,7 +29,11 @@
     opacity 0.85s ease,
     transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
     filter 0.85s ease;
-  margin: 0 clamp(1rem, 3vw, 2rem);
+  margin: 0 auto;
+}
+
+.sectionText {
+  max-width: 58rem;
 }
 
 .sectionActive .panel {
@@ -73,7 +78,7 @@
 @media (max-width: 640px) {
   .panel {
     border-radius: 1.35rem;
-    margin: 0 1rem;
+    width: calc(100% - 2rem);
   }
 
   .button {

@@ -33,7 +33,7 @@ const services = [
   {
     title: "Capacitación profesional",
     lead:
-      "Brindamos capacitación enfocada en el uso correcto, seguro y eficiente de la tecnología medica, asegurando el adecuado manejo y aprovechamiento de cada equipo.",
+      "Brindamos capacitación enfocada en el uso correcto, seguro y eficiente de la tecnología médica, asegurando el adecuado manejo y aprovechamiento de cada equipo.",
     body:
       "Acompañamos a su personal en la operación y funciones clave para optimizar el rendimiento clínico y fortalecer la práctica diagnóstica.",
     icon: GraduationCap,
@@ -42,18 +42,18 @@ const services = [
   {
     title: "Servicio postventa",
     lead:
-      "Brindamos soporte postventa orientado a asegurar el rendimiento sostenido de cada equipo y la continuidad operativa de su institucion.",
+      "Brindamos soporte postventa orientado a asegurar el rendimiento sostenido de cada equipo y la continuidad operativa de su institución.",
     body:
-      "Integramos respuesta tecnica oportuna, seguimiento especializado y un acompanamiento integral en los procesos asociados al uso y gestion del equipo, ofreciendo soluciones agiles y adaptadas a cada necesidad.",
+      "Integramos respuesta técnica oportuna, seguimiento especializado y un acompanamiento integral en los procesos asociados al uso y gestión del equipo, ofreciendo soluciones ágiles y adaptadas a cada necesidad.",
     icon: Headset,
     imageSlot: "/imgs/services/service-postventas.webp",
   },
   {
     title: "Servicio técnico y mantenimiento",
     lead:
-      "Contamos con un equipo técnico calificado para la atención, diagnóstico y mantenimiento de equipos de imagenologia medica, incluyendo intervenciones preventivas y correctivas que aseguran su funcionamiento optimo y contribuyen a prolongar su vida util.",
+      "Contamos con un equipo técnico calificado para la atención, diagnóstico y mantenimiento de equipos de imagenología médica, incluyendo intervenciones preventivas y correctivas que aseguran su funcionamiento óptimo y contribuyen a prolongar su vida útil.",
     body:
-      "Brindamos respuesta oportuna y con criterio tecnico ante cada requerimiento, respaldando la continuidad operativa de su servicio.",
+      "Brindamos respuesta oportuna y con criterio técnico ante cada requerimiento, respaldando la continuidad operativa de su servicio.",
     icon: Settings2,
     imageSlot: "/imgs/services/service-tecnicos.webp",
   },
@@ -76,7 +76,6 @@ function ServiceBlock({ service, index }) {
           <span className={styles.iconWrap} aria-hidden="true">
             <Icon size={22} strokeWidth={1.9} />
           </span>
-          <span className={styles.badgeText}>Servicio especializado</span>
         </div>
 
         <h2 className={styles.serviceTitle}>{service.title}</h2>

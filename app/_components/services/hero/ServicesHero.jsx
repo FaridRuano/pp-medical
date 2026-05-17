@@ -13,7 +13,6 @@ export default function ServicesHero() {
     <section className={styles.hero} aria-labelledby="services-hero-title">
       <div className={styles.container}>
         <div className={styles.content}>
-          <span className={styles.eyebrow}>Servicio especializado</span>
           <h1 id="services-hero-title" className={`section-title ${styles.title}`}>
             Soporte integral en cada etapa de implementación
           </h1>

@@ -13,7 +13,7 @@ import {
 import { useRevealOnScroll } from "@app/_components/us/useRevealOnScroll";
 import styles from "./EquipmentCatalog.module.scss";
 
-function EquipmentCard({ product, index }) {
+function EquipmentCard({ product, index, showCategory = true }) {
   const { sectionRef, hasEnteredView } = useRevealOnScroll(0);
   const [imageError, setImageError] = useState(false);
   const showPlaceholder = !product.image || imageError;
@@ -44,7 +44,9 @@ function EquipmentCard({ product, index }) {
 
       <div className={styles.cardBody}>
         <div className={styles.cardTop}>
-          <p className={styles.cardCategory}>{categoryLabels[product.category]}</p>
+          {showCategory ? (
+            <p className={styles.cardCategory}>{categoryLabels[product.category]}</p>
+          ) : null}
           <h2 className={styles.cardTitle}>{product.name}</h2>
         </div>
 
@@ -383,7 +385,12 @@ function CategorySection({ slug, label, products, fixedAudience = null }) {
       {visibleProducts.length ? (
         <div className={styles.grid}>
           {visibleProducts.map((product, index) => (
-            <EquipmentCard key={product.slug} product={product} index={index} />
+            <EquipmentCard
+              key={product.slug}
+              product={product}
+              index={index}
+              showCategory={false}
+            />
           ))}
         </div>
       ) : (
